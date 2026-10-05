@@ -26,3 +26,6 @@ paper/build/*
 # previews
 *.png
 !paper/figures/*.png
+
+# README images (PNG copies of the figures + page previews)
+!docs/img/*.png

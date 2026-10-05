@@ -19,12 +19,20 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "experiments" / "translation"
 FIGS = ROOT / "paper" / "figures"
+IMG = ROOT / "docs" / "img"                                 # PNG copies for the README
 CONFIGS = {"multi": "multi.json", "haiku": "single_copilot_claude-haiku-4.5.json", "gemma3": "single_ollama_gemma3_27b.json"}
 LABELS = {"multi": "multi\n(GPT-5 mini → Claude Haiku 4.5\n→ Gemma 3 QA)", "haiku": "single\nClaude Haiku 4.5", "gemma3": "single\nGemma 3 27B (local)"}
 WALL = {"multi": 1334, "haiku": 425, "gemma3": 384}          # first full run, seconds (from the run logs)
 GLOSSARY = {"multi": (284, 287), "haiku": (286, 287), "gemma3": (281, 287)}
 
 plt.rcParams.update({"font.size": 8, "font.family": "serif", "axes.spines.top": False, "axes.spines.right": False})
+
+
+def save(fig, name: str) -> None:
+    """PDF for the paper, PNG for the README."""
+    fig.savefig(FIGS / f"{name}.pdf", bbox_inches="tight")
+    fig.savefig(IMG / f"{name}.png", bbox_inches="tight", dpi=200)
+    plt.close(fig)
 
 
 def final_metrics(d: dict) -> dict:
@@ -45,6 +53,7 @@ def final_metrics(d: dict) -> dict:
 
 def main() -> None:
     FIGS.mkdir(parents=True, exist_ok=True)
+    IMG.mkdir(parents=True, exist_ok=True)
     D = {k: json.loads((DATA / v).read_text(encoding="utf-8")) for k, v in CONFIGS.items()}
     S = {k: final_metrics(d) for k, d in D.items()}
     for k in S:
@@ -90,8 +99,7 @@ def main() -> None:
         arrow(x, 17, x, 10.4)
     ax.text(63.5, 28.6, "every call: requested model vs. model that answered (assistant.usage) → provenance log",
             ha="center", va="center", fontsize=6.6, style="italic", color="#444")
-    fig.savefig(FIGS / "fig1_architecture.pdf", bbox_inches="tight")
-    plt.close(fig)
+    save(fig, "fig1_architecture")
 
     # ---- Fig. 2: configuration comparison ------------------------------------------------
     keys = ["multi", "haiku", "gemma3"]
@@ -108,8 +116,7 @@ def main() -> None:
         for i, v in enumerate(vals):
             ax.text(i, v, f"{v:.3f}" if v < 10 else f"{v:.0f}", ha="center", va="bottom", fontsize=6.3)
     fig.tight_layout(w_pad=0.6)
-    fig.savefig(FIGS / "fig2_configs.pdf", bbox_inches="tight")
-    plt.close(fig)
+    save(fig, "fig2_configs")
 
     # ---- Fig. 3: what the reviewer changed and what QA selected ----------------------------
     fig, axes = plt.subplots(1, 2, figsize=(7.0, 2.1))
@@ -131,8 +138,46 @@ def main() -> None:
     ax.set_xlabel("edit ratio of post-editor (changed units only)"); ax.set_ylabel("units")
     ax.set_title(f"(b) post-editor changed {S['multi']['review_changed']}/{len(ed)} units", fontsize=7.5)
     fig.tight_layout(w_pad=1.2)
-    fig.savefig(FIGS / "fig3_review.pdf", bbox_inches="tight")
-    plt.close(fig)
+    save(fig, "fig3_review")
+
+    # ---- README-only charts ------------------------------------------------------------------
+    # (a) requested vs served model (Experiment A)
+    fig, ax = plt.subplots(figsize=(6.4, 2.0))
+    rows = [("Claude Haiku 4.5", "Claude Haiku 4.5"), ("GPT-5 mini", "GPT-5 mini"),
+            ("Claude Opus 4.8", "Claude Haiku 4.5"), ("fictitious name", "Claude Haiku 4.5")]
+    ax.set_xlim(0, 100); ax.set_ylim(0, len(rows) * 10 + 4); ax.axis("off")
+    ax.text(17, len(rows) * 10 + 1.5, "requested", ha="center", fontsize=8, fontweight="bold")
+    ax.text(83, len(rows) * 10 + 1.5, "served (usage event)", ha="center", fontsize=8, fontweight="bold")
+    for i, (req, srv) in enumerate(rows):
+        y = (len(rows) - 1 - i) * 10 + 2
+        ok = req == srv
+        ax.add_patch(FancyBboxPatch((1, y), 32, 7, boxstyle="round,pad=0.2", fc="#eef2f7", ec="#333", lw=0.8))
+        ax.add_patch(FancyBboxPatch((67, y), 32, 7, boxstyle="round,pad=0.2", fc="#e9f7e9" if ok else "#fde2e2", ec="#333", lw=0.8))
+        ax.text(17, y + 3.5, req, ha="center", va="center", fontsize=7.6)
+        ax.text(83, y + 3.5, srv, ha="center", va="center", fontsize=7.6)
+        ax.add_patch(FancyArrowPatch((33.5, y + 3.5), (66.5, y + 3.5), arrowstyle="-|>", mutation_scale=10, lw=0.9,
+                                     color="#2e7d32" if ok else "#c62828"))
+        ax.text(50, y + 4.6, "as requested" if ok else "silently substituted (no error)", ha="center", fontsize=6.2,
+                color="#2e7d32" if ok else "#c62828")
+    ax.set_title("Requested vs. served model through the vendor SDK (entry-level account)", fontsize=8)
+    save(fig, "readme_substitution")
+
+    # (b) which layer caught which error (Experiment C)
+    fig, ax = plt.subplots(figsize=(6.4, 2.3))
+    errors = [("placeholder moved before a number", "validator", 1), ("QA model echoed its input", "validator", 37),
+              ("placeholders dropped (local model)", "validator", 2), ("sentence left untranslated", "post-editor", 1),
+              ("wrong technical term", "post-editor + human", 4), ("misspelling", "human", 1),
+              ("table cell / heading left or truncated", "human", 2)]
+    palette = {"validator": "#2e7d32", "post-editor": "#4c72b0", "post-editor + human": "#8172b2", "human": "#dd8452"}
+    ys = range(len(errors))[::-1]
+    ax.barh(list(ys), [e[2] for e in errors], color=[palette[e[1]] for e in errors])
+    ax.set_yticks(list(ys)); ax.set_yticklabels([e[0] for e in errors], fontsize=7)
+    ax.set_xscale("log"); ax.set_xlim(0.7, 60); ax.set_xlabel("occurrences (log scale)", fontsize=7)
+    for y, e in zip(ys, errors):
+        ax.text(e[2] * 1.15, y, f"{e[2]}  ·  caught by {e[1]}", va="center", fontsize=6.8, color=palette[e[1]])
+    ax.set_title("Who caught which error (146 units)", fontsize=8)
+    fig.tight_layout()
+    save(fig, "readme_errors")
     print(json.dumps({"configs": S, "agreement": agree}, indent=1))
 
 
