@@ -60,9 +60,11 @@ def served_summary() -> Dict[str, int]:
 # ----------------------------------------------------------------------------- ollama
 def ollama_chat(model: str, system: str, user: str, timeout: float = 600, json_mode: bool = True) -> str:
     t0 = time.time()
+    # Ollama truncates prompts to num_ctx (dropping the system prompt first); size the window to the input
+    num_ctx = max(8192, min(32768, (len(system) + len(user)) // 3 + 2048))
     body: dict = {
         "model": model, "stream": False,
-        "options": {"temperature": 0.2, "num_ctx": 8192, "num_predict": 4096},
+        "options": {"temperature": 0.2, "num_ctx": num_ctx, "num_predict": 4096},
         "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
     }
     if json_mode:

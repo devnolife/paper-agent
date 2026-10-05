@@ -72,9 +72,14 @@ A VS Code custom agent that drives these commands from Copilot Chat is in
 ## Paper
 
 `paper/` contains *"Which Model Actually Answered? Silent Model Substitution, Deterministic Validators and
-Multi-Model Routing in an LLM Paper Agent"* (IEEE conference format, English and Indonesian — the Indonesian
-version was produced by `paper-agent translate-tex` itself). `experiments/` holds the per-unit metrics of the
-three translation configurations compared in the paper.
+Multi-Model Routing in an LLM Paper Agent"* (IEEE conference format): `paper/build/main.pdf` (English, 7 pages)
+and `paper/build/main_id.pdf` (Indonesian, 8 pages). The Indonesian version was produced by
+`paper-agent translate-tex` itself — its per-unit metrics are in `paper/translation/multi.json` and
+`paper/translation/multi_report.md`. `experiments/translation/` holds the per-unit metrics of the three translation
+configurations compared in the paper; `experiments/make_figures.py` regenerates the figures and `summary.json`.
+`paper/review.md` is the output of `paper-agent review paper/main.tex` on this paper (critics: Claude Haiku 4.5 and
+Gemma 3 27B); one of its findings — that structural integrity was reached by the single API model as well, so the
+pipeline could not claim it as its own — was applied to the text before release.
 
 ## Design principles
 

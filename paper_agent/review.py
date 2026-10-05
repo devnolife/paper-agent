@@ -64,19 +64,35 @@ def _similar(a: str, b: str) -> bool:
     return len(wa & wb) / len(wa | wb) >= 0.35
 
 
+REQUIRED_KEYS = {"summary": str, "scores": dict, "weaknesses": list, "recommendation": str}
+
+
+def schema_ok(data: object) -> bool:
+    return isinstance(data, dict) and all(isinstance(data.get(k), t) for k, t in REQUIRED_KEYS.items())
+
+
 def review_paper(main_tex: Path, roles: Optional[Dict[str, Tuple[str, str]]] = None, out: Optional[Path] = None,
                  log=print) -> dict:
     roles = roles or default_roles()
     text = paper_text(main_tex)
+    prompt = ("PAPER (LaTeX source, flattened):\n\n" + text + "\n\nEND OF PAPER.\n\nReview the paper above as instructed. "
+              "Return ONLY the JSON object with the keys summary, scores, strengths, weaknesses, overclaims, missing, recommendation.")
     critics = [roles[k] for k in ("critic", "critic2") if k in roles]
     reviews: List[dict] = []
     for engine, model in critics:
         t0 = time.time()
-        data = engines.chat_json(engine, model, RUBRIC, text, retries=1, timeout=900)
+        data = engines.chat_json(engine, model, RUBRIC, prompt, retries=1, timeout=900)
+        if not schema_ok(data):                      # models sometimes answer with their own keys; insist once
+            data = engines.chat_json(engine, model, RUBRIC + "\n\nYour previous answer did not follow the schema. "
+                                     "Answer again with EXACTLY the keys summary, scores, strengths, weaknesses, "
+                                     "overclaims, missing, recommendation.", prompt, retries=0, timeout=900)
         served = engines.last_served() or f"{engine}:{model}"
         if not isinstance(data, dict):
             log(f"  critic {engine}:{model}: no valid JSON")
             continue
+        data["_schema_ok"] = schema_ok(data)
+        if not data["_schema_ok"]:
+            log(f"  critic {served}: answer does not follow the rubric schema (kept, flagged)")
         data["_model_requested"] = f"{engine}:{model}"
         data["_model_served"] = served
         data["_seconds"] = round(time.time() - t0, 1)
@@ -122,7 +138,7 @@ def merge_reviews(reviews: List[dict]) -> dict:
 def review_markdown(res: dict) -> str:
     m = res["merged"]
     rows = [f"# Review — {Path(res['paper']).name}", "",
-            f"Critics (model that actually answered): {', '.join(r['_model_served'] for r in res['reviews'])}", "",
+            f"Critics (model that actually answered): {', '.join(r['_model_served'] + ('' if r.get('_schema_ok', True) else ' [schema violated]') for r in res['reviews'])}", "",
             f"Recommendations: {m['recommendations']}", f"Mean scores: {m['mean_scores']}",
             f"Issues: {m['n_issues']} ({m['n_agreed']} raised by both critics)", "", "## Issues", ""]
     for i in m["issues"]:

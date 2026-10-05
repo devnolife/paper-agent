@@ -1,0 +1,31 @@
+\section{Pengaturan Eksperimental}
+\label{sec:setup}
+
+\paragraph{Eksperimen A: substitusi (RQ1)}
+Melalui Copilot SDK, dengan token akses personal yang terperinci dari akun paket dasar, kami meminta model yang akun tersebut berhak gunakan (\texttt{claude-haiku-4.5}, \texttt{gpt-5-mini}), sebuah model yang tidak berhak digunakannya (\texttt{claude-opus-4.8-fast}) dan sebuah nama fiktif, serta membaca model yang melayani dari event penggunaan (Bagian~\ref{sec:prov}). Perilaku tersebut ditunjukkan oleh uji otomatis pada agen yang awalnya mengalami insiden~\cite{arya2026wizard}.
+
+\paragraph{Eksperimen B: konfigurasi terjemahan (RQ2)}
+Materi adalah paper konferensi IEEE pendamping~\cite{arya2026wizard}: delapan berkas bagian, 146 unit, 4{,}673 kata, 262 placeholder dan 38 tag penekanan setelah penyamaran; 51 unit adalah sel tabel, 44 adalah judul bagian atau keterangan, 7 adalah butir daftar dan 44 adalah paragraf. Sasaran adalah Bahasa Indonesia formal dengan glosarium 103 istilah yang diturunkan dari tesis yang dirangkum oleh paper (mis.\ \emph{synthesis gap}, \emph{rule engine} dan \emph{knowledge graph} tetap dalam Bahasa Inggris; \emph{fragmentation} $\rightarrow$ \emph{fragmentasi}). Tiga konfigurasi menerjemahkan unit yang sama dengan glosarium dan prompt yang sama (Tabel~\ref{tab:configs}). Setiap konfigurasi dijalankan sekali; model API dijalankan dengan sampling default vendor, model lokal pada temperature $0.2$. Perangkat keras: dua NVIDIA L40S (46~GB) untuk Ollama; \texttt{gemma3:27b} dalam kuantisasi 4-bit.
+
+\begin{table}[t]
+  \caption{Konfigurasi yang dibandingkan dalam Eksperimen B. QA (terjemahan balik + cosine) dihitung untuk ketiganya.}
+  \label{tab:configs}
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lp{1.75cm}p{1.95cm}p{1.6cm}@{}}
+    \toprule
+    Konfigurasi & Draf & Sunting pasca & Seleksi \\
+    \midrule
+    \textsc{multi} & GPT-5 mini (Copilot) & Claude Haiku 4.5 (Copilot) & per unit berdasarkan skor QA \\
+    \textsc{single}-Haiku & Claude Haiku 4.5 (Copilot) & -- & -- \\
+    \textsc{single}-gemma3 & Gemma 3 27B (local, 4-bit) & -- & -- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Metrik}
+(i) integritas struktur: unit yang outputnya lolos validator (Bagian~\ref{sec:validators}) dan unit yang dibiarkan dalam bahasa Inggris; (ii) kepatuhan glosarium; (iii) rata-rata cosine lintas bahasa antara teks sumber dan teks akhir serta antara sumber dan terjemahan balik dari teks akhir; (iv) untuk \textsc{multi}, rasio suntingan penyunting pasca ($1-$ kesamaan difflib antara draf dan teks yang ditinjau) dan hasil seleksi; (v) waktu dinding, detik-model per unit, jumlah panggilan API dan model yang melayani; (vi) kesepakatan antar konfigurasi sebagai kesamaan tingkat karakter rata-rata dari teks akhir mereka. Nilai cosine dihitung dengan model embedding yang sama untuk semua konfigurasi dan dilaporkan beserta galat bakunya.
+
+\paragraph{Eksperimen C: analisis kesalahan (RQ3)}
+Kami memeriksa setiap unit yang validatornya terpicu, setiap unit yang skor QA-nya turun lebih dari $0.10$ setelah penyuntingan pasca, catatan perubahan penyunting pasca, dan unit bernilai terendah dari setiap konfigurasi, dan mengklasifikasikan apa yang menangkap setiap kesalahan: model penyuntingan pasca, model QA, atau validator.

@@ -1,0 +1,22 @@
+\section{Pendahuluan}
+\label{sec:intro}
+
+Perangkat lunak ilmiah yang dibangun di sekitar LLM kini secara rutin merupakan sistem \emph{komposit}: beberapa model, komponen retrieval dan pemeriksaan berbasis aturan bekerja sama, dan pemilihan model per langkah adalah variabel desain, bukan konstanta~\cite{chen2024compound,chen2023frugalgpt,ong2024routellm}. Agen riset yang membaca, menerjemahkan, meninjau atau meringkas makalah adalah kasus yang menonjol, dan hasil mereka masuk ke tesis dan publikasi bersama dengan pernyataan semacam ``the LLM was \texttt{model-X}''. Pernyataan itu merupakan bagian dari catatan ilmiah: ia menentukan apakah sebuah hasil dapat direproduksi dan apakah dua run dapat dibandingkan.
+
+Paper ini dimulai dari sebuah insiden dalam sistem semacam itu. Sebuah agen neuro-simbolik untuk mendeteksi indikator synthesis gap dalam literatur ilmiah~\cite{arya2026wizard} memanggil sebuah model komersial melalui GitHub Copilot SDK~\cite{copilotsdk2026} dan memberi label setiap hasil dengan model yang dikonfigurasikan, \texttt{claude-opus-4.8-fast}. Ketika hak akses akun berubah, CLI terus menerima nama itu---dan terus mengembalikan jawaban---sementara model yang berbeda, \texttt{claude-haiku-4.5}, yang melakukan pekerjaan. Tidak ada dalam respons yang menandakan substitusi model; sebuah nama model fiktif diterima dengan sama tenangnya. Satu-satunya bukti yang dapat diandalkan adalah event penggunaan yang menamai model yang menjawab. Label dalam tesis tersebut, untuk suatu periode, salah.
+
+Insiden ini menimbulkan pertanyaan umum bagi agen riset: \emph{model mana yang sebenarnya menjawab, dan bagaimana agen sebaiknya mengetahui, mencatat, dan memanfaatkan hal itu?} Kami mengubah pertanyaan tersebut menjadi tiga pertanyaan penelitian.
+\begin{itemize}
+  \item \textbf{RQ1} Apakah model yang menjawab suatu permintaan sama dengan model yang diminta, dan mekanisme apa yang memberikan agen sebuah label provenans yang benar?
+  \item \textbf{RQ2} Pada tugas yang sensitif terhadap struktur---menerjemahkan sebuah paper LaTeX sambil menjaga kutipan, matematika, dan silang-referensi tetap utuh---apakah sebuah pipeline yang menggabungkan beberapa model (penerjemah, penyunting, penilai) mengungguli satu model tunggal, dan dengan biaya apa?
+  \item \textbf{RQ3} Kesalahan mana yang tertangkap oleh model (model kedua yang membaca ulang keluaran) dan mana yang hanya tertangkap oleh validator deterministik?
+\end{itemize}
+
+Kami menjawabnya dengan \emph{agen paper}, sebuah agen sumber terbuka untuk paper ilmiah yang setiap panggilan LLM-nya mencatat model yang menjawab, merutekan pekerjaan ke model berdasarkan peran, dan memvalidasi setiap keluaran model secara deterministik. Kontribusinya adalah:
+\begin{itemize}
+  \item sebuah laporan empiris tentang substitusi model senyap dalam SDK vendor dan sebuah mekanisme provenans (pencatatan model yang melayani, peringatan substitusi, label provenans yang benar) yang kami rekomendasikan untuk agen riset;
+  \item sebuah metode terjemahan yang aman struktur untuk LaTeX yang menyamarkan perintah, matematika, dan referensi menjadi placeholder serta menempatkan penekanan ke dalam tag, memverifikasi multiset mereka dan keterikatannya pada angka per unit, dan mereproduksi sumber byte demi byte ketika tidak ada terjemahan yang diterapkan;
+  \item perbandingan terkontrol antara sebuah pipeline tiga-model dengan dua konfigurasi model tunggal pada 146 unit yang sama, dengan metrik per-unit (cosine lintas bahasa, cosine terjemahan balik, kepatuhan glosarium, integritas struktur, waktu, model yang melayani) yang dirilis bersama kode;
+  \item sebuah analisis kesalahan yang menunjukkan bahwa manfaat pipeline terletak pada menangkap kesalahan daripada meningkatkan rata-rata, dan bahwa tiga kelas kesalahan tidak terlihat oleh setiap model, termasuk penilai, namun tertangkap oleh validator.
+\end{itemize}
+Agen tersebut juga memverifikasi referensi terhadap basis data bibliografis, mengatur gerbang sitasi, membangun dan memeriksa PDF, meninjau sebuah paper dengan dua kritikus independen, dan mengonversi manuskrip Word ke IEEE LaTeX; fungsi-fungsi ini dijelaskan sebagai bagian dari sistem tetapi dievaluasi hanya secara informal di sini. Versi bahasa Indonesia dari paper ini diproduksi oleh agen itu sendiri.
