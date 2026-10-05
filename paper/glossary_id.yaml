@@ -1,0 +1,186 @@
+# Glosarium EN -> ID untuk paper paper-agent (dipakai `paper-agent translate-tex --glossary`)
+synthesis gap: synthesis gap
+synthesis-gap indicator: indikator synthesis gap
+research gap: kesenjangan penelitian (research gap)
+gap identification: identifikasi kesenjangan
+gap statement: pernyataan kesenjangan
+fragmentation: fragmentasi
+unreconciled inconsistency: inkonsistensi yang tidak terekonsiliasi
+collective incompleteness: ketidaklengkapan kolektif
+missing evidentiary support: dukungan bukti yang hilang
+primary evidence: bukti primer
+evidence gap map: peta kesenjangan bukti (evidence gap map)
+neuro-symbolic: neuro-simbolik
+agentic: agentic
+agent: agent
+agentic loop: loop agentic
+rule engine: rule engine
+rule-based validation layer: lapisan validasi berbasis aturan
+symbolic validation layer: lapisan validasi simbolik
+fact table: tabel fakta
+SPO fact: fakta SPO
+knowledge graph: knowledge graph
+retrieval-augmented generation: retrieval-augmented generation (RAG)
+retrieval-grounded: berlandaskan retrieval
+retrieval: retrieval
+retrieve-then-generate: retrieve-then-generate
+provenance chain: rantai provenans
+provenance: provenans
+verbatim quote: kutipan verbatim
+verbatim-grounded: berlandaskan kutipan verbatim
+selective abstention: abstensi selektif
+abstention: abstensi
+withheld for review: ditahan untuk ditinjau
+calibrated confidence: kepercayaan terkalibrasi
+confidence: kepercayaan
+calibration: kalibrasi
+temperature scaling: penskalaan suhu (temperature scaling)
+conformal threshold: ambang konformal
+verdict: verdik
+PASS/FLAG/REJECT: PASS/FLAG/REJECT
+bibliographic coupling: kopling bibliografis
+co-occurrence: ko-okurensi
+spurious correlation: korelasi semu
+cross-model critic: kritikus lintas model
+self-critic: kritik diri (self-critic)
+natural language inference: inferensi bahasa alami (NLI)
+cross-encoder: cross-encoder
+sentence-transformer: sentence-transformer
+vector store: penyimpan vektor (vector store)
+embedding: embedding
+forward-chaining production system: sistem produksi forward-chaining
+linear baseline: baseline linear
+ablation: ablasi
+multi-run: multi-run
+recurrence: rekurensi
+stable: stabil
+seedable: dapat di-seed
+negative control: kontrol negatif
+adversarial claim: klaim adversarial
+false indicator: indikator palsu
+citation echo: gema sitasi (citation echo)
+hedged claim: klaim berpagar (hedged)
+stated limitation: keterbatasan yang dinyatakan
+future work: penelitian lanjutan
+author corroboration: korroborasi penulis
+corroborating evidence: bukti korroboratif
+design science: design science
+literature-based discovery: penemuan berbasis literatur
+systematic review: tinjauan sistematis
+literature review: tinjauan pustaka
+human reviewer: peninjau manusia
+expert labels: label pakar
+gold standard: standar emas
+LLM-as-judge: LLM-sebagai-penilai (LLM-as-judge)
+pseudo-replication: pseudo-replikasi
+effect direction: arah efek
+heterogeneity: heterogenitas
+modularity: modularitas
+silhouette: silhouette
+link prediction: prediksi tautan
+connected component: komponen terhubung
+threshold: ambang
+pipeline: pipeline
+benchmark corpus: korpus benchmark
+applied corpus: korpus terapan
+digital forensics: forensik digital
+workflow stage: tahap alur kerja
+regression test: uji regresi
+silent defect: cacat senyap
+research question: pertanyaan penelitian
+contribution: kontribusi
+Fig. N: Gambar N
+Table N: Tabel N
+Section N: Bagian N
+Abstract: Abstrak
+Index Terms: Kata Kunci
+Universitas Hasanuddin: Universitas Hasanuddin
+served model: model yang melayani
+requested model: model yang diminta
+silent substitution: substitusi senyap
+model substitution: substitusi model
+entitlement: hak akses (entitlement)
+entitled: berhak
+usage event: event penggunaan (usage event)
+placeholder: placeholder
+tag: tag
+validator: validator
+deterministic validator: validator deterministik
+post-editor: penyunting
+post-editing: penyuntingan pasca
+post-edit: sunting pasca
+draft: draf
+drafting model: model pembuat draf
+back-translation: terjemahan balik
+round-trip translation: terjemahan bolak-balik
+glossary compliance: kepatuhan glosarium
+glossary: glosarium
+structural integrity: integritas struktur
+structure-safe: aman struktur
+unit: unit
+masking: penyamaran (masking)
+mask: menyamarkan
+unmask: membuka samaran
+multiset: multiset
+number-glued: menempel pada angka
+echo: gema
+echoed: menggemakan
+fallback model: model cadangan (fallback)
+fallback: cadangan (fallback)
+critic: kritikus
+judge: penilai
+LLM-as-a-judge: LLM-sebagai-penilai (LLM-as-a-judge)
+self-preference: preferensi diri
+compound AI system: sistem AI komposit (compound)
+compound system: sistem komposit
+routing: routing (perutean)
+router: router
+role: peran
+citation gate: gerbang sitasi
+reference verification: verifikasi referensi
+wall time: waktu dinding
+model-seconds: detik-model
+cosine: cosine
+cross-lingual: lintas bahasa
+sentence embedding: embedding kalimat
+standard error: galat baku
+edit ratio: rasio suntingan
+selection: seleksi
+selective review: review selektif
+quality estimation: estimasi kualitas
+terminology: terminologi
+paper agent: agen paper
+research agent: agen riset
+vendor SDK: SDK vendor
+subscription tier: paket langganan
+entry-level account: akun paket dasar
+personal access token: token akses personal
+health endpoint: endpoint kesehatan
+authentication: autentikasi
+trace: jejak
+label: label
+provenance log: log provenans
+seed: seed
+verified: terverifikasi
+manuscript: manuskrip
+companion paper: paper pendamping
+thesis: tesis
+quantisation: kuantisasi
+local model: model lokal
+API model: model API
+quota: kuota
+batch: batch
+run: run
+incident: insiden
+finding: temuan
+error class: kelas kesalahan
+error catching: penangkapan kesalahan
+mean quality: kualitas rata-rata
+fluent: lancar
+calque: calque
+hyphenated: bertanda hubung
+misspelled: salah eja
+table cell: sel tabel
+heading: judul bagian
+caption: keterangan gambar/tabel
+list item: butir daftar

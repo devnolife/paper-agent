@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "paper-agent"
+version = "0.1.0"
+description = "Agent for scientific papers: structure-safe translation (LaTeX/DOCX), reference verification, citation gate, LaTeX build/QA, multi-model review, DOCX->IEEE LaTeX. Every LLM call records the model that actually answered."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Andi Agung Dwi Arya B" }]
+requires-python = ">=3.10"
+dependencies = [
+  "requests>=2.31",
+  "PyYAML>=6.0",
+  "python-docx>=1.1",
+  "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+copilot = ["github-copilot-sdk>=1.0"]
+qa = ["sentence-transformers>=2.2", "numpy"]
+api = ["fastapi>=0.110", "uvicorn>=0.27", "python-multipart>=0.0.9"]
+dev = ["pytest>=8", "pyflakes>=3"]
+
+[project.scripts]
+paper-agent = "paper_agent.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/devnolife/paper-agent"
+
+[tool.setuptools.packages.find]
+include = ["paper_agent*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

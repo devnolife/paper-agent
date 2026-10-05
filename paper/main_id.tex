@@ -1,0 +1,64 @@
+% Versi Bahasa Indonesia — dihasilkan oleh `paper-agent translate-tex` dari sections_id/ -> sections_id/
+% Build: paper-agent compile paper/main_id.tex
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[bahasa]{babel}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\graphicspath{{figures/}}
+
+\addto\captionsbahasa{%
+  \def\abstractname{Abstrak}%
+  \def\tablename{TABEL}%
+  \def\refname{Daftar Pustaka}%
+  \def\IEEEkeywordsname{Kata Kunci}%
+}
+
+% \todo{} marks items that must be resolved before submission
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+% placeholder token as it appears in the masked text, e.g. \ph{3}
+\newcommand{\ph}[1]{\texttt{[[#1]]}}
+
+\begin{document}
+
+\title{Model Mana yang Sebenarnya Menjawab? Substitusi Model Senyap, Validator Deterministik, dan \emph{Routing} Multi-Model dalam Agen Paper Berbasis LLM}
+
+\author{%
+\IEEEauthorblockN{Andi Agung Dwi Arya B}
+\IEEEauthorblockA{\textit{Program Studi Magister Teknik Informatika, Fakultas Teknik} \\
+\textit{Universitas Hasanuddin}\\
+Makassar, Indonesia \\
+D082251054 $\cdot$ \todo{email}}
+}
+
+\maketitle
+
+\input{sections_id/abstract}
+
+\begin{IEEEkeywords}
+model bahasa besar, routing model, provenans, terjemahan mesin, LaTeX, sistem AI komposit, LLM-sebagai-penilai, agen riset
+\end{IEEEkeywords}
+
+\input{sections_id/introduction}
+\input{sections_id/related}
+\input{sections_id/method}
+\input{sections_id/experiments}
+\input{sections_id/results}
+\input{sections_id/discussion}
+\input{sections_id/conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

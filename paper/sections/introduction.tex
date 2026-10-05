@@ -1,0 +1,22 @@
+\section{Introduction}
+\label{sec:intro}
+
+Scientific software built around LLMs is now routinely a \emph{compound} system: several models, retrieval components and rule-based checks cooperate, and the choice of model per step is a design variable rather than a constant~\cite{chen2024compound,chen2023frugalgpt,ong2024routellm}. Research agents that read, translate, review or summarise papers are a prominent case, and their results enter theses and publications together with a statement of the kind ``the LLM was \texttt{model-X}''. That statement is part of the scientific record: it decides whether a result can be reproduced and whether two runs are comparable.
+
+This paper starts from an incident in such a system. A neuro-symbolic agent for detecting synthesis-gap indicators in scientific literature~\cite{arya2026wizard} called a commercial model through the GitHub Copilot SDK~\cite{copilotsdk2026} and labelled every result with the configured model, \texttt{claude-opus-4.8-fast}. When the account's entitlement changed, the CLI kept accepting the name---and kept returning answers---while a different model, \texttt{claude-haiku-4.5}, was doing the work. Nothing in the response signalled the substitution; a fictitious model name was accepted just as quietly. The only reliable evidence was a usage event that names the model that answered. The label in the thesis was, for a period, wrong.
+
+The incident raises a general question for research agents: \emph{which model actually answered, and how should an agent know, record and exploit that?} We turn the question into three research questions.
+\begin{itemize}
+  \item \textbf{RQ1} Does the model that answers a request equal the model that was requested, and what mechanism gives an agent a truthful provenance label?
+  \item \textbf{RQ2} On a structure-sensitive task---translating a LaTeX paper while keeping citations, mathematics and cross-references intact---does a pipeline that combines different models (translator, post-editor, judge) outperform a single model, and at what cost?
+  \item \textbf{RQ3} Which errors are caught by models (a second model re-reading the output) and which only by deterministic validators?
+\end{itemize}
+
+We answer them with \emph{paper-agent}, an open-source agent for scientific papers whose every LLM call records the model that answered, routes work to models by role, and validates every model output deterministically. The contributions are:
+\begin{itemize}
+  \item an empirical account of silent model substitution in a vendor SDK and a provenance mechanism (served-model logging, substitution warnings, truthful labels) that we recommend for research agents;
+  \item a structure-safe translation method for LaTeX that masks commands, mathematics and references into placeholders and emphasis into tags, verifies their multiset and their attachment to numbers per unit, and reproduces the source byte for byte when no translation is applied;
+  \item a controlled comparison of a three-model pipeline with two single-model configurations on the same 146 units, with per-unit metrics (cross-lingual cosine, back-translation cosine, glossary compliance, structural integrity, time, served models) released with the code;
+  \item an error analysis showing that the pipeline's benefit lies in catching errors rather than in raising averages, and that three error classes were invisible to every model, including the judge, but caught by validators.
+\end{itemize}
+The agent also verifies references against bibliographic databases, gates citations, builds and checks the PDF, reviews a paper with two independent critics, and converts Word manuscripts to IEEE LaTeX; these functions are described as part of the system but evaluated only informally here. The Indonesian version of this paper was produced by the agent itself.

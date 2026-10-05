@@ -1,0 +1,45 @@
+{
+ "configs": {
+  "multi": {
+   "units": 146,
+   "intact": 146,
+   "cosine_direct": 0.8260616438356164,
+   "cosine_back": 0.9576478873239437,
+   "cosine_direct_sd": 0.1336765787521765,
+   "cosine_back_sd": 0.0701435346506225,
+   "wall_s": 1334,
+   "glossary": 0.9895470383275261,
+   "review_changed": 38,
+   "review_edit_mean": 0.017356164383561645,
+   "selected": {
+    "draft": 7,
+    "review": 139
+   }
+  },
+  "haiku": {
+   "units": 146,
+   "intact": 146,
+   "cosine_direct": 0.8367260273972603,
+   "cosine_back": 0.9609712230215828,
+   "cosine_direct_sd": 0.12741134551683458,
+   "cosine_back_sd": 0.06177831596089885,
+   "wall_s": 425,
+   "glossary": 0.9965156794425087
+  },
+  "gemma3": {
+   "units": 146,
+   "intact": 144,
+   "cosine_direct": 0.8307671232876712,
+   "cosine_back": 0.9558642857142857,
+   "cosine_direct_sd": 0.13040816015184895,
+   "cosine_back_sd": 0.08106842001969568,
+   "wall_s": 384,
+   "glossary": 0.9790940766550522
+  }
+ },
+ "agreement": {
+  "multi-haiku": 0.8876091357914161,
+  "multi-gemma3": 0.9026607573496355,
+  "haiku-gemma3": 0.9051725373961077
+ }
+}

@@ -1,0 +1,28 @@
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+/build/
+/dist/
+.pytest_cache/
+.venv/
+
+# secrets / local config
+.env
+.paper-agent/
+
+# LaTeX build output (keep sources, figures and the final PDFs)
+paper/build/*
+!paper/build/main.pdf
+!paper/build/main_id.pdf
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+
+# previews
+*.png
+!paper/figures/*.png

@@ -1,0 +1,56 @@
+% paper-agent paper — IEEE conference format
+% Build: paper-agent compile paper/main.tex   (latexmk -pdf, output in paper/build/)
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\graphicspath{{figures/}}
+
+% \todo{} marks items that must be resolved before submission
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+% placeholder token as it appears in the masked text, e.g. \ph{3}
+\newcommand{\ph}[1]{\texttt{[[#1]]}}
+
+\begin{document}
+
+\title{Which Model Actually Answered? Silent Model Substitution, Deterministic Validators, and Multi-Model Routing in an LLM Paper Agent}
+
+\author{%
+\IEEEauthorblockN{Andi Agung Dwi Arya B}
+\IEEEauthorblockA{\textit{Program Studi Magister Teknik Informatika, Fakultas Teknik} \\
+\textit{Universitas Hasanuddin}\\
+Makassar, Indonesia \\
+D082251054 $\cdot$ \todo{email}}
+}
+
+\maketitle
+
+\input{sections/abstract}
+
+\begin{IEEEkeywords}
+large language models, model routing, provenance, machine translation, LaTeX, compound AI systems, LLM-as-a-judge, research agents
+\end{IEEEkeywords}
+
+\input{sections/introduction}
+\input{sections/related}
+\input{sections/method}
+\input{sections/experiments}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

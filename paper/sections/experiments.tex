@@ -1,0 +1,31 @@
+\section{Experimental Setup}
+\label{sec:setup}
+
+\paragraph{Experiment A: substitution (RQ1)}
+Through the Copilot SDK, with a fine-grained personal access token of an entry-level account, we requested models the account is entitled to (\texttt{claude-haiku-4.5}, \texttt{gpt-5-mini}), a model it is not entitled to (\texttt{claude-opus-4.8-fast}) and a fictitious name, and read the served model from the usage event (Section~\ref{sec:prov}). The behaviour is pinned by an automated test in the agent that originally hosted the incident~\cite{arya2026wizard}.
+
+\paragraph{Experiment B: translation configurations (RQ2)}
+The material is the companion IEEE conference paper~\cite{arya2026wizard}: eight section files, 146 units, 4{,}673 words, 262 placeholders and 38 emphasis tags after masking; 51 of the units are table cells, 44 are headings or captions, 7 are list items and 44 are paragraphs. The target is formal Indonesian with a 103-term glossary derived from the thesis the paper summarises (e.g.\ \emph{synthesis gap}, \emph{rule engine} and \emph{knowledge graph} are kept in English; \emph{fragmentation} $\rightarrow$ \emph{fragmentasi}). Three configurations translated the same units with the same glossary and prompts (Table~\ref{tab:configs}). Each configuration was run once; the API models run with the vendor's default sampling, the local model at temperature $0.2$. Hardware: two NVIDIA L40S (46~GB) for Ollama; \texttt{gemma3:27b} in 4-bit quantisation.
+
+\begin{table}[t]
+  \caption{Configurations compared in Experiment B. QA (back-translation + cosine) is computed for all three.}
+  \label{tab:configs}
+  \centering
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lp{1.75cm}p{1.95cm}p{1.6cm}@{}}
+    \toprule
+    Configuration & Draft & Post-edit & Selection \\
+    \midrule
+    \textsc{multi} & GPT-5 mini (Copilot) & Claude Haiku 4.5 (Copilot) & per unit by QA score \\
+    \textsc{single}-Haiku & Claude Haiku 4.5 (Copilot) & -- & -- \\
+    \textsc{single}-gemma3 & Gemma 3 27B (local, 4-bit) & -- & -- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Metrics}
+(i) Structural integrity: units whose output passed the validators (Section~\ref{sec:validators}) and units left in English; (ii) glossary compliance; (iii) mean cross-lingual cosine between source and final text and between source and the back-translation of the final text; (iv) for \textsc{multi}, the post-editor's edit ratio ($1-$ difflib similarity between draft and reviewed text) and the selection outcome; (v) wall time, model-seconds per unit, number of API calls and served models; (vi) agreement between configurations as mean character-level similarity of their final texts. Cosine values are computed by the same embedding model for all configurations and are reported with their standard error.
+
+\paragraph{Experiment C: error analysis (RQ3)}
+We inspected every unit whose validators fired, every unit whose QA score dropped by more than $0.10$ after post-editing, the post-editor's change notes, and the lowest-scoring units of each configuration, and classified what caught each error: the post-editing model, the QA model, or a validator.

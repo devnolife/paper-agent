@@ -1,0 +1,182 @@
+# Reference seed for the paper-agent paper. Verified by `paper-agent verify-refs`; nothing here is cited from memory
+# without the tool confirming title/year in >= 2 independent sources (or MANUAL for web pages / unpublished work).
+entries:
+  - key: zheng2023judge
+    type: arxiv
+    title: "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena"
+    authors: [Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric P. Xing, Hao Zhang, Joseph E. Gonzalez, Ion Stoica]
+    year: 2023
+    arxiv: "2306.05685"
+  - key: madaan2023selfrefine
+    type: arxiv
+    title: "Self-Refine: Iterative Refinement with Self-Feedback"
+    authors: [Aman Madaan, Niket Tandon, Prakhar Gupta, Skyler Hallinan, Luyu Gao, Sarah Wiegreffe, Uri Alon, Nouha Dziri, Shrimai Prabhumoye, Yiming Yang, Shashank Gupta, Bodhisattwa Prasad Majumder, Katherine Hermann, Sean Welleck, Amir Yazdanbakhsh, Peter Clark]
+    year: 2023
+    arxiv: "2303.17651"
+  - key: wang2024moa
+    type: arxiv
+    title: "Mixture-of-Agents Enhances Large Language Model Capabilities"
+    authors: [Junlin Wang, Jue Wang, Ben Athiwaratkun, Ce Zhang, James Zou]
+    year: 2024
+    arxiv: "2406.04692"
+  - key: ong2024routellm
+    type: arxiv
+    title: "RouteLLM: Learning to Route LLMs with Preference Data"
+    authors: [Isaac Ong, Amjad Almahairi, Vincent Wu, Wei-Lin Chiang, Tianhao Wu, Joseph E. Gonzalez, M Waleed Kadous, Ion Stoica]
+    year: 2024
+    arxiv: "2406.18665"
+  - key: chen2023frugalgpt
+    type: arxiv
+    title: "FrugalGPT: How to Use Large Language Models While Reducing Cost and Improving Performance"
+    authors: [Lingjiao Chen, Matei Zaharia, James Zou]
+    year: 2023
+    arxiv: "2305.05176"
+  - key: chen2024compound
+    type: arxiv
+    title: "Are More LLM Calls All You Need? Towards Scaling Laws of Compound Inference Systems"
+    authors: [Lingjiao Chen, Jared Quincy Davis, Boris Hanin, Peter Bailis, Ion Stoica, Matei Zaharia, James Zou]
+    year: 2024
+    arxiv: "2403.02419"
+  - key: jiang2023blender
+    type: inproceedings
+    title: "LLM-Blender: Ensembling Large Language Models with Pairwise Ranking and Generative Fusion"
+    authors: [Dongfu Jiang, Xiang Ren, Bill Yuchen Lin]
+    year: 2023
+    venue: "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"
+    doi: 10.18653/v1/2023.acl-long.792
+  - key: huang2024selfcorrect
+    type: arxiv
+    title: "Large Language Models Cannot Self-Correct Reasoning Yet"
+    authors: [Jie Huang, Xinyun Chen, Swaroop Mishra, Huaixiu Steven Zheng, Adams Wei Yu, Xinying Song, Denny Zhou]
+    year: 2023
+    arxiv: "2310.01798"
+  - key: panickssery2024selfpref
+    type: arxiv
+    title: "LLM Evaluators Recognize and Favor Their Own Generations"
+    authors: [Arjun Panickssery, Samuel R. Bowman, Shi Feng]
+    year: 2024
+    arxiv: "2404.13076"
+  - key: yao2023react
+    type: arxiv
+    title: "ReAct: Synergizing Reasoning and Acting in Language Models"
+    authors: [Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, Yuan Cao]
+    year: 2022
+    arxiv: "2210.03629"
+  - key: shinn2023reflexion
+    type: arxiv
+    title: "Reflexion: Language Agents with Verbal Reinforcement Learning"
+    authors: [Noah Shinn, Federico Cassano, Edward Berman, Ashwin Gopinath, Karthik Narasimhan, Shunyu Yao]
+    year: 2023
+    arxiv: "2303.11366"
+  - key: reimers2019sbert
+    type: inproceedings
+    title: "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks"
+    authors: [Nils Reimers, Iryna Gurevych]
+    year: 2019
+    venue: "Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP)"
+    doi: 10.18653/v1/D19-1410
+  - key: reimers2020multilingual
+    type: inproceedings
+    title: "Making Monolingual Sentence Embeddings Multilingual using Knowledge Distillation"
+    authors: [Nils Reimers, Iryna Gurevych]
+    year: 2020
+    venue: "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)"
+    doi: 10.18653/v1/2020.emnlp-main.365
+  - key: rei2020comet
+    type: inproceedings
+    title: "COMET: A Neural Framework for MT Evaluation"
+    authors: [Ricardo Rei, Craig Stewart, Ana C Farinha, Alon Lavie]
+    year: 2020
+    venue: "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)"
+    doi: 10.18653/v1/2020.emnlp-main.213
+  - key: freitag2021mqm
+    type: article
+    title: "Experts, Errors, and Context: A Large-Scale Study of Human Evaluation for Machine Translation"
+    authors: [Markus Freitag, George Foster, David Grangier, Viresh Ratnakar, Qijun Tan, Wolfgang Macherey]
+    year: 2021
+    venue: "Transactions of the Association for Computational Linguistics"
+    doi: 10.1162/tacl_a_00437
+  - key: kocmi2023gemba
+    type: arxiv
+    title: "Large Language Models Are State-of-the-Art Evaluators of Translation Quality"
+    authors: [Tom Kocmi, Christian Federmann]
+    year: 2023
+    arxiv: "2302.14520"
+  - key: hendy2023gpt
+    type: arxiv
+    title: "How Good Are GPT Models at Machine Translation? A Comprehensive Evaluation"
+    authors: [Amr Hendy, Mohamed Abdelrehim, Amr Sharaf, Vikas Raunak, Mohamed Gabr, Hitokazu Matsushita, Young Jin Kim, Mohamed Afify, Hany Hassan Awadalla]
+    year: 2023
+    arxiv: "2302.09210"
+  - key: moon2020roundtrip
+    type: inproceedings
+    title: "Revisiting Round-Trip Translation for Quality Estimation"
+    authors: [Jihyung Moon, Hyunchang Cho, Eunjeong L. Park]
+    year: 2020
+    venue: "Proceedings of the 22nd Annual Conference of the European Association for Machine Translation"
+  - key: sennrich2016backtranslation
+    type: inproceedings
+    title: "Improving Neural Machine Translation Models with Monolingual Data"
+    authors: [Rico Sennrich, Barry Haddow, Alexandra Birch]
+    year: 2016
+    venue: "Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)"
+    doi: 10.18653/v1/P16-1009
+  - key: dinu2019terminology
+    type: inproceedings
+    title: "Training Neural Machine Translation to Apply Terminology Constraints"
+    authors: [Georgiana Dinu, Prashant Mathur, Marcello Federico, Yaser Al-Onaizan]
+    year: 2019
+    venue: "Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics"
+    doi: 10.18653/v1/P19-1294
+  - key: ji2023hallucination
+    type: article
+    title: "Survey of Hallucination in Natural Language Generation"
+    authors: [Ziwei Ji, Nayeon Lee, Rita Frieske, Tiezheng Yu, Dan Su, Yan Xu, Etsuko Ishii, Ye Jin Bang, Andrea Madotto, Pascale Fung]
+    year: 2023
+    venue: "ACM Computing Surveys"
+    doi: 10.1145/3571730
+  - key: mitchell2019modelcards
+    type: inproceedings
+    title: "Model Cards for Model Reporting"
+    authors: [Margaret Mitchell, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman, Ben Hutchinson, Elena Spitzer, Inioluwa Deborah Raji, Timnit Gebru]
+    year: 2019
+    venue: "Proceedings of the Conference on Fairness, Accountability, and Transparency"
+    doi: 10.1145/3287560.3287596
+  - key: gemma2025
+    type: arxiv
+    title: "Gemma 3 Technical Report"
+    authors: ["{Gemma Team}"]
+    year: 2025
+    arxiv: "2503.19786"
+  # --- web pages and unpublished work: MANUAL (human-checked, no automatic verification) ---
+  - key: githubdocs2026models
+    type: misc
+    title: "Supported AI models in GitHub Copilot"
+    authors: ["{GitHub Docs}"]
+    year: 2026
+    howpublished: "\\url{https://docs.github.com/en/copilot/reference/ai-models/supported-models}"
+    note: "Accessed 3 Oct. 2026"
+    verify: manual
+  - key: artificialanalysis2026
+    type: misc
+    title: "Artificial Analysis: Independent LLM Evaluations (Intelligence Index, Terminal-Bench-Science, AA-Omniscience, AA-LCR)"
+    authors: ["{Artificial Analysis}"]
+    year: 2026
+    howpublished: "\\url{https://artificialanalysis.ai/evaluations}"
+    note: "Accessed 3 Oct. 2026"
+    verify: manual
+  - key: arya2026wizard
+    type: misc
+    title: "A Neuro-Symbolic Agentic Approach for Detecting Synthesis-Gap Indicators in Scientific Literature"
+    authors: [Andi Agung Dwi Arya B]
+    year: 2026
+    howpublished: "Unpublished manuscript, Universitas Hasanuddin"
+    verify: manual
+  - key: copilotsdk2026
+    type: misc
+    title: "GitHub Copilot SDK for Python (github-copilot-sdk)"
+    authors: ["{GitHub}"]
+    year: 2026
+    howpublished: "\\url{https://github.com/github/copilot-sdk}"
+    note: "Version 1.0.x, accessed Oct. 2026"
+    verify: manual
