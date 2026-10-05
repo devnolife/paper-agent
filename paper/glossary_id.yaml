@@ -12,7 +12,7 @@ primary evidence: bukti primer
 evidence gap map: peta kesenjangan bukti (evidence gap map)
 neuro-symbolic: neuro-simbolik
 agentic: agentic
-agent: agent
+agent: agen
 agentic loop: loop agentic
 rule engine: rule engine
 rule-based validation layer: lapisan validasi berbasis aturan
@@ -149,6 +149,7 @@ selection: seleksi
 selective review: review selektif
 quality estimation: estimasi kualitas
 terminology: terminologi
+paper-agent: paper-agent
 paper agent: agen paper
 research agent: agen riset
 vendor SDK: SDK vendor

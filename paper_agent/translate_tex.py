@@ -250,9 +250,13 @@ def translate_tex(src_dir: Path, out_dir: Path, files: Optional[List[str]] = Non
                 u.out[k] = t
                 return True
 
-            pend = [u for u in units if stage in u.out and key not in u.out and not u.metrics.get("untranslated")]
+            pend = [u for u in units if stage in u.out and key not in u.out and not u.metrics.get("untranslated")
+                    and not u.metrics.get(f"{key}_failed")]
             run_stage(pend, key, eng, mod, SYSTEM_BACK, batch_chars, workers,
                       lambda u, s=stage: {"id": u.uid, "text": u.out[s]}, accept_back, log)
+            for u in pend:                      # remember failures so a resumed run does not retry them forever
+                if key not in u.out:
+                    u.metrics[f"{key}_failed"] = True
         save()
         for stage in cands:
             sel = [u for u in units if stage in u.out and f"sim_{stage}" not in u.metrics]
