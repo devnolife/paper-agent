@@ -2,45 +2,45 @@
 \label{sec:results}
 
 \subsection{Eksperimen A: Model yang melayani bukan model yang diminta}
-Tabel~\ref{tab:served} merangkum tes substitusi. Model yang berhak dilayani sebagaimana diminta. Setiap nama yang tidak berhak---termasuk yang fiktif---diterima tanpa kesalahan dan dijawab oleh \texttt{claude-haiku-4.5}. Tidak ada field pada objek respons yang berbeda antara kedua kasus; hanya event penggunaan yang menamai model yang melayani. Agen yang menjadi host insiden telah memberi label pada beberapa bulan analisis dengan nama yang diminta; label-labelnya kini diturunkan dari event penggunaan, peringatan substitusi dicatat sekali per pasangan, dan endpoint kesehatan melaporkan autentikasi secara eksplisit, karena login yang kedaluwarsa sebelumnya hanya muncul sebagai hasil kosong.
+Tabel~\ref{tab:served} merangkum uji substitusi. Model yang berhak dilayani sesuai dengan permintaan. Setiap nama yang tidak berhak---termasuk yang fiktif---diterima tanpa kesalahan dan dijawab oleh Claude Haiku 4.5. Tidak ada bidang dari objek respons yang berbeda antara kedua kasus; hanya event penggunaan (usage event) yang menamai model yang melayani. Agen yang menampung insiden tersebut telah memberi label beberapa bulan analisis dengan nama yang diminta; label-labelnya sekarang diturunkan dari event penggunaan (usage event), sebuah peringatan substitusi dicatat sekali per pasangan, dan endpoint kesehatan-nya melaporkan autentikasi secara eksplisit, karena login yang kadaluarsa sebelumnya hanya muncul sebagai hasil kosong.
 
 \begin{table}[t]
-  \caption{Eksperimen A: model yang diminta versus model yang melayani melalui Copilot SDK pada akun paket dasar (berhak: \texttt{claude-haiku-4.5}, \texttt{gpt-5-mini}, \texttt{gpt-5.3-codex}, \texttt{gpt-4.1}). Tidak ada permintaan yang menimbulkan kesalahan.}
+  \caption{Eksperimen A: model yang diminta versus model yang melayani melalui SDK vendor pada akun paket dasar (berhak: Claude Haiku 4.5, GPT-5 mini, GPT-5.3 Codex, GPT-4.1). Tidak ada permintaan yang menghasilkan kesalahan.}
   \label{tab:served}
   \centering
   \footnotesize
   \begin{tabular}{@{}ll@{}}
     \toprule
-    Diminta & Dilayani (\texttt{assistant.usage}) \\
+    Diminta & Dilayani (event penggunaan (usage event)) \\
     \midrule
-    \texttt{claude-haiku-4.5} & \texttt{claude-haiku-4.5} \\
-    \texttt{gpt-5-mini} & \texttt{gpt-5-mini} \\
-    \texttt{claude-opus-4.8-fast} & \texttt{claude-haiku-4.5} \\
-    nama fiktif & \texttt{claude-haiku-4.5} \\
+    Claude Haiku 4.5 & Claude Haiku 4.5 \\
+    GPT-5 mini & GPT-5 mini \\
+    Claude Opus 4.8 & Claude Haiku 4.5 \\
+    nama fiktif & Claude Haiku 4.5 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\subsection{Eksperimen B: Tiga konfigurasi, unit yang sama}
-Tabel~\ref{tab:results} dan Gambar~\ref{fig:configs} melaporkan perbandingan. Ketiga konfigurasi menghasilkan makalah berbahasa Indonesia yang dapat dikompilasi (sembilan halaman dibandingkan delapan dalam bahasa Inggris; nol referensi atau sitasi yang tidak terdefinisi; gerbang sitasi lulus dengan 32 kunci yang sama). Pada metrik kualitas otomatis, konfigurasi berada dalam satu galat baku satu sama lain: run Haiku~4.5 tunggal memiliki mean cosine tertinggi (0.837 direct, 0.961 terjemahan balik) dan kepatuhan glosarium (99.7\%), diikuti oleh pipeline tiga-model (0.826, 0.958, 99.0\%), dan model lokal berada di antara keduanya pada cosine (0.831, 0.956) tetapi terendah pada kepatuhan glosarium (97.9\%). Kedua konfigurasi berbasis Copilot mempertahankan semua 146 unit tetap utuh tanpa menggunakan model cadangan (fallback), sedangkan model lokal meninggalkan dua paragraf dalam bahasa Inggris setelah output placeholder-nya gagal divalidasi dua kali. Waktu dinding berbeda sekitar faktor tiga (22 vs 7 vs 6.4 menit) dan penggunaan API berbeda sekitar faktor dua (32 vs 17 vs 0 panggilan). Teks akhir dari dua konfigurasi manapun memiliki kesamaan karakter 0.89--0.91, i.e.\ ketiga sistem menghasilkan bahasa Indonesia yang pada dasarnya dapat saling dipertukarkan.
+\subsection{Eksperimen B: Tiga Konfigurasi, Unit yang Sama}
+Tabel~\ref{tab:results} dan Gambar~\ref{fig:configs} melaporkan perbandingan tersebut. Ketiga konfigurasi menghasilkan paper bahasa Indonesia yang dapat dikompilasi (sembilan halaman dibanding delapan dalam bahasa Inggris; nol referensi atau sitasi yang tidak terdefinisi; gerbang sitasi lolos dengan 32 kunci yang sama). Pada metrik kualitas otomatis, konfigurasi berada dalam satu galat baku satu sama lain: run tunggal Claude Haiku~4.5 memiliki mean cosine tertinggi (0.837 langsung, 0.961 terjemahan balik) dan kepatuhan glosarium (99.7\%), pipeline tiga-model mengikuti (0.826, 0.958, 99.0\%), dan model lokal berada di antaranya pada cosine (0.831, 0.956) tetapi terendah pada kepatuhan glosarium (97.9\%). Kedua konfigurasi model API mempertahankan semua 146 unit tanpa menggunakan model cadangan (fallback), sedangkan model lokal meninggalkan dua paragraf dalam bahasa Inggris setelah keluaran placeholder-nya gagal divalidasi dua kali. Waktu dinding berbeda dengan faktor tiga (22 vs 7 vs 6.4 menit) dan penggunaan API berbeda dengan faktor dua (32 vs 17 vs 0 panggilan). Teks akhir dari dua konfigurasi manapun memiliki kesamaan karakter 0.89--0.91, yaitu\ ketiga sistem menghasilkan bahasa Indonesia yang pada umumnya dapat dipertukarkan.
 
 \begin{table*}[t]
-  \caption{Eksperimen B pada 146 unit (4{,}673 kata). Nilai cosine adalah rata-rata dari teks akhir dengan galat baku; integritas = unit yang lolos validator tanpa beralih kembali ke bahasa Inggris.}
+  \caption{Eksperimen B pada 146 unit (4{,}673 kata). Nilai cosine adalah rata-rata dari teks akhir dengan galat baku; integritas = unit yang lolos validator tanpa kembali ke bahasa Inggris.}
   \label{tab:results}
   \centering
   \footnotesize
   \begin{tabular}{@{}lccc@{}}
     \toprule
-    Metrik & \textsc{multi} & \textsc{single}-Haiku & \textsc{single}-gemma3 \\
+    Metrik & \textsc{multi} & \textsc{single}-Claude Haiku & \textsc{single}-Gemma 3 \\
     \midrule
     Integritas (unit) & 146/146 & 146/146 & 144/146 \\
     Kepatuhan glosarium & 284/287 (99.0\%) & 286/287 (99.7\%) & 281/287 (97.9\%) \\
     Cosine EN$\leftrightarrow$ID & $0.826\pm0.011$ & $0.837\pm0.011$ & $0.831\pm0.011$ \\
     Cosine EN$\leftrightarrow$terjemahan balik & $0.958\pm0.006$ & $0.961\pm0.005$ & $0.956\pm0.007$ \\
-    Unit dengan teks berbahasa Inggris yang tertinggal & 1 (klaim yang dikutip) & 0 & 2 \\
+    Unit yang tersisa dalam bahasa Inggris & 1 (klaim yang dikutip) & 0 & 2 \\
     Waktu dinding (s) & 1{,}334 & 425 & 384 \\
     Detik-model per unit (draf + sunting pasca) & 7.2 + 5.0 & 3.0 & 2.8 \\
-    Panggilan Copilot (model yang melayani) & 16 \texttt{gpt-5-mini} + 16 \texttt{claude-haiku-4.5} & 17 \texttt{claude-haiku-4.5} & 0 \\
+    Panggilan API (model yang melayani) & 16 GPT-5 mini + 16 Claude Haiku 4.5 & 17 Claude Haiku 4.5 & 0 \\
     \bottomrule
   \end{tabular}
 \end{table*}
@@ -48,22 +48,22 @@ Tabel~\ref{tab:results} dan Gambar~\ref{fig:configs} melaporkan perbandingan. Ke
 \begin{figure*}[t]
   \centering
   \includegraphics[width=0.95\textwidth]{fig2_configs.pdf}
-  \caption{Eksperimen B: kualitas teks akhir (cosine dengan galat baku), kepatuhan glosarium, dan waktu dinding dari tiga konfigurasi.}
+  \caption{Eksperimen B: kualitas teks akhir (cosine dengan galat baku), kepatuhan glosarium dan waktu dinding dari ketiga konfigurasi.}
   \label{fig:configs}
 \end{figure*}
 
-\paragraph{Apa yang dilakukan penyunting pasca}
-Dalam \textsc{multi} penyunting mengubah 38 dari 146 unit (26\%); rasio suntingan rata-rata atas semua unit adalah 0.017, dan atas unit yang diubah 0.067 (maksimum 0.625). Seleksi QA mempertahankan teks yang ditinjau untuk 139 unit dan draf untuk 7 (Gambar~\ref{fig:review}a); kedua kandidat terletak dekat diagonal, yaitu\ penyuntingan pasca jarang mengubah skor otomatis. Catatan perubahan menjelaskan koreksi terminologi dan tata bahasa: \emph{inferred} dirender sebagai ``diturunkan'' (derived) dikoreksi menjadi ``disimpulkan''; \emph{show} dirender sebagai ``dibuktikan'' (proven) menjadi ``ditunjukkan''; sebuah calque bertanda hubung ``sembilan-aturan'' menjadi ``dengan sembilan aturan''; dan satu kalimat bahasa Inggris lengkap yang model pembuat draf dibiarkan tanpa diterjemahkan di paragraf pembuka diterjemahkan. Tidak satu pun dari ini terlihat pada rata-rata cosine.
+\paragraph{Apa yang dilakukan penyunting}
+Pada \textsc{multi} penyunting mengubah 38 dari 146 unit (26\%); rasio suntingan rata-rata di semua unit adalah 0.017, dan pada unit yang diubah 0.067 (maksimum 0.625). Seleksi QA mempertahankan teks yang ditinjau untuk 139 unit dan draf untuk 7 (Gambar~\ref{fig:review}a); kedua kandidat berada dekat diagonal, yaitu\ penyuntingan pasca jarang mengubah skor otomatis. Catatan perubahan menjelaskan koreksi terminologi dan tata bahasa: \emph{inferred} yang di-render sebagai ``diturunkan'' (derived) dikoreksi menjadi ``disimpulkan''; \emph{show} yang di-render sebagai ``dibuktikan'' (proven) menjadi ``ditunjukkan''; sebuah calque bertanda hubung ``sembilan-aturan'' menjadi ``dengan sembilan aturan''; dan satu kalimat bahasa Inggris lengkap yang model pembuat draf tinggalkan tanpa terjemahan pada paragraf pembuka diterjemahkan. Tidak satupun dari hal ini terlihat pada cosine rata-rata.
 
 \begin{figure*}[t]
   \centering
   \includegraphics[width=0.95\textwidth]{fig3_review.pdf}
-  \caption{\textsc{multi} pipeline: (a) skor QA per unit dari draf dan dari teks hasil penyuntingan pasca dengan kandidat yang dipilih; (b) distribusi rasio suntingan penyunting atas 38 unit yang diubah.}
+  \caption{\textsc{multi} pipeline: (a) skor QA per unit dari draf dan dari teks pasca-sunting dengan kandidat yang dipilih; (b) distribusi rasio suntingan oleh penyunting atas 38 unit yang diubah.}
   \label{fig:review}
 \end{figure*}
 
-\subsection{Eksperimen C: Siapa Menangkap Kesalahan Mana}
-Tabel~\ref{tab:errors} mengklasifikasikan kesalahan yang kami temukan menurut lapisan yang menangkapnya. Tiga kelas ditangkap oleh validator dan tidak oleh lapisan lain. (i) \emph{Placeholder yang dipindahkan}: dalam run pilot, penyunting, saat ``merapikan'' format angka, memindahkan placeholder untuk \verb|\%| ke depan angka (``hanya \ph{3}58'' untuk ``only 58\%''); pemeriksaan multiset lolos, sehingga aturan menempel pada angka ditambahkan dan kini menolak keluaran semacam itu. (ii) \emph{Terjemahan balik yang menggema}: pada 37 panggilan untuk unit pendek (33 dipenyunting dan 4 kandidat draf) model QA lokal mengembalikan teks bahasa Indonesia tanpa perubahan alih-alih bahasa Inggris; karena terjemahan balik kemudian sama dengan kandidat, cosine terjemahan balik runtuh (19 unit turun lebih dari 0.10) dan selektor keliru memilih draf untuk 25 unit yang kedua kandidatnya identik. Aturan gema mengubah ini menjadi panggilan yang gagal yang dicoba ulang, setelah itu seleksi menjadi 139/7. (iii) \emph{Placeholder yang hilang}: model lokal sebagai satu-satunya penerjemah kehilangan placeholder pada dua paragraf meskipun dicoba ulang; tanpa model cadangan (fallback) ini tetap dalam bahasa Inggris dan dilaporkan, yang merupakan perilaku yang benar. Kesalahan yang ditangkap oleh model bersifat semantik: sebuah kalimat tidak diterjemahkan, istilah teknis yang salah (\emph{confounder} menjadi ``perusak'' (destroyer) dalam run lokal dan ``perancu'' atau ``konfonder'' di tempat lain; ``stokhastisitas'' salah eja), sebuah sel tabel ``Union'' dibiarkan dalam bahasa Inggris dan sebuah judul bagian terpotong menjadi ``Kritikus lintas'' dalam run single-Haiku---tiga terakhir ditemukan oleh pembacaan manusia, yang tetap menjadi lapisan akhir.
+\subsection{Eksperimen C: Siapa yang Menemukan Kesalahan Mana}
+Tabel~\ref{tab:errors} mengklasifikasikan kesalahan yang kami temukan menurut lapisan yang menangkapnya. Tiga kelas tertangkap oleh validator dan tidak oleh apa pun selain itu. (i) \emph{Placeholder dipindahkan}: pada satu run pilot, penyunting, saat ``merapikan'' format angka, memindahkan placeholder untuk \verb|\%| ke depan angka (``hanya \ph{3}58'' untuk ``only 58\%''); pemeriksaan multiset lulus, sehingga aturan menempel pada angka ditambahkan dan sekarang menolak keluaran semacam itu. (ii) \emph{Terjemahan balik yang menggemakan}: pada 37 panggilan untuk unit pendek (33 kandidat hasil penyuntingan pasca dan 4 kandidat draf) model QA lokal mengembalikan teks bahasa Indonesia tanpa perubahan alih-alih bahasa Inggris; karena terjemahan balik kemudian sama dengan kandidat, cosine terjemahan balik runtuh (19 unit turun lebih dari 0.10) dan selektor keliru memilih draf untuk 25 unit yang dua kandidatnya identik. Aturan gema mengubah ini menjadi panggilan yang gagal untuk dicoba ulang, setelah itu seleksi menjadi 139/7. (iii) \emph{Placeholder yang hilang}: model lokal sebagai penerjemah tunggal kehilangan placeholder dalam dua paragraf meskipun sudah dicoba ulang; tanpa model cadangan (fallback) ini tetap dalam bahasa Inggris dan dilaporkan, yang merupakan perilaku yang benar. Kesalahan yang tertangkap oleh model bersifat semantik: sebuah kalimat yang tidak diterjemahkan, istilah teknis yang salah (\emph{confounder} menjadi ``perusak'' (destroyer) pada run lokal dan ``perancu'' atau ``konfonder'' di tempat lain; ``stokhastisitas'' salah eja), sebuah sel tabel ``Union'' yang dibiarkan dalam bahasa Inggris dan sebuah judul yang dipangkas menjadi ``Kritikus lintas'' pada satu run Claude Haiku---ketiga terakhir ditemukan melalui pembacaan manusia, yang tetap menjadi lapisan terakhir.
 
 \begin{table}[t]
   \caption{Eksperimen C: kelas kesalahan dan lapisan yang menangkapnya (P = model penyuntingan pasca, Q = model QA, V = validator deterministik, H = pembacaan manusia).}
@@ -72,18 +72,18 @@ Tabel~\ref{tab:errors} mengklasifikasikan kesalahan yang kami temukan menurut la
   \small
   \begin{tabular}{@{}p{4.1cm}cp{2.6cm}@{}}
     \toprule
-    Kesalahan & Ditangkap oleh & Kejadian \\
+    Kesalahan & Tertangkap oleh & Kejadian \\
     \midrule
     Placeholder dipindahkan sebelum angka & V & 1 unit (pilot) \\
     Model QA menggemakan inputnya & V & 37 panggilan \\
-    Placeholder hilang (model lokal) & V & 2 unit \\
+    Placeholder yang hilang (model lokal) & V & 2 unit \\
     Kalimat tidak diterjemahkan & P & 1 unit \\
-    Istilah teknis yang salah & P, H & 4 istilah \\
-    Salah eja (``stokhastisitas'') & H & 1 unit \\
-    Sel atau judul bagian dibiarkan/terpotong & H & 2 unit (Haiku) \\
+    Istilah teknis salah & P, H & 4 istilah \\
+    Ejaan salah (``stokhastisitas'') & H & 1 unit \\
+    Sel atau judul dibiarkan/terpotong & H & 2 unit (Claude Haiku) \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\subsection{Jawaban atas Pertanyaan Penelitian}
-\textbf{RQ1.} Tidak: SDK vendor dapat menyajikan model yang berbeda dari yang diminta tanpa kesalahan apa pun, dan satu-satunya label yang benar adalah model yang disebutkan dalam event penggunaan (usage event); agen mencatatnya untuk setiap panggilan. \textbf{RQ2.} Pipeline tiga model tidak meningkatkan kualitas rata-rata---satu model kuat menandingi atau melampauinya dalam sepertiga waktu---dan integritas struktur merupakan sifat dari validator daripada pipeline (kedua konfigurasi Copilot mencapai 146/146); yang ditambahkan pipeline adalah koreksi terhadap kesalahan semantik yang tidak ditunjukkan oleh metrik mana pun. \textbf{RQ3.} Kesalahan struktural dan protokol (placeholder, gema) hanya ditangkap oleh validator; kesalahan semantik ditangkap oleh model kedua atau oleh manusia.
+\subsection{Jawaban terhadap Pertanyaan Penelitian}
+\textbf{RQ1.} Tidak: SDK vendor dapat menyajikan model yang berbeda dari yang diminta tanpa menghasilkan kesalahan apa pun, dan satu-satunya label yang benar adalah model yang disebutkan dalam event penggunaan; agen merekamnya untuk setiap panggilan. \textbf{RQ2.} Pipeline tiga-model tidak meningkatkan kualitas rata-rata---sebuah model kuat tunggal menyamai atau melampauinya dalam sepertiga waktu---dan integritas struktur merupakan sifat dari validator daripada dari pipeline (kedua konfigurasi API-model mencapai 146/146); yang ditambahkan oleh pipeline adalah koreksi terhadap kesalahan semantik yang tidak ditunjukkan oleh metrik mana pun. \textbf{RQ3.} Kesalahan struktural dan protokol (placeholder, gema) hanya ditangkap oleh validator; kesalahan semantik ditangkap oleh model kedua atau oleh peninjau manusia.

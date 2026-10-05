@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "experiments" / "translation"
 FIGS = ROOT / "paper" / "figures"
 CONFIGS = {"multi": "multi.json", "haiku": "single_copilot_claude-haiku-4.5.json", "gemma3": "single_ollama_gemma3_27b.json"}
-LABELS = {"multi": "multi\n(gpt-5-mini → Haiku 4.5\n→ gemma3 QA)", "haiku": "single\nHaiku 4.5", "gemma3": "single\ngemma3:27b (local)"}
+LABELS = {"multi": "multi\n(GPT-5 mini → Claude Haiku 4.5\n→ Gemma 3 QA)", "haiku": "single\nClaude Haiku 4.5", "gemma3": "single\nGemma 3 27B (local)"}
 WALL = {"multi": 1334, "haiku": 425, "gemma3": 384}          # first full run, seconds (from the run logs)
 GLOSSARY = {"multi": (284, 287), "haiku": (286, 287), "gemma3": (281, 287)}
 
@@ -78,7 +78,7 @@ def main() -> None:
             ax.text((x1 + x2) / 2, (y1 + y2) / 2 + dy, text, ha="center", va="bottom", fontsize=6.4, color="#333")
 
     box(1, 17, 13, 9, "LaTeX / DOCX\nsource", fc="#ffffff")
-    box(18, 17, 15, 9, "Mask\n⟦n⟧ placeholders\n<k> tags", fc="#e8f1fb")
+    box(18, 17, 15, 9, "Mask\n[[n]] placeholders\n<k> tags", fc="#e8f1fb")
     box(37, 17, 15, 9, "Draft\n(role: draft)", fc="#fff3d6")
     box(56, 17, 15, 9, "Post-edit\n(role: review,\ndifferent model)", fc="#fff3d6")
     box(75, 17, 15, 9, "QA: back-translate\n(role: qa, local) +\nmultilingual cosine", fc="#fff3d6")
@@ -103,7 +103,7 @@ def main() -> None:
         vals = [S[k][key] for k in keys]
         err = [S[k].get(f"{key}_sd", 0) / (S[k]["units"] ** 0.5) for k in keys] if key.startswith("cosine") else None
         ax.bar(range(3), vals, color=colors, yerr=err, capsize=2, error_kw={"lw": 0.7})
-        ax.set_xticks(range(3)); ax.set_xticklabels(["multi", "Haiku", "gemma3"], fontsize=7)
+        ax.set_xticks(range(3)); ax.set_xticklabels(["multi", "Claude\nHaiku", "Gemma 3"], fontsize=6.5)
         ax.set_title(title, fontsize=7.5); ax.set_ylim(*ylim)
         for i, v in enumerate(vals):
             ax.text(i, v, f"{v:.3f}" if v < 10 else f"{v:.0f}", ha="center", va="bottom", fontsize=6.3)
@@ -123,7 +123,7 @@ def main() -> None:
         ax.scatter(xs, ys, s=9, c=c, marker=m, label=f"selected {s} (n={len(xs)})", alpha=0.75, lw=0)
     lo, hi = min(qd + qr) - 0.02, 1.0
     ax.plot([lo, hi], [lo, hi], color="#888", lw=0.7, ls="--")
-    ax.set_xlabel("QA score of draft (gpt-5-mini)"); ax.set_ylabel("QA score after post-edit (Haiku 4.5)")
+    ax.set_xlabel("QA score of draft (GPT-5 mini)"); ax.set_ylabel("QA score after post-edit (Claude Haiku 4.5)")
     ax.legend(fontsize=6.3, frameon=False, loc="lower right")
     ax.set_title("(a) per-unit QA before/after post-editing", fontsize=7.5)
     ax = axes[1]

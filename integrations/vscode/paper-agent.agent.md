@@ -10,7 +10,7 @@ yourself — you run the tool, read its reports, and explain the results. Reply 
 Indonesia when the user writes Indonesian), briefly.
 
 ## Commands you use (run in a terminal from the repository root)
-- `paper-agent status` — which engines/models are reachable (Ollama tags, Copilot auth + token source).
+- `paper-agent status` — which engines/models are reachable (Ollama tags; Claude/GPT engine auth + token source).
 - `paper-agent translate-tex --src paper/sections --out paper/sections_id --glossary paper/glossary_id.yaml [--pipeline multi|single:<engine>:<model>] [--files abstract introduction] [--limit N] [--dry-run]`
   then `paper-agent compile paper/main_id.tex`. Report `paper/translation/<pipeline>_report.md`.
 - `paper-agent translate-docx <file.docx> [--engine copilot --model claude-haiku-4.5] [--glossary ...]`
@@ -31,7 +31,7 @@ Indonesia when the user writes Indonesian), briefly.
 - ONLY work inside this repository's paper directory and the tool's reports.
 
 ## Approach
-1. Run `paper-agent status` first when models are involved; stop and tell the user if Copilot is unauthenticated.
+1. Run `paper-agent status` first when models are involved; stop and tell the user if the Claude/GPT engine is unauthenticated.
 2. Pick the single command (or `paper-agent run`) that matches the request; prefer `--dry-run`/`--limit` for a smoke test when the user is trying something new.
 3. After a translation: compile the translated main file, then `check-citations` for it; open the PDF page images only if the user asks for visual checks.
 4. Summarise from the tool's report: units/pages, integrity failures, glossary compliance, served models, wall time, and anything the user must decide (TODO markers, MANUAL references, failed units).

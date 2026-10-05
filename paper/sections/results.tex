@@ -2,27 +2,27 @@
 \label{sec:results}
 
 \subsection{Experiment A: The Served Model Is Not the Requested Model}
-Table~\ref{tab:served} summarises the substitution test. Entitled models were served as requested. Every non-entitled name---including a fictitious one---was accepted without error and answered by \texttt{claude-haiku-4.5}. No field of the response object differs between the two cases; only the usage event names the serving model. The agent that hosted the incident had labelled several months of analyses with the requested name; its labels are now derived from the usage event, a substitution warning is logged once per pair, and its health endpoint reports authentication explicitly, because an expired login had previously surfaced only as empty results.
+Table~\ref{tab:served} summarises the substitution test. Entitled models were served as requested. Every non-entitled name---including a fictitious one---was accepted without error and answered by Claude Haiku 4.5. No field of the response object differs between the two cases; only the usage event names the serving model. The agent that hosted the incident had labelled several months of analyses with the requested name; its labels are now derived from the usage event, a substitution warning is logged once per pair, and its health endpoint reports authentication explicitly, because an expired login had previously surfaced only as empty results.
 
 \begin{table}[t]
-  \caption{Experiment A: requested versus served model through the Copilot SDK on an entry-level account (entitled: \texttt{claude-haiku-4.5}, \texttt{gpt-5-mini}, \texttt{gpt-5.3-codex}, \texttt{gpt-4.1}). No request raised an error.}
+  \caption{Experiment A: requested versus served model through the vendor SDK on an entry-level account (entitled: Claude Haiku 4.5, GPT-5 mini, GPT-5.3 Codex, GPT-4.1). No request raised an error.}
   \label{tab:served}
   \centering
   \footnotesize
   \begin{tabular}{@{}ll@{}}
     \toprule
-    Requested & Served (\texttt{assistant.usage}) \\
+    Requested & Served (usage event) \\
     \midrule
-    \texttt{claude-haiku-4.5} & \texttt{claude-haiku-4.5} \\
-    \texttt{gpt-5-mini} & \texttt{gpt-5-mini} \\
-    \texttt{claude-opus-4.8-fast} & \texttt{claude-haiku-4.5} \\
-    fictitious name & \texttt{claude-haiku-4.5} \\
+    Claude Haiku 4.5 & Claude Haiku 4.5 \\
+    GPT-5 mini & GPT-5 mini \\
+    Claude Opus 4.8 & Claude Haiku 4.5 \\
+    fictitious name & Claude Haiku 4.5 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \subsection{Experiment B: Three Configurations, Same Units}
-Table~\ref{tab:results} and Fig.~\ref{fig:configs} report the comparison. All three configurations produced a compilable Indonesian paper (nine pages against eight in English; zero undefined references or citations; the citation gate passed with the same 32 keys). On the automatic quality metrics the configurations are within one standard error of each other: the single Haiku~4.5 run has the highest mean cosine (0.837 direct, 0.961 back-translation) and glossary compliance (99.7\%), the three-model pipeline follows (0.826, 0.958, 99.0\%), and the local model is between them on cosine (0.831, 0.956) but lowest on glossary compliance (97.9\%). Both Copilot-based configurations kept all 146 units intact without using the fallback model, whereas the local model left two paragraphs in English after its placeholder output failed validation twice. Wall time differs by a factor of three (22 vs 7 vs 6.4 minutes) and API usage by a factor of two (32 vs 17 vs 0 calls). The final texts of any two configurations agree at 0.89--0.91 character similarity, i.e.\ the three systems produced largely interchangeable Indonesian.
+Table~\ref{tab:results} and Fig.~\ref{fig:configs} report the comparison. All three configurations produced a compilable Indonesian paper (nine pages against eight in English; zero undefined references or citations; the citation gate passed with the same 32 keys). On the automatic quality metrics the configurations are within one standard error of each other: the single Claude Haiku~4.5 run has the highest mean cosine (0.837 direct, 0.961 back-translation) and glossary compliance (99.7\%), the three-model pipeline follows (0.826, 0.958, 99.0\%), and the local model is between them on cosine (0.831, 0.956) but lowest on glossary compliance (97.9\%). Both API-model configurations kept all 146 units intact without using the fallback model, whereas the local model left two paragraphs in English after its placeholder output failed validation twice. Wall time differs by a factor of three (22 vs 7 vs 6.4 minutes) and API usage by a factor of two (32 vs 17 vs 0 calls). The final texts of any two configurations agree at 0.89--0.91 character similarity, i.e.\ the three systems produced largely interchangeable Indonesian.
 
 \begin{table*}[t]
   \caption{Experiment B on 146 units (4{,}673 words). Cosine values are means of the final text with standard error; integrity = units that passed the validators without falling back to English.}
@@ -31,7 +31,7 @@ Table~\ref{tab:results} and Fig.~\ref{fig:configs} report the comparison. All th
   \footnotesize
   \begin{tabular}{@{}lccc@{}}
     \toprule
-    Metric & \textsc{multi} & \textsc{single}-Haiku & \textsc{single}-gemma3 \\
+    Metric & \textsc{multi} & \textsc{single}-Claude Haiku & \textsc{single}-Gemma 3 \\
     \midrule
     Integrity (units) & 146/146 & 146/146 & 144/146 \\
     Glossary compliance & 284/287 (99.0\%) & 286/287 (99.7\%) & 281/287 (97.9\%) \\
@@ -40,7 +40,7 @@ Table~\ref{tab:results} and Fig.~\ref{fig:configs} report the comparison. All th
     Units with English left & 1 (quoted claim) & 0 & 2 \\
     Wall time (s) & 1{,}334 & 425 & 384 \\
     Model-seconds per unit (draft + post-edit) & 7.2 + 5.0 & 3.0 & 2.8 \\
-    Copilot calls (served model) & 16 \texttt{gpt-5-mini} + 16 \texttt{claude-haiku-4.5} & 17 \texttt{claude-haiku-4.5} & 0 \\
+    API calls (served model) & 16 GPT-5 mini + 16 Claude Haiku 4.5 & 17 Claude Haiku 4.5 & 0 \\
     \bottomrule
   \end{tabular}
 \end{table*}
@@ -63,7 +63,7 @@ In \textsc{multi} the post-editor changed 38 of 146 units (26\%); the mean edit 
 \end{figure*}
 
 \subsection{Experiment C: Who Caught Which Error}
-Table~\ref{tab:errors} classifies the errors we found by the layer that caught them. Three classes were caught by validators and by nothing else. (i) \emph{Moved placeholder}: in a pilot run the post-editor, while ``tidying'' number formats, moved the placeholder for \verb|\%| in front of the number (``hanya \ph{3}58'' for ``only 58\%''); the multiset check passed, so the number-gluing rule was added and now rejects such output. (ii) \emph{Echoed back-translation}: on 37 calls for short units (33 post-edited and 4 draft candidates) the local QA model returned the Indonesian text unchanged instead of English; because the back-translation then equalled the candidate, the back-translation cosine collapsed (19 units dropped by more than 0.10) and the selector wrongly preferred the draft for 25 units whose two candidates were identical. The echo rule turns these into failed calls that are retried, after which the selection became 139/7. (iii) \emph{Dropped placeholders}: the local model as sole translator lost placeholders in two paragraphs despite retries; without a fallback model these stay in English and are reported, which is the correct behaviour. Errors caught by a model were semantic: an untranslated sentence, wrong technical terms (\emph{confounder} became ``perusak'' (destroyer) in the local run and ``perancu'' or ``konfonder'' elsewhere; ``stokhastisitas'' misspelled), a table cell ``Union'' left in English and a heading truncated to ``Kritikus lintas'' in the single-Haiku run---the last three were found by human reading, which remains the final layer.
+Table~\ref{tab:errors} classifies the errors we found by the layer that caught them. Three classes were caught by validators and by nothing else. (i) \emph{Moved placeholder}: in a pilot run the post-editor, while ``tidying'' number formats, moved the placeholder for \verb|\%| in front of the number (``hanya \ph{3}58'' for ``only 58\%''); the multiset check passed, so the number-gluing rule was added and now rejects such output. (ii) \emph{Echoed back-translation}: on 37 calls for short units (33 post-edited and 4 draft candidates) the local QA model returned the Indonesian text unchanged instead of English; because the back-translation then equalled the candidate, the back-translation cosine collapsed (19 units dropped by more than 0.10) and the selector wrongly preferred the draft for 25 units whose two candidates were identical. The echo rule turns these into failed calls that are retried, after which the selection became 139/7. (iii) \emph{Dropped placeholders}: the local model as sole translator lost placeholders in two paragraphs despite retries; without a fallback model these stay in English and are reported, which is the correct behaviour. Errors caught by a model were semantic: an untranslated sentence, wrong technical terms (\emph{confounder} became ``perusak'' (destroyer) in the local run and ``perancu'' or ``konfonder'' elsewhere; ``stokhastisitas'' misspelled), a table cell ``Union'' left in English and a heading truncated to ``Kritikus lintas'' in the single Claude Haiku run---the last three were found by human reading, which remains the final layer.
 
 \begin{table}[t]
   \caption{Experiment C: error classes and the layer that caught them (P = post-editing model, Q = QA model, V = deterministic validator, H = human reading).}
@@ -80,10 +80,10 @@ Table~\ref{tab:errors} classifies the errors we found by the layer that caught t
     Sentence left untranslated & P & 1 unit \\
     Wrong technical term & P, H & 4 terms \\
     Misspelling (``stokhastisitas'') & H & 1 unit \\
-    Cell or heading left/truncated & H & 2 units (Haiku) \\
+    Cell or heading left/truncated & H & 2 units (Claude Haiku) \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \subsection{Answers to the Research Questions}
-\textbf{RQ1.} No: a vendor SDK can serve a different model from the requested one without any error, and the only truthful label is the model named in the usage event; the agent records it for every call. \textbf{RQ2.} The three-model pipeline did not raise mean quality---a single strong model matched or exceeded it at a third of the time---and structural integrity was a property of the validators rather than of the pipeline (both Copilot configurations reached 146/146); what the pipeline added was the correction of semantic errors that no metric showed. \textbf{RQ3.} Structural and protocol errors (placeholders, echoes) were caught only by validators; semantic errors were caught by a second model or by a human.
+\textbf{RQ1.} No: a vendor SDK can serve a different model from the requested one without any error, and the only truthful label is the model named in the usage event; the agent records it for every call. \textbf{RQ2.} The three-model pipeline did not raise mean quality---a single strong model matched or exceeded it at a third of the time---and structural integrity was a property of the validators rather than of the pipeline (both API-model configurations reached 146/146); what the pipeline added was the correction of semantic errors that no metric showed. \textbf{RQ3.} Structural and protocol errors (placeholders, echoes) were caught only by validators; semantic errors were caught by a second model or by a human.

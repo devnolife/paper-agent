@@ -2,12 +2,12 @@
 
 An agent for scientific papers whose **every LLM call records the model that actually answered**.
 
-It grew out of a finding while building a research agent on top of the GitHub Copilot SDK: the Copilot
-CLI accepts *any* model name and, when the account is not entitled to it, silently serves another
-model (`claude-opus-4.8-fast` requested → `claude-haiku-4.5` served). A pipeline that labels its output
-with the *requested* model therefore misreports its own provenance. `paper-agent` reads the
-`assistant.usage` event of every call, routes work to models by role, and wraps every model output in
-deterministic validators. The accompanying paper (`paper/`) reports the experiments.
+It grew out of a finding while building a research agent on top of a commercial model SDK: the vendor's CLI accepts
+*any* model name and, when the account is not entitled to it, silently serves another model (Claude Opus 4.8
+requested → Claude Haiku 4.5 served). A pipeline that labels its output with the *requested* model therefore
+misreports its own provenance. `paper-agent` reads the `assistant.usage` event of every call, routes work to models
+by role (e.g. GPT-5 mini drafts, Claude Haiku 4.5 post-edits, a local Gemma 3 27B back-translates), and wraps every
+model output in deterministic validators. The accompanying paper (`paper/`) reports the experiments.
 
 ## What it does
 
@@ -26,14 +26,14 @@ deterministic validators. The accompanying paper (`paper/`) reports the experime
 ## Install
 
 ```bash
-pip install -e ".[copilot,qa,api,dev]"      # from a clone
+pip install -e ".[copilot,qa,api,dev]"      # from a clone; the `copilot` extra installs the vendor SDK that serves the Claude/GPT models
 # system tools: TeX Live (texlive-latex-extra texlive-publishers latexmk; texlive-lang-other for babel bahasa), poppler-utils
 ```
 
 Configuration is by environment (`.env` in the working directory is loaded):
 
 ```ini
-COPILOT_GITHUB_TOKEN=github_pat_…     # fine-grained PAT, permission "Copilot Requests" (or `copilot login`)
+COPILOT_GITHUB_TOKEN=github_pat_…     # token for the Claude/GPT engine (fine-grained PAT, permission "Copilot Requests"), or log in with the vendor CLI
 OLLAMA_URL=http://127.0.0.1:11434
 CROSSREF_EMAIL=you@example.org
 BROWSER_AGENT_URL=http://127.0.0.1:8780   # optional: Scopus / Semantic Scholar through studio-revisi's browser-agent
