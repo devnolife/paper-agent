@@ -178,11 +178,12 @@ def translate_tex(src_dir: Path, out_dir: Path, files: Optional[List[str]] = Non
         cached_all = json.loads(cache_path.read_text(encoding="utf-8"))
         for k, v in cached_all.get("served_models", {}).items():
             engines.SERVED[k] = engines.SERVED.get(k, 0) + v
-        cached = cached_all.get("units", {})
+        # keyed by masked text, not by unit number: file order or an inserted paragraph must not invalidate the rest
+        by_text = {c.get("masked"): c for c in cached_all.get("units", {}).values() if c.get("masked")}
         for u in units:
-            c = cached.get(str(u.uid))
-            if c and c.get("masked") == u.masked:
-                u.out, u.final, u.metrics = c.get("out", {}), c.get("final"), c.get("metrics", {})
+            c = by_text.get(u.masked)
+            if c:
+                u.out, u.final, u.metrics = dict(c.get("out", {})), c.get("final"), dict(c.get("metrics", {}))
                 for stage in ("draft", "review"):   # a back-translation equal to its input is a failed QA call
                     if u.out.get(f"back_{stage}", "").strip() == u.out.get(stage, "\0").strip():
                         u.out.pop(f"back_{stage}", None)
