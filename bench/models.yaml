@@ -1,0 +1,24 @@
+# SkripsiBench study roster (models enabled for the authors' account on 2026-10-14).
+# tier: economy / standard / premium (vendor SDK models) and local (Ollama). Premium models and reasoning effort
+# high/xhigh/max only run with `paper-agent bench run --approve-high-cost`.
+effort: low                       # reasoning effort for API models that accept one
+copilot:
+  economy: [gpt-5-mini, gpt-5.4-mini, claude-haiku-4.5, claude-haiku-5.5, gemini-3.7-flash, gemini-3.8-flash,
+            kimi-k3, mai-code-1.1-flash]
+  standard: [claude-sonnet-5, claude-sonnet-5.5, gpt-6.1-sol, gpt-6-luna, gpt-5.6-terra, gpt-5.4, gemini-4-argon]
+  premium: [claude-opus-4.8, claude-opus-4.8-fast, claude-opus-5, claude-opus-5.5, claude-fable-5, claude-fable-5.1,
+            gpt-6-sol, gpt-6-astra, gpt-5.6-sol]
+  no_effort: [claude-haiku-4.5, gemini-3.7-flash, gemini-3.8-flash, gemini-4-argon, kimi-k3]   # SDK lists no effort levels
+ollama:
+  - model: hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0
+    name: Gemma2 9B CPT SahabatAI (Q8_0)
+    ctx_max: 8192
+  - {model: llama3.2, name: Llama 3.2 3B}
+  - {model: "qwen2.5:7b-instruct", name: Qwen2.5 7B Instruct}
+  - {model: gemma4, name: Gemma 4 8B, think: true}
+  - {model: "phi4-reasoning:plus", name: Phi-4 reasoning plus 14.7B, ctx_max: 32768}
+  - {model: gpt-oss, name: gpt-oss 20B, think: low}
+  - {model: "gemma3:27b", name: Gemma 3 27B}
+  - {model: "qwen3-coder:30b", name: Qwen3-Coder 30B-A3B}
+  - {model: "qwen2.5-coder:32b", name: Qwen2.5-Coder 32B, ctx_max: 32768}
+  - {model: qwen3.6, name: Qwen3.6 36B, think: true}

@@ -19,7 +19,9 @@ def main(argv: Optional[List[str]] = None) -> int:
     ap = argparse.ArgumentParser(prog="paper-agent",
                                  description="Agent for scientific papers: structure-safe translation, reference "
                                              "verification, citation gate, LaTeX build/QA, multi-model review, "
-                                             "DOCX->IEEE LaTeX. Every LLM call records the model that actually answered.")
+                                             "DOCX->IEEE LaTeX, and SkripsiBench (model benchmark for Indonesian "
+                                             "academic writing and research coding). Every LLM call records the model "
+                                             "that actually answered.")
     ap.add_argument("--version", action="version", version=f"paper-agent {__version__}")
     ap.add_argument("--json", action="store_true", help="print the result as JSON")
     common = argparse.ArgumentParser(add_help=False)
@@ -92,6 +94,9 @@ def main(argv: Optional[List[str]] = None) -> int:
     s.add_argument("--host", default="127.0.0.1")
     s.add_argument("--port", type=int, default=8790)
 
+    from .bench.cli import add_parser as add_bench_parser
+    add_bench_parser(sub)
+
     args = ap.parse_args(argv)
     load_env()
     log = (lambda *_a, **_k: None) if args.json else (lambda m="": print(m, file=sys.stderr, flush=True))
@@ -148,6 +153,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         from .api import serve
         serve(args.host, args.port)
         return 0
+    elif args.cmd == "bench":
+        from .bench.cli import dispatch
+        res = dispatch(args, log=log)
     else:  # pragma: no cover
         ap.error("unknown command")
         return 2
