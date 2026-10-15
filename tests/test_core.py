@@ -223,3 +223,19 @@ def test_crossref_record_joins_subtitle_and_matches_print_year():
     same = Local._crossref_rec({"title": ["A Title: Its Subtitle"], "subtitle": ["Its subtitle"], "issued": {
         "date-parts": [[2020]]}})
     assert same.title == "A Title: Its Subtitle"
+
+
+def test_caption_spanning_lines_keeps_its_text_and_leaves_the_closing_brace_out_of_units():
+    src = ("\\begin{figure}[t]\n  \\caption{Overall score against cost (API: GPU time at an\n"
+           "  on-demand price). The dashed line joins the front.}\n  \\label{fig:x}\n\\end{figure}\n")
+    doc = Doc()
+    doc.add_file("r", src)
+    assert doc.render("r") == src
+    first = next(u for u in doc.units if "GPU time" in u.masked)
+    second = next(u for u in doc.units if "dashed line" in u.masked)
+    assert first.masked.endswith("at an") and second.masked.endswith("front.")
+    first.final, second.final = "Skor terhadap biaya (API: waktu GPU pada", "Garis putus menyambungkan front."
+    out = doc.render("r")
+    assert "  \\caption{Skor terhadap biaya (API: waktu GPU pada\n  Garis putus menyambungkan front.}\n" in out
+    assert integrity_ok("a {b} c", "x {y} z") and not integrity_ok("a {b} c", "x {y z")
+    assert not integrity_ok("waktu GPU pada", "waktu GPU pada}")                      # invented a brace

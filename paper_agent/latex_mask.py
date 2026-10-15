@@ -4,9 +4,9 @@ Each source line becomes translatable *units* (paragraph, ``\\section``/``\\capt
 cell, ``\\item`` body). Inside a unit, commands, math, ``\\cite``/``\\ref``/``\\label``, identifiers
 (``\\texttt``, ``\\textsc``), ``~``, ``\\%``, ``{,}`` ... are replaced by placeholders ``⟦n⟧`` and the
 emphasis commands ``\\emph``/``\\textbf``/``\\textit`` by inline tags ``<k>…</k>``. ``unmask`` reverses
-the process; ``integrity_ok`` checks that a translation kept every placeholder/tag exactly once and
-kept placeholders glued to numbers (``58⟦3⟧`` = ``58\\%``) in place. Masking then unmasking without
-translation reproduces the source byte for byte (see tests).
+the process; ``integrity_ok`` checks that a translation kept every placeholder/tag exactly once, kept the
+unit's literal braces, and kept placeholders glued to numbers (``58⟦3⟧`` = ``58\\%``) in place. Masking then
+unmasking without translation reproduces the source byte for byte (see tests).
 """
 from __future__ import annotations
 
@@ -51,6 +51,12 @@ class Unit:
 
 def balanced(s: str, i: int, open_ch: str = "{", close_ch: str = "}") -> int:
     """``s[i] == open_ch``; index just past the matching ``close_ch`` (or ``len(s)``)."""
+    j = matching(s, i, open_ch, close_ch)
+    return len(s) if j is None else j
+
+
+def matching(s: str, i: int, open_ch: str = "{", close_ch: str = "}") -> Optional[int]:
+    """``s[i] == open_ch``; index just past the matching ``close_ch``, or None when it is not closed within ``s``."""
     depth, j = 0, i
     while j < len(s):
         c = s[j]
@@ -64,7 +70,26 @@ def balanced(s: str, i: int, open_ch: str = "{", close_ch: str = "}") -> int:
             if depth == 0:
                 return j + 1
         j += 1
-    return len(s)
+    return None
+
+
+def close_at(s: str, depth: int) -> Tuple[Optional[int], int]:
+    """Scan a line inside an argument opened on an earlier line (``depth`` open braces): index of the brace that
+    closes it, or None and the depth still open at the end of the line."""
+    j = 0
+    while j < len(s):
+        c = s[j]
+        if c == "\\":
+            j += 2
+            continue
+        if c == "{":
+            depth += 1
+        elif c == "}":
+            depth -= 1
+            if depth == 0:
+                return j, 0
+        j += 1
+    return None, depth
 
 
 class Masker:
@@ -153,9 +178,18 @@ def unmask(text: str, ph: List[str], tags: Dict[int, str]) -> str:
     return PH_RE.sub(lambda m: ph[int(m.group(1))] if int(m.group(1)) < len(ph) else "", t)
 
 
+def braces(s: str) -> Tuple[int, int]:
+    """Unescaped ``{`` and ``}`` in a unit: a translation must keep them (e.g. the ``}`` closing a caption that
+    started on an earlier line)."""
+    s = re.sub(r"\\[{}]", "", s)
+    return s.count("{"), s.count("}")
+
+
 def integrity_ok(masked_src: str, cand: str) -> bool:
     if sorted(PH_RE.findall(masked_src)) != sorted(PH_RE.findall(cand)) or \
             sorted(TAG_RE.findall(masked_src)) != sorted(TAG_RE.findall(cand)):
+        return False
+    if braces(masked_src) != braces(cand):
         return False
     for num, ph in NUM_PH_RE.findall(masked_src):     # 58⟦3⟧ must stay glued to its number
         if f"{num}{ph}" not in cand and f"{num.replace('.', ',')}{ph}" not in cand:
@@ -224,6 +258,7 @@ class Doc:
 
     def add_file(self, name: str, text: str) -> None:
         lines: List[Line] = []
+        depth = 0                   # braces still open of a \caption{...} (etc.) argument begun on an earlier line
         for lno, raw in enumerate(text.split("\n"), 1):
             if not raw.strip() or VERBATIM_LINE_RE.match(raw):
                 lines.append(Line([raw])); continue
@@ -231,9 +266,21 @@ class Doc:
             body, tail = raw.strip(), ""
             if body.endswith("\\\\"):
                 body, tail = body[:-2].rstrip(), " \\\\"
+            if depth:               # continuation: the closing brace (and what follows it) stays out of the unit
+                j, depth = close_at(body, depth)
+                if j is None:
+                    lines.append(Line([indent, self._unit(name, lno, body), tail]))
+                else:
+                    lines.append(Line([indent, self._unit(name, lno, body[:j]), body[j:] + tail]))
+                continue
             m = WRAP_RE.match(body)
-            if m and balanced(body, m.end() - 1) == len(body):
+            end = matching(body, m.end() - 1) if m else None
+            if m and end == len(body):          # the argument closes on this line
                 lines.append(Line([indent + body[: m.end()], self._unit(name, lno, body[m.end():-1]), "}" + tail]))
+                continue
+            if m and end is None:               # the argument continues on the next lines
+                depth = close_at(body[m.end():], 1)[1]
+                lines.append(Line([indent + body[: m.end()], self._unit(name, lno, body[m.end():]), tail]))
                 continue
             if body.startswith("\\item"):
                 lines.append(Line([indent + "\\item", self._unit(name, lno, body[len("\\item"):]), tail]))

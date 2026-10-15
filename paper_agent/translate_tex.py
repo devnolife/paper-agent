@@ -184,6 +184,12 @@ def translate_tex(src_dir: Path, out_dir: Path, files: Optional[List[str]] = Non
             c = by_text.get(u.masked)
             if c:
                 u.out, u.final, u.metrics = dict(c.get("out", {})), c.get("final"), dict(c.get("metrics", {}))
+                for stage in ("draft", "review"):   # cached output that today's validators reject is redone
+                    if stage in u.out and not integrity_ok(u.masked, u.out[stage]):
+                        u.out.pop(stage)
+                        u.out.pop(f"back_{stage}", None)
+                        for key in (f"sim_{stage}", f"back_{stage}_sim", f"qa_{stage}", f"back_{stage}_failed"):
+                            u.metrics.pop(key, None)
                 for stage in ("draft", "review"):   # a back-translation equal to its input is a failed QA call
                     if u.out.get(f"back_{stage}", "").strip() == u.out.get(stage, "\0").strip():
                         u.out.pop(f"back_{stage}", None)
