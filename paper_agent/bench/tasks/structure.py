@@ -94,6 +94,11 @@ def headings(obj, chapter: str) -> List[str]:
     v = obj.get("bab3" if chapter == "III" else "bab4")
     if v is None:
         v = obj.get("BAB III" if chapter == "III" else "BAB IV")
+    if isinstance(v, str):            # double-encoded ("bab3": "{\"bab3\": [...]}") or one title per line
+        inner = parse_json_loose(v)
+        if isinstance(inner, dict):
+            inner = inner.get("bab3" if chapter == "III" else "bab4", inner)
+        v = inner if isinstance(inner, (list, dict)) else [x for x in v.splitlines() if x.strip()]
     if isinstance(v, dict):
         v = next((v[k] for k in ("subbab", "sub_bab", "subsections", "bagian") if isinstance(v.get(k), list)), [])
     if not v:

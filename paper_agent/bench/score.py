@@ -1,7 +1,8 @@
 """Score run records with the deterministic task scorers; build extraction silver labels from a model panel.
 
 Scores go to ``<run_dir>/scores/<model-slug>.jsonl`` keyed by item and repetition, together with a hash of the
-answer(s) and the scorer version, so re-scoring only touches what changed. Network-bound (references) and
+answer(s), the scorer version, the item hash and a fingerprint of reference data kept outside the item (silver/gold
+labels), so re-scoring only touches what changed — including a corrected answer key. Network-bound (references) and
 sandbox-bound (coding, LaTeX) scoring runs in a small thread pool.
 """
 from __future__ import annotations
@@ -19,7 +20,7 @@ from .schema import Item
 from .tasks import Context, registry
 from .tasks import extraction as X
 
-SCORER_VERSION = {"structure": 1, "methodology": 1, "extraction": 1, "grounded": 1, "references": 1, "language": 1,
+SCORER_VERSION = {"structure": 2, "methodology": 2, "extraction": 2, "grounded": 2, "references": 3, "language": 1,
                   "coding": 1, "latex": 2}
 
 
@@ -50,6 +51,7 @@ def score_runs(items: List[Item], ctx: Context, run_dir: Path, models: Optional[
                tasks: Optional[List[str]] = None, workers: int = 4, log: Callable = print) -> dict:
     reg = registry()
     by_id = {it.id: it for it in items}
+    item_sha = {it.id: it.sha256()[:16] for it in items}
     sdir = Path(run_dir) / "scores"
     sdir.mkdir(parents=True, exist_ok=True)
     totals = {"scored": 0, "reused": 0, "skipped": 0, "failed": 0}
@@ -68,21 +70,23 @@ def score_runs(items: List[Item], ctx: Context, run_dir: Path, models: Optional[
                              "score": None}
                 continue
             h, ver = answer_hash(rec), SCORER_VERSION[it.task]
+            ref = f"{item_sha[it.id]}:{reg[it.task].reference_fingerprint(it, ctx)}"
             prev = old.get(key)
-            if prev and prev.get("answer_hash") == h and prev.get("version") == ver and prev.get("score") is not None:
+            if prev and prev.get("answer_hash") == h and prev.get("version") == ver and prev.get("ref") == ref \
+                    and prev.get("score") is not None:
                 keep[key] = prev
                 totals["reused"] += 1
                 continue
-            jobs.append((key, it, rec, h, ver))
+            jobs.append((key, it, rec, h, ver, ref))
 
         def work(job):
-            key, it, rec, h, ver = job
+            key, it, rec, h, ver, ref = job
             try:
                 res = reg[it.task].score(it, rec, ctx)
             except Exception as exc:  # noqa: BLE001
                 res = {"score": None, "error": f"scorer: {type(exc).__name__}: {exc}"[:400]}
             return key, {"item": it.id, "task": it.task, "rep": key[1], "model": model, "answer_hash": h,
-                         "version": ver, **res}
+                         "version": ver, "ref": ref, **res}
 
         with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
             for key, row in pool.map(work, jobs):

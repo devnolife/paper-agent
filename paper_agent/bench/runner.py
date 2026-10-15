@@ -50,6 +50,7 @@ class RunConfig:
     seed: int = 7
     local_workers: int = 1        # parallel requests per local model (energy is then measured per run segment)
     shared_models: tuple = ()      # local models other users depend on: always one request at a time
+    budget_usd: Optional[float] = None   # API runs: start no new call once this run has spent the budget
 
 
 def prompt_sha(system: str, user: str, json_mode: bool) -> str:
@@ -208,6 +209,12 @@ def _call(model: ModelInfo, task: Task, system: str, user: str, cfg: RunConfig) 
     raise last  # type: ignore[misc]
 
 
+def record_aiu(rec: dict) -> float:
+    """AI units of a record including its follow-up turns (0 for local models and failed calls)."""
+    turns = [rec] + list(rec.get("followups") or [])
+    return float(sum((t.get("usage") or {}).get("aiu") or 0.0 for t in turns))
+
+
 def _reply_fields(rep: engines.Reply) -> dict:
     return {"requested": rep.requested, "served": rep.served, "seconds": rep.seconds,
             "usage": {**{k: v for k, v in rep.usage.__dict__.items() if k != "extra"}, "aiu": rep.usage.aiu,
@@ -266,25 +273,49 @@ def run_api(models: List[ModelInfo], items: List[Item], ctx: Context, cfg: RunCo
         for q in queues.values():
             if q:
                 jobs.append(q.pop(0))
-    log(f"API: {len(jobs)} calls over {len(models)} models, {cfg.workers} workers")
-    n_ok = n_err = 0
+    budget_aiu = None if cfg.budget_usd is None else cfg.budget_usd / Prices.from_env().usd_per_aiu
+    log(f"API: {len(jobs)} calls over {len(models)} models, {cfg.workers} workers"
+        + ("" if budget_aiu is None else f", budget US${cfg.budget_usd:.2f} ({budget_aiu:.0f} AIU)"))
+    n_ok = n_err = n_skip = 0
     aiu = 0.0
+    stop = threading.Event()
+    spent_lock = threading.Lock()
+    spent = [0.0]
+
+    def guarded(m: ModelInfo, it: Item, rep: int) -> Optional[dict]:
+        # spend is counted in the worker, so the next call sees the cap at once; calls already running when it is
+        # reached finish (overshoot <= workers - 1 calls)
+        if stop.is_set():
+            return None
+        rec = run_one(m, it, rep, tasks[it.task], ctx, cfg)
+        if budget_aiu is not None:
+            with spent_lock:
+                spent[0] += record_aiu(rec)
+                if spent[0] >= budget_aiu:
+                    stop.set()
+        return rec
+
     with ThreadPoolExecutor(max_workers=cfg.workers) as pool:
-        futs = {pool.submit(run_one, m, it, rep, tasks[it.task], ctx, cfg): (m, it) for m, it, rep in jobs}
+        futs = {pool.submit(guarded, m, it, rep): (m, it) for m, it, rep in jobs}
         for i, fut in enumerate(as_completed(futs), 1):
             m, it = futs[fut]
             rec = fut.result()
+            if rec is None:
+                n_skip += 1
+                continue
             store.append(m, rec)
             if rec.get("error"):
                 n_err += 1
                 log(f"  [{i}/{len(jobs)}] {m.label} {it.id} ERROR {rec['error'][:120]}")
             else:
                 n_ok += 1
-                aiu += (rec.get("usage") or {}).get("aiu") or 0
-                aiu += sum((f.get("usage") or {}).get("aiu") or 0 for f in rec.get("followups") or [])
+                aiu += record_aiu(rec)
                 if i % 25 == 0 or i == len(jobs):
                     log(f"  [{i}/{len(jobs)}] ok={n_ok} err={n_err} aiu={aiu:.2f}")
-    return {"calls": len(jobs), "ok": n_ok, "errors": n_err, "aiu": round(aiu, 3)}
+    if stop.is_set():
+        log(f"  budget reached: {spent[0]:.1f} AIU >= {budget_aiu:.0f} AIU; {n_skip} calls not started")
+    return {"calls": len(jobs), "ok": n_ok, "errors": n_err, "skipped": n_skip, "aiu": round(aiu, 3),
+            "stopped_by_budget": stop.is_set()}
 
 
 def run_local(models: List[ModelInfo], items: List[Item], ctx: Context, cfg: RunConfig, store: Store,

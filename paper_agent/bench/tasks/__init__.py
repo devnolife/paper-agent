@@ -48,13 +48,47 @@ class Task:
     def score(self, item: Item, record: dict, ctx: Context) -> dict:
         raise NotImplementedError
 
+    def reference_fingerprint(self, item: Item, ctx: Context) -> str:
+        """Hash of reference data kept outside the item (e.g. silver labels); a change invalidates cached scores."""
+        return ""
+
 
 # ----------------------------------------------------------------------------- parsing helpers
 _FENCE = re.compile(r"```[ \t]*([A-Za-z0-9_+-]*)[^\n]*\n(.*?)```", re.DOTALL)
 
 
+def _balanced(t: str, opener: str, closer: str) -> Any:
+    """First parseable balanced ``opener…closer`` span in ``t`` (strings respected), else None."""
+    start = t.find(opener)
+    while start != -1:
+        depth, in_str, esc = 0, False, False
+        for i in range(start, len(t)):
+            ch = t[i]
+            if in_str:
+                if esc:
+                    esc = False
+                elif ch == "\\":
+                    esc = True
+                elif ch == '"':
+                    in_str = False
+            elif ch == '"':
+                in_str = True
+            elif ch == opener:
+                depth += 1
+            elif ch == closer:
+                depth -= 1
+                if depth == 0:
+                    try:
+                        return json.loads(t[start:i + 1])
+                    except (json.JSONDecodeError, ValueError):
+                        break
+        start = t.find(opener, start + 1)
+    return None
+
+
 def parse_json_loose(text: str) -> Any:
-    """JSON from a model answer: plain, fenced, or the first balanced ``{…}``/``[…]`` in the text; None if absent."""
+    """JSON from a model answer: plain, fenced, the first balanced ``{…}``, a repaired object (wrong or missing
+    closers), then the same for ``[…]``; None if nothing parses."""
     if not text:
         return None
     t = text.strip()
@@ -64,31 +98,56 @@ def parse_json_loose(text: str) -> Any:
         except (json.JSONDecodeError, ValueError):
             pass
     for opener, closer in (("{", "}"), ("[", "]")):
-        start = t.find(opener)
-        while start != -1:
-            depth, in_str, esc = 0, False, False
-            for i in range(start, len(t)):
-                ch = t[i]
-                if in_str:
-                    if esc:
-                        esc = False
-                    elif ch == "\\":
-                        esc = True
-                    elif ch == '"':
-                        in_str = False
-                elif ch == '"':
-                    in_str = True
-                elif ch == opener:
-                    depth += 1
-                elif ch == closer:
-                    depth -= 1
-                    if depth == 0:
-                        try:
-                            return json.loads(t[start:i + 1])
-                        except (json.JSONDecodeError, ValueError):
-                            break
-            start = t.find(opener, start + 1)
+        got = _balanced(t, opener, closer)
+        if got is not None:
+            return got
+        i = t.find(opener)
+        if i != -1:
+            fixed = repair_json(t[i:])
+            if fixed:
+                try:
+                    return json.loads(fixed)
+                except (json.JSONDecodeError, ValueError):
+                    pass
     return None
+
+
+def repair_json(text: str) -> Optional[str]:
+    """Balance brackets outside strings: a wrong closer is replaced by the expected one and missing closers are
+    appended (``{"a": [1, 2]]`` -> ``{"a": [1, 2]}``; a cut-off answer is closed). Only the first object/array from
+    its opening bracket is considered."""
+    starts = [i for i in (text.find("{"), text.find("[")) if i != -1]
+    if not starts:
+        return None
+    out, stack, in_str, esc = [], [], False, False
+    pairs = {"{": "}", "[": "]"}
+    for ch in text[min(starts):]:
+        if in_str:
+            out.append(ch)
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                in_str = False
+            continue
+        if ch == '"':
+            in_str = True
+        elif ch in pairs:
+            stack.append(pairs[ch])
+        elif ch in "}]":
+            if not stack:
+                break
+            ch = stack.pop()
+            out.append(ch)
+            if not stack:
+                break
+            continue
+        out.append(ch)
+    if in_str:
+        out.append('"')
+    out.extend(reversed(stack))
+    return "".join(out)
 
 
 def code_block(text: str, langs: Tuple[str, ...]) -> Optional[str]:

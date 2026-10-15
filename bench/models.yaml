@@ -20,5 +20,5 @@ ollama:
   - {model: gpt-oss, name: gpt-oss 20B, think: low}
   - {model: "gemma3:27b", name: Gemma 3 27B}
   - {model: "qwen3-coder:30b", name: Qwen3-Coder 30B-A3B}
-  - {model: "qwen2.5-coder:32b", name: Qwen2.5-Coder 32B, ctx_max: 32768}
+  - {model: "qwen2.5-coder:32b", name: Qwen2.5-Coder 32B, ctx_max: 8192}   # 16k x 4 slots split it over both GPUs
   - {model: qwen3.6, name: Qwen3.6 36B, think: true}

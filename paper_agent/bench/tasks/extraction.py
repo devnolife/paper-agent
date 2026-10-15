@@ -142,6 +142,11 @@ class ExtractionTask(Task):
             ctx.cache[key] = data.get("labels", data) if isinstance(data, dict) else {}
         return ctx.cache[key]
 
+    def reference_fingerprint(self, item: Item, ctx: Context) -> str:
+        import hashlib
+        labels = [self._labels(ctx, "silver").get(item.id), self._labels(ctx, "gold").get(item.id)]
+        return hashlib.sha256(json.dumps(labels, sort_keys=True).encode("utf-8")).hexdigest()[:16]
+
     def score(self, item: Item, record: dict, ctx: Context) -> dict:
         obj = parse_json_loose(record.get("text", ""))
         got = normalize(obj)

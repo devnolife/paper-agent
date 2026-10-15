@@ -86,13 +86,36 @@ def sentences(text: str) -> List[str]:
     return [p for p in parts if len(words(p)) >= 4]
 
 
+_UNITS = {w: i for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve thirteen "
+                                      "fourteen fifteen sixteen seventeen eighteen nineteen".split())}
+_TENS = {w: 10 * i for i, w in enumerate("_ _ twenty thirty forty fifty sixty seventy eighty ninety".split()) if i >= 2}
+_NUMWORD = re.compile(r"\b(?:(%s)(?:[\s-]+(%s))?|(%s))(?:\s+hundred(?:\s+(?:and\s+)?(?:(%s)(?:[\s-]+(%s))?|(%s)))?)?\b"
+                      % ("|".join(_TENS), "|".join(_UNITS), "|".join(_UNITS), "|".join(_TENS), "|".join(_UNITS),
+                         "|".join(_UNITS)), re.IGNORECASE)
+
+
+def words_to_digits(text: str) -> str:
+    """Spelled-out English numbers up to 999 -> digits ("Fifty-two percent" -> "52 percent"), so a model that writes
+    52% from such a source is not flagged."""
+    def val(tens, unit, single) -> int:
+        return (_TENS[tens.lower()] if tens else 0) + (_UNITS[unit.lower()] if unit else 0) + \
+            (_UNITS[single.lower()] if single else 0)
+
+    def sub(m: re.Match) -> str:
+        first = val(m.group(1), m.group(2), m.group(3))
+        if "hundred" in m.group(0).lower():
+            return str(first * 100 + val(m.group(4), m.group(5), m.group(6)))
+        return str(first)
+    return _NUMWORD.sub(sub, text or "")
+
+
 def number_support(text: str, sources: List[dict]) -> Tuple[int, int, List[str]]:
     """(numbers in the text, of which unsupported, the unsupported ones). Citation markers and years of the sources
     are not counted; a number is supported when one of its readings occurs in a source's title or abstract."""
     body = _CITE_GROUP.sub(" ", text or "")
     src = set()
     for s in sources:
-        for m in numbers_in(f"{s.get('title', '')} {s.get('abstract', '')}"):
+        for m in numbers_in(words_to_digits(f"{s.get('title', '')} {s.get('abstract', '')}")):
             src |= number_forms(m)
     years = {str(s.get("year")) for s in sources if s.get("year")}
     found = [m for m in numbers_in(body) if m.rstrip("%") not in years]

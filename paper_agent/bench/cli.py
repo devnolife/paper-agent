@@ -55,6 +55,8 @@ def add_parser(sub) -> None:
             p.add_argument("--shared-models", nargs="*", default=[],
                            help="local models other users depend on: never more than one request at a time")
             p.add_argument("--timeout", type=float, default=900)
+            p.add_argument("--budget-usd", type=float, default=None,
+                           help="API models: start no new call once this run has spent this many US$ (AI units)")
     p = bs.add_parser("score", help="deterministic scoring of the latest records")
     common(p, models=False)
     p.add_argument("--models", nargs="*", default=[])
@@ -119,6 +121,7 @@ def dispatch(args, log: Callable = print) -> dict:
                         approve_high_cost=getattr(args, "approve_high_cost", False),
                         workers=getattr(args, "workers", 4), timeout=getattr(args, "timeout", 900),
                         local_workers=getattr(args, "local_workers", 1),
+                        budget_usd=getattr(args, "budget_usd", None),
                         shared_models=tuple(getattr(args, "shared_models", []) or ()))
         if cmd == "plan":
             p = plan(items, models, ctx, cfg)

@@ -98,6 +98,10 @@ def test_power_integration():
 def test_parsing_helpers():
     assert parse_json_loose('Berikut:\n```json\n{"a": [1, 2]}\n```') == {"a": [1, 2]}
     assert parse_json_loose('teks {"b": "x}"} lagi') == {"b": "x}"}
+    assert parse_json_loose('{"bab3": ["a"], "bab4": ["b"]]') == {"bab3": ["a"], "bab4": ["b"]}   # wrong closer
+    assert parse_json_loose('jawab: {"a": [1, 2') == {"a": [1, 2]}                                  # cut off
+    assert parse_json_loose('{"x": "] di string", "y": [1]]') == {"x": "] di string", "y": [1]}
+    assert parse_json_loose("tidak ada json") is None
     assert code_block("a\n```python\nprint(1)\n```\nb\n```python\nprint(22222)\n```", ("python",)) == "print(22222)\n"
     assert code_block("```python\nimport x\n", ("python",)) == "import x\n"
     assert number_forms("1.250") == {"1250", "1.25"} and number_forms("0,85") == {"0.85"}
@@ -124,6 +128,8 @@ def test_structure_score():
     res = structure.StructureTask().score(it, {"text": json.dumps(ans)}, None)
     assert res["ch3"]["recall"] == 1.0 and res["ch3"]["precision"] == 0.75
     assert res["generic_ch4"] is True and 0 < res["score"] < 1
+    double = {"bab3": json.dumps({"bab3": ans["bab3"]}), "bab4": "4.1 Hasil Penelitian\n4.2 Pembahasan"}
+    assert structure.headings(double, "III") == ans["bab3"] and structure.headings(double, "IV")[1] == "4.2 Pembahasan"
 
 
 def test_extraction_scoring():
@@ -149,6 +155,8 @@ def test_grounded_checks():
     assert (n, bad, which) == (2, 1, ["42"])
     assert sum(len(rx.findall(text)) for rx in grounded._FOREIGN) == 1
     assert grounded.abstract_text({"world": [1], "hello": [0]}) == "hello world"
+    assert grounded.words_to_digits("Fifty-two percent; one hundred and twenty-five pupils") == "52 percent; 125 pupils"
+    assert grounded.number_support("52% rumah tangga [P1].", [{"title": "", "abstract": "Fifty-two percent of"}])[1] == 0
     assert grounded.clip("Kalimat satu. " * 200, 100).endswith(".")
 
 
@@ -199,8 +207,29 @@ def test_reference_seeds_and_credit():
     seeds = references.seeds_from_answer(ans, 5)
     assert [s["title"] for s in seeds] == ["Interactive engagement", "Second"]
     assert seeds[0]["authors"] == ["Richard Hake"] and seeds[0]["year"] == 1998 and seeds[1]["year"] is None
-    assert references.credit("VERIFIED", True, True) == 1.0 and references.credit("VERIFIED", False, False) == 0.75
-    assert references.credit("SINGLE_SOURCE", True, False) == 0.25 and references.credit("NOT_FOUND", True, True) == 0.0
+    assert references.credit(True, True, True) == 1.0 and references.credit(True, False, False) == 0.75
+    assert references.credit(True, True, False) == 0.5 and references.credit(False, True, True) == 0.0
+
+
+def test_crossref_client_separates_missing_from_unavailable(tmp_path: Path, monkeypatch):
+    import requests
+    monkeypatch.setenv("PAPER_AGENT_CACHE_DIR", str(tmp_path))
+    monkeypatch.setattr(references.time, "sleep", lambda *_: None)
+    replies = {"a": [404], "b": [429, 200], "c": [500] * 10}
+    calls = {}
+
+    def fake_get(url, params=None, headers=None, timeout=None):
+        k = url.rsplit("/", 1)[-1]
+        calls[k] = calls.get(k, 0) + 1
+        code = replies[k][min(calls[k], len(replies[k])) - 1]
+        return SimpleNamespace(status_code=code, ok=code == 200, headers={},
+                               json=lambda: {"message": {"title": ["T"], "DOI": "10.1/b"}})
+    monkeypatch.setattr(requests, "get", fake_get)
+    cr = references.Crossref()
+    assert cr.get("https://x/a") is None and cr.get("https://x/a") is None and calls["a"] == 1   # cached 404
+    assert cr.get("https://x/b")["message"]["DOI"] == "10.1/b" and calls["b"] == 2              # retried 429
+    with pytest.raises(references.Unavailable):
+        cr.get("https://x/c")
 
 
 # ----------------------------------------------------------------------------- runner (fake engine)
@@ -275,3 +304,38 @@ def test_local_costs_mix_sequential_calls_and_parallel_segments(tmp_path: Path):
     assert c["gpu_hours"] == pytest.approx(30 / 3600, abs=1e-4)    # 10 s sequential + 20 s parallel segment
     assert c["kwh_gross"] == pytest.approx(0.3) and c["kwh_per_100"] == pytest.approx(10.0)
     assert c["rental_usd"] == pytest.approx(0.03)
+
+
+def _costly_reply(engine, model, system, user, timeout=600, json_mode=True, effort=None, options=None):
+    return engines.Reply('{"jawaban": "B"}', engine, model, model, effort, 0.01,
+                         engines.Usage(input_tokens=10, output_tokens=2, nano_aiu=1e9, api_calls=1))   # 1 AIU per call
+
+
+def test_budget_cap_stops_new_calls(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr(engines, "chat_reply", _costly_reply)
+    items_dir = tmp_path / "items"
+    schema.write_jsonl(items_dir / "methodology.jsonl", [mcq(i) for i in range(1, 11)])
+    items = schema.load_items([items_dir])
+    models = select(load_roster(REPO / "bench" / "models.yaml"), ["copilot:gpt-5-mini@low"])
+    cfg = runner.RunConfig(run_dir=tmp_path / "run", workers=1, budget_usd=0.025)       # 2.5 AIU at US$0.01/AIU
+    out = runner.run(items, models, Context(repo=REPO), cfg, log=lambda *_: None)["api"]
+    assert out["stopped_by_budget"] and out["ok"] == 3 and out["skipped"] == 7      # one worker: no overshoot
+    cfg.budget_usd = None                                                              # resume without a cap
+    again = runner.run(items, models, Context(repo=REPO), cfg, log=lambda *_: None)["api"]
+    assert again["calls"] == 10 - out["ok"] and not again["stopped_by_budget"]
+
+
+def test_changed_answer_key_is_rescored(tmp_path: Path, monkeypatch):
+    from paper_agent.bench import score
+    monkeypatch.setattr(engines, "chat_reply", _fake_reply)                            # always answers B
+    items_dir = tmp_path / "items"
+    schema.write_jsonl(items_dir / "methodology.jsonl", [mcq(1, "B")])
+    cfg = runner.RunConfig(run_dir=tmp_path / "run", workers=1)
+    runner.run(schema.load_items([items_dir]), select(load_roster(REPO / "bench" / "models.yaml"),
+                                                       ["copilot:gpt-5-mini@low"]), Context(repo=REPO), cfg,
+               log=lambda *_: None)
+    score.score_runs(schema.load_items([items_dir]), Context(repo=REPO), cfg.run_dir, log=lambda *_: None)
+    schema.write_jsonl(items_dir / "methodology.jsonl", [mcq(1, "A")])                # corrected key, same prompt
+    tot = score.score_runs(schema.load_items([items_dir]), Context(repo=REPO), cfg.run_dir, log=lambda *_: None)
+    rows = score.load_scores(cfg.run_dir)["copilot:gpt-5-mini@low"]
+    assert tot["scored"] == 1 and tot["reused"] == 0 and rows[("methodology-001", 0)]["score"] == 0.0
