@@ -1,0 +1,852 @@
+{
+ "threshold": 0.9,
+ "sources": [
+  "doi.org",
+  "scopus",
+  "openalex"
+ ],
+ "openalex_daily_cap": 600,
+ "models": {
+  "copilot:claude-haiku-4.5": {
+   "returned": 55,
+   "not_found": 22,
+   "exact": 2,
+   "title": 3,
+   "none": 17,
+   "unchecked": 0,
+   "via": {
+    "scopus": 2
+   },
+   "not_found_rate": 0.4,
+   "no_match_rate": 0.3091,
+   "share_of_not_found": {
+    "exact": 0.0909,
+    "title": 0.1364,
+    "none": 0.7727,
+    "unchecked": 0.0
+   }
+  },
+  "copilot:claude-haiku-5.5@low": {
+   "returned": 76,
+   "not_found": 2,
+   "exact": 1,
+   "title": 0,
+   "none": 1,
+   "unchecked": 0,
+   "via": {
+    "openalex": 1
+   },
+   "not_found_rate": 0.0263,
+   "no_match_rate": 0.0132,
+   "share_of_not_found": {
+    "exact": 0.5,
+    "title": 0.0,
+    "none": 0.5,
+    "unchecked": 0.0
+   }
+  },
+  "copilot:claude-sonnet-5.5@low": {
+   "returned": 82,
+   "not_found": 6,
+   "exact": 4,
+   "title": 0,
+   "none": 2,
+   "unchecked": 0,
+   "via": {
+    "openalex": 2,
+    "scopus": 2
+   },
+   "not_found_rate": 0.0732,
+   "no_match_rate": 0.0244,
+   "share_of_not_found": {
+    "exact": 0.6667,
+    "title": 0.0,
+    "none": 0.3333,
+    "unchecked": 0.0
+   }
+  },
+  "copilot:claude-sonnet-5@low": {
+   "returned": 59,
+   "not_found": 8,
+   "exact": 3,
+   "title": 0,
+   "none": 5,
+   "unchecked": 0,
+   "via": {
+    "openalex": 2,
+    "scopus": 1
+   },
+   "not_found_rate": 0.1356,
+   "no_match_rate": 0.0847,
+   "share_of_not_found": {
+    "exact": 0.375,
+    "title": 0.0,
+    "none": 0.625,
+    "unchecked": 0.0
+   }
+  },
+  "copilot:gemini-3.7-flash": {
+   "returned": 100,
+   "not_found": 21,
+   "exact": 2,
+   "title": 0,
+   "none": 19,
+   "unchecked": 0,
+   "via": {
+    "openalex": 1,
+    "scopus": 1
+   },
+   "not_found_rate": 0.21,
+   "no_match_rate": 0.19,
+   "share_of_not_found": {
+    "exact": 0.0952,
+    "title": 0.0,
+    "none": 0.9048,
+    "unchecked": 0.0
+   }
+  },
+  "copilot:gemini-3.8-flash": {
+   "returned": 90,
+   "not_found": 24,
+   "exact": 1,
+   "title": 0,
+   "none": 23,
+   "unchecked": 0,
+   "via": {
+    "scopus": 1
+   },
+   "not_found_rate": 0.2667,
+   "no_match_rate": 0.2556,
+   "share_of_not_found": {
+    "exact": 0.0417,
+    "title": 0.0,
+    "none": 0.9583,
+    "unchecked": 0.0
+   }
+  },
+  "copilot:gemini-4-argon": {
+   "returned": 69,
+   "not_found": 2,
+   "exact": 1,
+   "title": 0,
+   "none": 1,
+   "unchecked": 0,
+   "via": {
+    "scopus": 1
+   },
+   "not_found_rate": 0.029,
+   "no_match_rate": 0.0145,
+   "share_of_not_found": {
+    "exact": 0.5,
+    "title": 0.0,
+    "none": 0.5,
+    "unchecked": 0.0
+   }
+  },
+  "copilot:gpt-5-mini@low": {
+   "returned": 48,
+   "not_found": 1,
+   "exact": 1,
+   "title": 0,
+   "none": 0,
+   "unchecked": 0,
+   "via": {
+    "scopus": 1
+   },
+   "not_found_rate": 0.0208,
+   "no_match_rate": 0.0,
+   "share_of_not_found": {
+    "exact": 1.0,
+    "title": 0.0,
+    "none": 0.0,
+    "unchecked": 0.0
+   }
+  },
+  "copilot:gpt-5.4-mini@low": {
+   "returned": 88,
+   "not_found": 7,
+   "exact": 1,
+   "title": 0,
+   "none": 6,
+   "unchecked": 0,
+   "via": {
+    "scopus": 1
+   },
+   "not_found_rate": 0.0795,
+   "no_match_rate": 0.0682,
+   "share_of_not_found": {
+    "exact": 0.1429,
+    "title": 0.0,
+    "none": 0.8571,
+    "unchecked": 0.0
+   }
+  },
+  "copilot:gpt-5.4@low": {
+   "returned": 88,
+   "not_found": 0,
+   "exact": 0,
+   "title": 0,
+   "none": 0,
+   "unchecked": 0,
+   "via": {},
+   "not_found_rate": 0.0,
+   "no_match_rate": 0.0,
+   "share_of_not_found": {
+    "exact": null,
+    "title": null,
+    "none": null,
+    "unchecked": null
+   }
+  },
+  "copilot:gpt-5.6-terra@low": {
+   "returned": 84,
+   "not_found": 2,
+   "exact": 0,
+   "title": 0,
+   "none": 2,
+   "unchecked": 0,
+   "via": {},
+   "not_found_rate": 0.0238,
+   "no_match_rate": 0.0238,
+   "share_of_not_found": {
+    "exact": 0.0,
+    "title": 0.0,
+    "none": 1.0,
+    "unchecked": 0.0
+   }
+  },
+  "copilot:gpt-6-luna@low": {
+   "returned": 90,
+   "not_found": 7,
+   "exact": 2,
+   "title": 0,
+   "none": 5,
+   "unchecked": 0,
+   "via": {
+    "openalex": 1,
+    "scopus": 1
+   },
+   "not_found_rate": 0.0778,
+   "no_match_rate": 0.0556,
+   "share_of_not_found": {
+    "exact": 0.2857,
+    "title": 0.0,
+    "none": 0.7143,
+    "unchecked": 0.0
+   }
+  },
+  "copilot:gpt-6.1-sol@low": {
+   "returned": 82,
+   "not_found": 0,
+   "exact": 0,
+   "title": 0,
+   "none": 0,
+   "unchecked": 0,
+   "via": {},
+   "not_found_rate": 0.0,
+   "no_match_rate": 0.0,
+   "share_of_not_found": {
+    "exact": null,
+    "title": null,
+    "none": null,
+    "unchecked": null
+   }
+  },
+  "copilot:kimi-k3": {
+   "returned": 100,
+   "not_found": 2,
+   "exact": 1,
+   "title": 0,
+   "none": 1,
+   "unchecked": 0,
+   "via": {
+    "scopus": 1
+   },
+   "not_found_rate": 0.02,
+   "no_match_rate": 0.01,
+   "share_of_not_found": {
+    "exact": 0.5,
+    "title": 0.0,
+    "none": 0.5,
+    "unchecked": 0.0
+   }
+  },
+  "copilot:mai-code-1.1-flash@low": {
+   "returned": 95,
+   "not_found": 26,
+   "exact": 3,
+   "title": 2,
+   "none": 21,
+   "unchecked": 0,
+   "via": {
+    "openalex": 3
+   },
+   "not_found_rate": 0.2737,
+   "no_match_rate": 0.2211,
+   "share_of_not_found": {
+    "exact": 0.1154,
+    "title": 0.0769,
+    "none": 0.8077,
+    "unchecked": 0.0
+   }
+  },
+  "ollama:gemma3:27b": {
+   "returned": 100,
+   "not_found": 83,
+   "exact": 4,
+   "title": 9,
+   "none": 70,
+   "unchecked": 0,
+   "via": {
+    "openalex": 4
+   },
+   "not_found_rate": 0.83,
+   "no_match_rate": 0.7,
+   "share_of_not_found": {
+    "exact": 0.0482,
+    "title": 0.1084,
+    "none": 0.8434,
+    "unchecked": 0.0
+   }
+  },
+  "ollama:gemma4": {
+   "returned": 67,
+   "not_found": 61,
+   "exact": 2,
+   "title": 2,
+   "none": 57,
+   "unchecked": 0,
+   "via": {
+    "openalex": 2
+   },
+   "not_found_rate": 0.9104,
+   "no_match_rate": 0.8507,
+   "share_of_not_found": {
+    "exact": 0.0328,
+    "title": 0.0328,
+    "none": 0.9344,
+    "unchecked": 0.0
+   }
+  },
+  "ollama:gpt-oss": {
+   "returned": 70,
+   "not_found": 60,
+   "exact": 2,
+   "title": 4,
+   "none": 54,
+   "unchecked": 0,
+   "via": {
+    "openalex": 2
+   },
+   "not_found_rate": 0.8571,
+   "no_match_rate": 0.7714,
+   "share_of_not_found": {
+    "exact": 0.0333,
+    "title": 0.0667,
+    "none": 0.9,
+    "unchecked": 0.0
+   }
+  },
+  "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0": {
+   "returned": 77,
+   "not_found": 65,
+   "exact": 3,
+   "title": 6,
+   "none": 56,
+   "unchecked": 0,
+   "via": {
+    "openalex": 3
+   },
+   "not_found_rate": 0.8442,
+   "no_match_rate": 0.7273,
+   "share_of_not_found": {
+    "exact": 0.0462,
+    "title": 0.0923,
+    "none": 0.8615,
+    "unchecked": 0.0
+   }
+  },
+  "ollama:llama3.2": {
+   "returned": 91,
+   "not_found": 86,
+   "exact": 0,
+   "title": 9,
+   "none": 77,
+   "unchecked": 0,
+   "via": {},
+   "not_found_rate": 0.9451,
+   "no_match_rate": 0.8462,
+   "share_of_not_found": {
+    "exact": 0.0,
+    "title": 0.1047,
+    "none": 0.8953,
+    "unchecked": 0.0
+   }
+  },
+  "ollama:phi4-reasoning:plus": {
+   "returned": 94,
+   "not_found": 72,
+   "exact": 3,
+   "title": 12,
+   "none": 57,
+   "unchecked": 0,
+   "via": {
+    "openalex": 1,
+    "scopus": 2
+   },
+   "not_found_rate": 0.766,
+   "no_match_rate": 0.6064,
+   "share_of_not_found": {
+    "exact": 0.0417,
+    "title": 0.1667,
+    "none": 0.7917,
+    "unchecked": 0.0
+   }
+  },
+  "ollama:qwen2.5-coder:32b": {
+   "returned": 93,
+   "not_found": 84,
+   "exact": 1,
+   "title": 14,
+   "none": 69,
+   "unchecked": 0,
+   "via": {
+    "openalex": 1
+   },
+   "not_found_rate": 0.9032,
+   "no_match_rate": 0.7419,
+   "share_of_not_found": {
+    "exact": 0.0119,
+    "title": 0.1667,
+    "none": 0.8214,
+    "unchecked": 0.0
+   }
+  },
+  "ollama:qwen2.5:7b-instruct": {
+   "returned": 64,
+   "not_found": 55,
+   "exact": 2,
+   "title": 5,
+   "none": 48,
+   "unchecked": 0,
+   "via": {
+    "openalex": 1,
+    "scopus": 1
+   },
+   "not_found_rate": 0.8594,
+   "no_match_rate": 0.75,
+   "share_of_not_found": {
+    "exact": 0.0364,
+    "title": 0.0909,
+    "none": 0.8727,
+    "unchecked": 0.0
+   }
+  },
+  "ollama:qwen3-coder:30b": {
+   "returned": 99,
+   "not_found": 89,
+   "exact": 1,
+   "title": 11,
+   "none": 77,
+   "unchecked": 0,
+   "via": {
+    "openalex": 1
+   },
+   "not_found_rate": 0.899,
+   "no_match_rate": 0.7778,
+   "share_of_not_found": {
+    "exact": 0.0112,
+    "title": 0.1236,
+    "none": 0.8652,
+    "unchecked": 0.0
+   }
+  },
+  "ollama:qwen3.6": {
+   "returned": 35,
+   "not_found": 26,
+   "exact": 0,
+   "title": 4,
+   "none": 22,
+   "unchecked": 0,
+   "via": {},
+   "not_found_rate": 0.7429,
+   "no_match_rate": 0.6286,
+   "share_of_not_found": {
+    "exact": 0.0,
+    "title": 0.1538,
+    "none": 0.8462,
+    "unchecked": 0.0
+   }
+  }
+ },
+ "api": {
+  "returned": 1206,
+  "not_found": 130,
+  "exact": 22,
+  "title": 5,
+  "none": 103,
+  "unchecked": 0,
+  "via": {
+   "openalex": 10,
+   "scopus": 12
+  },
+  "not_found_rate": 0.1078,
+  "no_match_rate": 0.0854,
+  "share_of_not_found": {
+   "exact": 0.1692,
+   "title": 0.0385,
+   "none": 0.7923,
+   "unchecked": 0.0
+  }
+ },
+ "local": {
+  "returned": 790,
+  "not_found": 681,
+  "exact": 18,
+  "title": 76,
+  "none": 587,
+  "unchecked": 0,
+  "via": {
+   "openalex": 15,
+   "scopus": 3
+  },
+  "not_found_rate": 0.862,
+  "no_match_rate": 0.743,
+  "share_of_not_found": {
+   "exact": 0.0264,
+   "title": 0.1116,
+   "none": 0.862,
+   "unchecked": 0.0
+  }
+ },
+ "unchecked": 0,
+ "complete": true,
+ "corrections": [
+  {
+   "model": "copilot:claude-haiku-4.5",
+   "item": "references-001",
+   "rep": 0,
+   "ref": 2,
+   "source": "scopus",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:claude-haiku-4.5",
+   "item": "references-001",
+   "rep": 0,
+   "ref": 3,
+   "source": "scopus",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:claude-haiku-5.5@low",
+   "item": "references-004",
+   "rep": 0,
+   "ref": 0,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:claude-sonnet-5.5@low",
+   "item": "references-004",
+   "rep": 0,
+   "ref": 0,
+   "source": "openalex",
+   "credit": 0.75
+  },
+  {
+   "model": "copilot:claude-sonnet-5.5@low",
+   "item": "references-006",
+   "rep": 0,
+   "ref": 2,
+   "source": "openalex",
+   "credit": 0.75
+  },
+  {
+   "model": "copilot:claude-sonnet-5.5@low",
+   "item": "references-008",
+   "rep": 0,
+   "ref": 4,
+   "source": "scopus",
+   "credit": 0.75
+  },
+  {
+   "model": "copilot:claude-sonnet-5.5@low",
+   "item": "references-017",
+   "rep": 0,
+   "ref": 3,
+   "source": "scopus",
+   "credit": 0.75
+  },
+  {
+   "model": "copilot:claude-sonnet-5@low",
+   "item": "references-008",
+   "rep": 0,
+   "ref": 1,
+   "source": "scopus",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:claude-sonnet-5@low",
+   "item": "references-019",
+   "rep": 0,
+   "ref": 0,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:claude-sonnet-5@low",
+   "item": "references-020",
+   "rep": 0,
+   "ref": 0,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:gemini-3.7-flash",
+   "item": "references-004",
+   "rep": 0,
+   "ref": 1,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:gemini-3.7-flash",
+   "item": "references-005",
+   "rep": 0,
+   "ref": 4,
+   "source": "scopus",
+   "credit": 1.0
+  },
+  {
+   "model": "copilot:gemini-3.8-flash",
+   "item": "references-019",
+   "rep": 0,
+   "ref": 4,
+   "source": "scopus",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:gemini-4-argon",
+   "item": "references-016",
+   "rep": 0,
+   "ref": 0,
+   "source": "scopus",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:gpt-5-mini@low",
+   "item": "references-002",
+   "rep": 0,
+   "ref": 3,
+   "source": "scopus",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:gpt-5.4-mini@low",
+   "item": "references-001",
+   "rep": 0,
+   "ref": 2,
+   "source": "scopus",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:gpt-6-luna@low",
+   "item": "references-006",
+   "rep": 0,
+   "ref": 4,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:gpt-6-luna@low",
+   "item": "references-020",
+   "rep": 0,
+   "ref": 0,
+   "source": "scopus",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:kimi-k3",
+   "item": "references-020",
+   "rep": 0,
+   "ref": 3,
+   "source": "scopus",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:mai-code-1.1-flash@low",
+   "item": "references-018",
+   "rep": 0,
+   "ref": 4,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:mai-code-1.1-flash@low",
+   "item": "references-019",
+   "rep": 0,
+   "ref": 0,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "copilot:mai-code-1.1-flash@low",
+   "item": "references-019",
+   "rep": 0,
+   "ref": 3,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:gemma3:27b",
+   "item": "references-004",
+   "rep": 0,
+   "ref": 2,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:gemma3:27b",
+   "item": "references-009",
+   "rep": 0,
+   "ref": 1,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:gemma3:27b",
+   "item": "references-016",
+   "rep": 0,
+   "ref": 1,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:gemma3:27b",
+   "item": "references-016",
+   "rep": 0,
+   "ref": 4,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:gemma4",
+   "item": "references-016",
+   "rep": 0,
+   "ref": 2,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:gemma4",
+   "item": "references-019",
+   "rep": 0,
+   "ref": 3,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:gpt-oss",
+   "item": "references-015",
+   "rep": 0,
+   "ref": 4,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:gpt-oss",
+   "item": "references-016",
+   "rep": 0,
+   "ref": 4,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0",
+   "item": "references-010",
+   "rep": 0,
+   "ref": 0,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0",
+   "item": "references-010",
+   "rep": 0,
+   "ref": 2,
+   "source": "openalex",
+   "credit": 0.75
+  },
+  {
+   "model": "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0",
+   "item": "references-016",
+   "rep": 0,
+   "ref": 2,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:phi4-reasoning:plus",
+   "item": "references-009",
+   "rep": 0,
+   "ref": 2,
+   "source": "scopus",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:phi4-reasoning:plus",
+   "item": "references-016",
+   "rep": 0,
+   "ref": 1,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:phi4-reasoning:plus",
+   "item": "references-016",
+   "rep": 0,
+   "ref": 3,
+   "source": "scopus",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:qwen2.5-coder:32b",
+   "item": "references-016",
+   "rep": 0,
+   "ref": 2,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:qwen2.5:7b-instruct",
+   "item": "references-010",
+   "rep": 0,
+   "ref": 0,
+   "source": "openalex",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:qwen2.5:7b-instruct",
+   "item": "references-012",
+   "rep": 0,
+   "ref": 1,
+   "source": "scopus",
+   "credit": 0.5
+  },
+  {
+   "model": "ollama:qwen3-coder:30b",
+   "item": "references-016",
+   "rep": 0,
+   "ref": 2,
+   "source": "openalex",
+   "credit": 0.5
+  }
+ ],
+ "last_run": {
+  "at": "2026-10-15T11:32:25+00:00",
+  "calls": {},
+  "paused": {},
+  "openalex_searches_today": 767
+ }
+}

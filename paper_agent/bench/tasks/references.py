@@ -1,14 +1,17 @@
 """references — ask for n real references (with DOI) on a research topic; verify each in Crossref.
 
-Crossref is the DOI registration agency for journal articles and proceedings, so a work with a DOI exists when the
-DOI resolves there to a record matching the title (similarity ≥ 0.90, the same rule as ``paper-agent verify-refs``),
-the year (± 1) and the first author; a work given with a wrong or no DOI is looked up by title and author. arXiv
-DOIs (10.48550) are checked against arXiv. Crossref answers that are not "found"/"not found" (rate limits, server
-errors, network) are retried and, if they persist, make the item *unscored* rather than wrong.
+Crossref is the largest DOI registration agency for journal articles and proceedings, so a work with a DOI exists
+when the DOI resolves there to a record matching the title (similarity ≥ 0.90 with Crossref's title and subtitle
+joined, the same rule as ``paper-agent verify-refs``), the year (± 1 of any publication date: Crossref's ``issued``
+is the earliest, often the online one, while a work is usually cited by its print year) and the first author; a work
+given with a wrong or no DOI is looked up by title and author. arXiv DOIs (10.48550) are checked against arXiv.
+Crossref answers that are not "found"/"not found" (rate limits, server errors, network) are retried and, if they
+persist, make the item *unscored* rather than wrong. Works that Crossref does not know are audited in other databases
+by ``experiments/bench/audit_refs.py``.
 
 Credit per reference (at most n counted, duplicates ignored): 1.0 exists with the correct DOI, 0.75 exists without a
-DOI, 0.5 exists with a wrong DOI, 0 not found (fabricated). Score = total credit / n requested — abstaining costs the
-same as a fabricated reference; fabrication is reported separately as ``hallucination_rate`` (not found / returned)
+DOI, 0.5 exists with a wrong DOI, 0 not found. Score = total credit / n requested — abstaining costs the same as an
+unverifiable reference; the not-found share is reported separately as ``hallucination_rate`` (not found / returned)
 and ``doi_unresolvable`` (DOIs that resolve nowhere).
 """
 from __future__ import annotations

@@ -1,0 +1,3699 @@
+{
+ "benchmark": "SkripsiBench",
+ "created": "2026-10-15 19:32",
+ "items": {
+  "structure": {
+   "public": 35,
+   "private": 0
+  },
+  "methodology": {
+   "public": 60,
+   "private": 0
+  },
+  "grounded": {
+   "public": 30,
+   "private": 0
+  },
+  "references": {
+   "public": 20,
+   "private": 0
+  },
+  "language": {
+   "public": 30,
+   "private": 0
+  },
+  "coding": {
+   "public": 30,
+   "private": 0
+  },
+  "latex": {
+   "public": 20,
+   "private": 0
+  },
+  "extraction": {
+   "public": 0,
+   "private": 30
+  }
+ },
+ "judge_weight": 0.5,
+ "prices": {
+  "usd_per_aiu": 0.01,
+  "tariff_per_kwh": null,
+  "tariff_currency": null,
+  "gpu_usd_per_hour": 1.09,
+  "gpu_price_source": "RunPod L40S on-demand from US$1.09/h (runpod.io/gpu-models/l40s, updated 2026-08-27)"
+ },
+ "ranking": [
+  "copilot:kimi-k3",
+  "copilot:gpt-5.4@low",
+  "copilot:gpt-6.1-sol@low",
+  "copilot:claude-sonnet-5.5@low",
+  "copilot:gpt-5.6-terra@low",
+  "copilot:gemini-3.7-flash",
+  "copilot:gemini-4-argon",
+  "copilot:gpt-6-luna@low",
+  "copilot:claude-haiku-5.5@low",
+  "copilot:gemini-3.8-flash",
+  "copilot:gpt-5.4-mini@low",
+  "copilot:claude-sonnet-5@low",
+  "copilot:mai-code-1.1-flash@low",
+  "copilot:gpt-5-mini@low",
+  "copilot:claude-haiku-4.5",
+  "ollama:qwen3.6",
+  "ollama:gpt-oss",
+  "ollama:gemma3:27b",
+  "ollama:gemma4",
+  "ollama:phi4-reasoning:plus",
+  "ollama:qwen2.5-coder:32b",
+  "ollama:qwen3-coder:30b",
+  "ollama:qwen2.5:7b-instruct",
+  "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0",
+  "ollama:llama3.2"
+ ],
+ "models": {
+  "copilot:claude-haiku-4.5": {
+   "name": "claude-haiku-4.5",
+   "tier": "economy",
+   "family": "anthropic",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.6798,
+     "ci": [
+      0.6247,
+      0.7337
+     ],
+     "auto": 0.6798,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 0.9833,
+     "ci": [
+      0.95,
+      1.0
+     ],
+     "auto": 0.9833,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.8797,
+     "ci": [
+      0.8343,
+      0.9188
+     ],
+     "auto": 0.8797,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.8354,
+     "ci": [
+      0.8169,
+      0.854
+     ],
+     "auto": 0.9329,
+     "judge": 0.7378,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.235,
+     "ci": [
+      0.135,
+      0.3401
+     ],
+     "auto": 0.235,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.959,
+     "ci": [
+      0.9509,
+      0.9672
+     ],
+     "auto": 0.99,
+     "judge": 0.9279,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.86,
+     "ci": [
+      0.7267,
+      0.9667
+     ],
+     "auto": 0.86,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.785,
+     "ci": [
+      0.59,
+      0.95
+     ],
+     "auto": 0.785,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.762,
+     "ci": [
+      0.7415,
+      0.784
+     ]
+    },
+    "coding": {
+     "mean": 0.8225,
+     "ci": [
+      0.71,
+      0.9258
+     ]
+    },
+    "overall": {
+     "mean": 0.7772,
+     "ci": [
+      0.7443,
+      0.808
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "economy",
+    "family": "anthropic",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 152.436,
+    "usd": 1.5244,
+    "usd_per_100": 0.5978,
+    "in_tokens": 252641,
+    "out_tokens": 254136,
+    "median_s": 10.61,
+    "served": {
+     "claude-haiku-4.5": 259
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:claude-haiku-5.5@low": {
+   "name": "claude-haiku-5.5",
+   "tier": "economy",
+   "family": "anthropic",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.7202,
+     "ci": [
+      0.6785,
+      0.7627
+     ],
+     "auto": 0.7202,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.9311,
+     "ci": [
+      0.9034,
+      0.9576
+     ],
+     "auto": 0.9311,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.8806,
+     "ci": [
+      0.8599,
+      0.8995
+     ],
+     "auto": 0.9259,
+     "judge": 0.8353,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.685,
+     "ci": [
+      0.55,
+      0.815
+     ],
+     "auto": 0.685,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9931,
+     "ci": [
+      0.99,
+      0.9959
+     ],
+     "auto": 0.9994,
+     "judge": 0.9867,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.95,
+     "ci": [
+      0.85,
+      1.0
+     ],
+     "auto": 0.95,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.8683,
+     "ci": [
+      0.8435,
+      0.8917
+     ]
+    },
+    "coding": {
+     "mean": 0.975,
+     "ci": [
+      0.925,
+      1.0
+     ]
+    },
+    "overall": {
+     "mean": 0.895,
+     "ci": [
+      0.8709,
+      0.917
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "economy",
+    "family": "anthropic",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 14.288,
+    "usd": 0.1429,
+    "usd_per_100": 0.056,
+    "in_tokens": 330081,
+    "out_tokens": 205655,
+    "median_s": 6.83,
+    "served": {
+     "claude-haiku-5.5": 255
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:claude-sonnet-5.5@low": {
+   "name": "claude-sonnet-5.5",
+   "tier": "standard",
+   "family": "anthropic",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.7478,
+     "ci": [
+      0.7104,
+      0.7837
+     ],
+     "auto": 0.7478,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.9285,
+     "ci": [
+      0.8991,
+      0.9547
+     ],
+     "auto": 0.9285,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.9459,
+     "ci": [
+      0.9362,
+      0.9543
+     ],
+     "auto": 0.955,
+     "judge": 0.9367,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.7275,
+     "ci": [
+      0.6,
+      0.85
+     ],
+     "auto": 0.7275,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9907,
+     "ci": [
+      0.987,
+      0.994
+     ],
+     "auto": 0.9993,
+     "judge": 0.9821,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.9667,
+     "ci": [
+      0.9,
+      1.0
+     ],
+     "auto": 0.9667,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.8901,
+     "ci": [
+      0.8664,
+      0.9109
+     ]
+    },
+    "coding": {
+     "mean": 0.9833,
+     "ci": [
+      0.95,
+      1.0
+     ]
+    },
+    "overall": {
+     "mean": 0.9134,
+     "ci": [
+      0.893,
+      0.932
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "standard",
+    "family": "anthropic",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 199.785,
+    "usd": 1.9978,
+    "usd_per_100": 0.7835,
+    "in_tokens": 331420,
+    "out_tokens": 119340,
+    "median_s": 4.85,
+    "served": {
+     "claude-sonnet-5.5": 256
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:claude-sonnet-5@low": {
+   "name": "claude-sonnet-5",
+   "tier": "standard",
+   "family": "anthropic",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.7408,
+     "ci": [
+      0.6994,
+      0.7809
+     ],
+     "auto": 0.7408,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.9035,
+     "ci": [
+      0.8591,
+      0.9397
+     ],
+     "auto": 0.9035,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.9265,
+     "ci": [
+      0.9093,
+      0.9411
+     ],
+     "auto": 0.9614,
+     "judge": 0.8915,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.45,
+     "ci": [
+      0.295,
+      0.6
+     ],
+     "auto": 0.45,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9837,
+     "ci": [
+      0.9776,
+      0.9891
+     ],
+     "auto": 0.9944,
+     "judge": 0.973,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.8341,
+     "ci": [
+      0.8071,
+      0.8623
+     ]
+    },
+    "coding": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "overall": {
+     "mean": 0.8756,
+     "ci": [
+      0.8545,
+      0.8963
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "standard",
+    "family": "anthropic",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 181.368,
+    "usd": 1.8137,
+    "usd_per_100": 0.7112,
+    "in_tokens": 329571,
+    "out_tokens": 103068,
+    "median_s": 5.75,
+    "served": {
+     "claude-sonnet-5": 255
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:gemini-3.7-flash": {
+   "name": "gemini-3.7-flash",
+   "tier": "economy",
+   "family": "google",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.7254,
+     "ci": [
+      0.6817,
+      0.7703
+     ],
+     "auto": 0.7254,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.9388,
+     "ci": [
+      0.8737,
+      0.9798
+     ],
+     "auto": 0.9388,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.9488,
+     "ci": [
+      0.9393,
+      0.9572
+     ],
+     "auto": 0.9904,
+     "judge": 0.9072,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.71,
+     "ci": [
+      0.62,
+      0.795
+     ],
+     "auto": 0.71,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9679,
+     "ci": [
+      0.9623,
+      0.9735
+     ],
+     "auto": 1.0,
+     "judge": 0.9357,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.8818,
+     "ci": [
+      0.8608,
+      0.9
+     ]
+    },
+    "coding": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "overall": {
+     "mean": 0.9114,
+     "ci": [
+      0.896,
+      0.9241
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "economy",
+    "family": "google",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 35.845,
+    "usd": 0.3584,
+    "usd_per_100": 0.1406,
+    "in_tokens": 185666,
+    "out_tokens": 58453,
+    "median_s": 15.36,
+    "served": {
+     "gemini-3.7-flash": 255
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:gemini-3.8-flash": {
+   "name": "gemini-3.8-flash",
+   "tier": "economy",
+   "family": "google",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.7073,
+     "ci": [
+      0.6534,
+      0.7595
+     ],
+     "auto": 0.7073,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.9163,
+     "ci": [
+      0.8181,
+      0.9838
+     ],
+     "auto": 0.9163,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.9454,
+     "ci": [
+      0.9359,
+      0.9536
+     ],
+     "auto": 0.9874,
+     "judge": 0.9033,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.61,
+     "ci": [
+      0.465,
+      0.75
+     ],
+     "auto": 0.61,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9656,
+     "ci": [
+      0.9601,
+      0.9706
+     ],
+     "auto": 1.0,
+     "judge": 0.9312,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.8574,
+     "ci": [
+      0.8277,
+      0.8871
+     ]
+    },
+    "coding": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "overall": {
+     "mean": 0.8931,
+     "ci": [
+      0.8696,
+      0.9139
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "economy",
+    "family": "google",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 36.909,
+    "usd": 0.3691,
+    "usd_per_100": 0.1447,
+    "in_tokens": 185666,
+    "out_tokens": 61290,
+    "median_s": 18.62,
+    "served": {
+     "gemini-3.8-flash": 255
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:gemini-4-argon": {
+   "name": "gemini-4-argon",
+   "tier": "standard",
+   "family": "google",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.7349,
+     "ci": [
+      0.6901,
+      0.781
+     ],
+     "auto": 0.7349,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.9724,
+     "ci": [
+      0.9515,
+      0.9905
+     ],
+     "auto": 0.9724,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.8943,
+     "ci": [
+      0.8815,
+      0.9065
+     ],
+     "auto": 0.9784,
+     "judge": 0.8103,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.645,
+     "ci": [
+      0.51,
+      0.78
+     ],
+     "auto": 0.645,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9617,
+     "ci": [
+      0.9527,
+      0.9693
+     ],
+     "auto": 0.9975,
+     "judge": 0.926,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.868,
+     "ci": [
+      0.8415,
+      0.8916
+     ]
+    },
+    "coding": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "overall": {
+     "mean": 0.901,
+     "ci": [
+      0.882,
+      0.9188
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "standard",
+    "family": "google",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 100.846,
+    "usd": 1.0085,
+    "usd_per_100": 0.3955,
+    "in_tokens": 188923,
+    "out_tokens": 63061,
+    "median_s": 5.82,
+    "served": {
+     "gemini-4-argon": 255
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:gpt-5-mini@low": {
+   "name": "gpt-5-mini",
+   "tier": "economy",
+   "family": "openai",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.6512,
+     "ci": [
+      0.613,
+      0.6894
+     ],
+     "auto": 0.6512,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.8525,
+     "ci": [
+      0.807,
+      0.8964
+     ],
+     "auto": 0.8525,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.9186,
+     "ci": [
+      0.905,
+      0.9314
+     ],
+     "auto": 0.9591,
+     "judge": 0.8781,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.4,
+     "ci": [
+      0.225,
+      0.57
+     ],
+     "auto": 0.4,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9196,
+     "ci": [
+      0.8968,
+      0.9377
+     ],
+     "auto": 0.9606,
+     "judge": 0.8785,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.9333,
+     "ci": [
+      0.8333,
+      1.0
+     ],
+     "auto": 0.9333,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.85,
+     "ci": [
+      0.65,
+      1.0
+     ],
+     "auto": 0.85,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.7903,
+     "ci": [
+      0.7593,
+      0.8208
+     ]
+    },
+    "coding": {
+     "mean": 0.8917,
+     "ci": [
+      0.7917,
+      0.975
+     ]
+    },
+    "overall": {
+     "mean": 0.8156,
+     "ci": [
+      0.7839,
+      0.8473
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "economy",
+    "family": "openai",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 34.551,
+    "usd": 0.3455,
+    "usd_per_100": 0.1355,
+    "in_tokens": 191315,
+    "out_tokens": 148840,
+    "median_s": 7.74,
+    "served": {
+     "gpt-5-mini": 257
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:gpt-5.4-mini@low": {
+   "name": "gpt-5.4-mini",
+   "tier": "economy",
+   "family": "openai",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.7437,
+     "ci": [
+      0.7072,
+      0.7788
+     ],
+     "auto": 0.7437,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.9226,
+     "ci": [
+      0.8929,
+      0.9516
+     ],
+     "auto": 0.9226,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.9193,
+     "ci": [
+      0.9083,
+      0.9297
+     ],
+     "auto": 0.9659,
+     "judge": 0.8726,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.655,
+     "ci": [
+      0.565,
+      0.75
+     ],
+     "auto": 0.655,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.965,
+     "ci": [
+      0.9567,
+      0.9721
+     ],
+     "auto": 0.9917,
+     "judge": 0.9383,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.9667,
+     "ci": [
+      0.9,
+      1.0
+     ],
+     "auto": 0.9667,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.895,
+     "ci": [
+      0.745,
+      1.0
+     ],
+     "auto": 0.895,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.8676,
+     "ci": [
+      0.8495,
+      0.8847
+     ]
+    },
+    "coding": {
+     "mean": 0.9308,
+     "ci": [
+      0.85,
+      0.9975
+     ]
+    },
+    "overall": {
+     "mean": 0.8834,
+     "ci": [
+      0.8603,
+      0.9052
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "economy",
+    "family": "openai",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 64.264,
+    "usd": 0.6426,
+    "usd_per_100": 0.252,
+    "in_tokens": 190006,
+    "out_tokens": 111142,
+    "median_s": 4.79,
+    "served": {
+     "gpt-5.4-mini": 256
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:gpt-5.4@low": {
+   "name": "gpt-5.4",
+   "tier": "standard",
+   "family": "openai",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.7574,
+     "ci": [
+      0.7224,
+      0.7919
+     ],
+     "auto": 0.7574,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.9543,
+     "ci": [
+      0.9295,
+      0.9757
+     ],
+     "auto": 0.9543,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.9634,
+     "ci": [
+      0.9578,
+      0.9686
+     ],
+     "auto": 0.9837,
+     "judge": 0.943,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.84,
+     "ci": [
+      0.725,
+      0.94
+     ],
+     "auto": 0.84,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9659,
+     "ci": [
+      0.9589,
+      0.972
+     ],
+     "auto": 0.9932,
+     "judge": 0.9386,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.9135,
+     "ci": [
+      0.8919,
+      0.9311
+     ]
+    },
+    "coding": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "overall": {
+     "mean": 0.9351,
+     "ci": [
+      0.919,
+      0.949
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "standard",
+    "family": "openai",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 220.397,
+    "usd": 2.204,
+    "usd_per_100": 0.8643,
+    "in_tokens": 188719,
+    "out_tokens": 115478,
+    "median_s": 7.93,
+    "served": {
+     "gpt-5.4": 255
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:gpt-5.6-terra@low": {
+   "name": "gpt-5.6-terra",
+   "tier": "standard",
+   "family": "openai",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.7582,
+     "ci": [
+      0.7129,
+      0.8028
+     ],
+     "auto": 0.7582,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 0.9833,
+     "ci": [
+      0.95,
+      1.0
+     ],
+     "auto": 0.9833,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.9544,
+     "ci": [
+      0.9286,
+      0.9766
+     ],
+     "auto": 0.9544,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.9361,
+     "ci": [
+      0.9226,
+      0.9473
+     ],
+     "auto": 0.9594,
+     "judge": 0.9127,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.785,
+     "ci": [
+      0.63,
+      0.9151
+     ],
+     "auto": 0.785,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.973,
+     "ci": [
+      0.9687,
+      0.9773
+     ],
+     "auto": 0.9982,
+     "judge": 0.9478,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.9667,
+     "ci": [
+      0.9,
+      1.0
+     ],
+     "auto": 0.9667,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.95,
+     "ci": [
+      0.85,
+      1.0
+     ],
+     "auto": 0.95,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.8983,
+     "ci": [
+      0.8702,
+      0.9229
+     ]
+    },
+    "coding": {
+     "mean": 0.9584,
+     "ci": [
+      0.8917,
+      1.0
+     ]
+    },
+    "overall": {
+     "mean": 0.9133,
+     "ci": [
+      0.888,
+      0.9362
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "standard",
+    "family": "openai",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 149.262,
+    "usd": 1.4926,
+    "usd_per_100": 0.5853,
+    "in_tokens": 190089,
+    "out_tokens": 87557,
+    "median_s": 5.93,
+    "served": {
+     "gpt-5.6-terra": 256
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:gpt-6-luna@low": {
+   "name": "gpt-6-luna",
+   "tier": "standard",
+   "family": "openai",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.772,
+     "ci": [
+      0.7212,
+      0.8177
+     ],
+     "auto": 0.772,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.9517,
+     "ci": [
+      0.9247,
+      0.9751
+     ],
+     "auto": 0.9517,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.9286,
+     "ci": [
+      0.9184,
+      0.9375
+     ],
+     "auto": 0.9418,
+     "judge": 0.9154,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.785,
+     "ci": [
+      0.65,
+      0.89
+     ],
+     "auto": 0.785,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9702,
+     "ci": [
+      0.9659,
+      0.9743
+     ],
+     "auto": 0.9972,
+     "judge": 0.9432,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.8,
+     "ci": [
+      0.6,
+      0.95
+     ],
+     "auto": 0.8,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.9012,
+     "ci": [
+      0.8782,
+      0.9212
+     ]
+    },
+    "coding": {
+     "mean": 0.9,
+     "ci": [
+      0.8,
+      0.975
+     ]
+    },
+    "overall": {
+     "mean": 0.9009,
+     "ci": [
+      0.8717,
+      0.927
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "standard",
+    "family": "openai",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 7.616,
+    "usd": 0.0762,
+    "usd_per_100": 0.0299,
+    "in_tokens": 188719,
+    "out_tokens": 108460,
+    "median_s": 7.02,
+    "served": {
+     "gpt-6-luna": 255
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:gpt-6.1-sol@low": {
+   "name": "gpt-6.1-sol",
+   "tier": "standard",
+   "family": "openai",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.7379,
+     "ci": [
+      0.6855,
+      0.7851
+     ],
+     "auto": 0.7379,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.9714,
+     "ci": [
+      0.9524,
+      0.9878
+     ],
+     "auto": 0.9714,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.9588,
+     "ci": [
+      0.9503,
+      0.9656
+     ],
+     "auto": 0.9921,
+     "judge": 0.9255,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.81,
+     "ci": [
+      0.705,
+      0.9001
+     ],
+     "auto": 0.81,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9729,
+     "ci": [
+      0.9694,
+      0.9761
+     ],
+     "auto": 0.9976,
+     "judge": 0.9483,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.9085,
+     "ci": [
+      0.8894,
+      0.9264
+     ]
+    },
+    "coding": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ]
+    },
+    "overall": {
+     "mean": 0.9314,
+     "ci": [
+      0.9164,
+      0.9458
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "standard",
+    "family": "openai",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 117.539,
+    "usd": 1.1754,
+    "usd_per_100": 0.4609,
+    "in_tokens": 188719,
+    "out_tokens": 73688,
+    "median_s": 8.27,
+    "served": {
+     "gpt-6.1-sol": 255
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:kimi-k3": {
+   "name": "kimi-k3",
+   "tier": "economy",
+   "family": "moonshot",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.7894,
+     "ci": [
+      0.7361,
+      0.8368
+     ],
+     "auto": 0.7894,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.9256,
+     "ci": [
+      0.8898,
+      0.9539
+     ],
+     "auto": 0.9256,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.9543,
+     "ci": [
+      0.9444,
+      0.9618
+     ],
+     "auto": 0.9728,
+     "judge": 0.9359,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.935,
+     "ci": [
+      0.88,
+      0.98
+     ],
+     "auto": 0.935,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9761,
+     "ci": [
+      0.972,
+      0.9799
+     ],
+     "auto": 0.9975,
+     "judge": 0.9547,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.95,
+     "ci": [
+      0.85,
+      1.0
+     ],
+     "auto": 0.95,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.9301,
+     "ci": [
+      0.9166,
+      0.9417
+     ]
+    },
+    "coding": {
+     "mean": 0.975,
+     "ci": [
+      0.925,
+      1.0
+     ]
+    },
+    "overall": {
+     "mean": 0.9413,
+     "ci": [
+      0.9238,
+      0.9551
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "economy",
+    "family": "moonshot",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 795.293,
+    "usd": 7.9529,
+    "usd_per_100": 3.1188,
+    "in_tokens": 237046,
+    "out_tokens": 482786,
+    "median_s": 34.48,
+    "served": {
+     "kimi-k3": 255
+    },
+    "substituted_turns": 0
+   }
+  },
+  "copilot:mai-code-1.1-flash@low": {
+   "name": "mai-code-1.1-flash",
+   "tier": "economy",
+   "family": "microsoft",
+   "engine": "copilot",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.5662,
+     "ci": [
+      0.498,
+      0.6374
+     ],
+     "auto": 0.5662,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.871,
+     "ci": [
+      0.8337,
+      0.9062
+     ],
+     "auto": 0.871,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.8938,
+     "ci": [
+      0.8771,
+      0.9083
+     ],
+     "auto": 0.9508,
+     "judge": 0.8369,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.56,
+     "ci": [
+      0.405,
+      0.705
+     ],
+     "auto": 0.56,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9584,
+     "ci": [
+      0.9493,
+      0.9677
+     ],
+     "auto": 0.9912,
+     "judge": 0.9256,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.8933,
+     "ci": [
+      0.7732,
+      0.9867
+     ],
+     "auto": 0.8933,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.95,
+     "ci": [
+      0.85,
+      1.0
+     ],
+     "auto": 0.95,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.8082,
+     "ci": [
+      0.7785,
+      0.8345
+     ]
+    },
+    "coding": {
+     "mean": 0.9216,
+     "ci": [
+      0.8417,
+      0.9833
+     ]
+    },
+    "overall": {
+     "mean": 0.8366,
+     "ci": [
+      0.8063,
+      0.8641
+     ]
+    }
+   },
+   "cost": {
+    "engine": "copilot",
+    "tier": "economy",
+    "family": "microsoft",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 40.014,
+    "usd": 0.4001,
+    "usd_per_100": 0.1569,
+    "in_tokens": 192856,
+    "out_tokens": 301308,
+    "median_s": 7.9,
+    "served": {
+     "mai-code-1.1-flash": 258
+    },
+    "substituted_turns": 0
+   }
+  },
+  "ollama:gemma3:27b": {
+   "name": "Gemma 3 27B",
+   "tier": "local",
+   "family": "google",
+   "engine": "ollama",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.6898,
+     "ci": [
+      0.6524,
+      0.7257
+     ],
+     "auto": 0.6898,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 0.8,
+     "ci": [
+      0.7,
+      0.9
+     ],
+     "auto": 0.8,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.7613,
+     "ci": [
+      0.6947,
+      0.8262
+     ],
+     "auto": 0.7613,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.8083,
+     "ci": [
+      0.785,
+      0.8323
+     ],
+     "auto": 0.8854,
+     "judge": 0.7311,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.09,
+     "ci": [
+      0.045,
+      0.14
+     ],
+     "auto": 0.09,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9286,
+     "ci": [
+      0.9173,
+      0.9393
+     ],
+     "auto": 0.9919,
+     "judge": 0.8653,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.5767,
+     "ci": [
+      0.3999,
+      0.75
+     ],
+     "auto": 0.5767,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.8767,
+     "ci": [
+      0.7217,
+      0.9867
+     ],
+     "auto": 0.8767,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.6797,
+     "ci": [
+      0.6552,
+      0.7017
+     ]
+    },
+    "coding": {
+     "mean": 0.7267,
+     "ci": [
+      0.6125,
+      0.8359
+     ]
+    },
+    "overall": {
+     "mean": 0.6914,
+     "ci": [
+      0.6582,
+      0.7218
+     ]
+    }
+   },
+   "cost": {
+    "engine": "ollama",
+    "tier": "local",
+    "family": "google",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 0.0,
+    "usd": 0.0,
+    "usd_per_100": 0.1698,
+    "in_tokens": 195174,
+    "out_tokens": 69374,
+    "median_s": 9.57,
+    "served": {
+     "gemma3:27b": 267
+    },
+    "substituted_turns": 0,
+    "kwh_gross": 0.07298,
+    "kwh_marginal": 0.02527,
+    "kwh_per_100": 0.02862,
+    "energy_cost": null,
+    "gpu_hours": 0.3973,
+    "rental_usd": 0.433,
+    "timed_calls": 255,
+    "energy_calls": 255
+   }
+  },
+  "ollama:gemma4": {
+   "name": "Gemma 4 8B",
+   "tier": "local",
+   "family": "google",
+   "engine": "ollama",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.6454,
+     "ci": [
+      0.5982,
+      0.6892
+     ],
+     "auto": 0.6454,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 0.8167,
+     "ci": [
+      0.7167,
+      0.9167
+     ],
+     "auto": 0.8167,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.7178,
+     "ci": [
+      0.6547,
+      0.7778
+     ],
+     "auto": 0.7178,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.8925,
+     "ci": [
+      0.876,
+      0.9074
+     ],
+     "auto": 0.9638,
+     "judge": 0.8211,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.03,
+     "ci": [
+      0.01,
+      0.06
+     ],
+     "auto": 0.03,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.925,
+     "ci": [
+      0.9143,
+      0.9347
+     ],
+     "auto": 0.9861,
+     "judge": 0.8639,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.4876,
+     "ci": [
+      0.3177,
+      0.6568
+     ],
+     "auto": 0.4876,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.8317,
+     "ci": [
+      0.6682,
+      0.9767
+     ],
+     "auto": 0.8317,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.6712,
+     "ci": [
+      0.6494,
+      0.6928
+     ]
+    },
+    "coding": {
+     "mean": 0.6596,
+     "ci": [
+      0.5387,
+      0.7726
+     ]
+    },
+    "overall": {
+     "mean": 0.6683,
+     "ci": [
+      0.6362,
+      0.6995
+     ]
+    }
+   },
+   "cost": {
+    "engine": "ollama",
+    "tier": "local",
+    "family": "google",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 0.0,
+    "usd": 0.0,
+    "usd_per_100": 0.1834,
+    "in_tokens": 201230,
+    "out_tokens": 193180,
+    "median_s": 13.57,
+    "served": {
+     "gemma4": 267
+    },
+    "substituted_turns": 0,
+    "kwh_gross": 0.09099,
+    "kwh_marginal": 0.01796,
+    "kwh_per_100": 0.03568,
+    "energy_cost": null,
+    "gpu_hours": 0.4291,
+    "rental_usd": 0.4677,
+    "timed_calls": 255,
+    "energy_calls": 255
+   }
+  },
+  "ollama:gpt-oss": {
+   "name": "gpt-oss 20B",
+   "tier": "local",
+   "family": "openai",
+   "engine": "ollama",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.5035,
+     "ci": [
+      0.4435,
+      0.5594
+     ],
+     "auto": 0.5035,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 0.9333,
+     "ci": [
+      0.8667,
+      0.9833
+     ],
+     "auto": 0.9333,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.7953,
+     "ci": [
+      0.7523,
+      0.8377
+     ],
+     "auto": 0.7953,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.7523,
+     "ci": [
+      0.7264,
+      0.7769
+     ],
+     "auto": 0.8378,
+     "judge": 0.6669,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.055,
+     "ci": [
+      0.01,
+      0.11
+     ],
+     "auto": 0.055,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9277,
+     "ci": [
+      0.9132,
+      0.9408
+     ],
+     "auto": 0.9843,
+     "judge": 0.871,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.8667,
+     "ci": [
+      0.7333,
+      0.9667
+     ],
+     "auto": 0.8667,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.95,
+     "ci": [
+      0.85,
+      1.0
+     ],
+     "auto": 0.95,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.6612,
+     "ci": [
+      0.642,
+      0.6788
+     ]
+    },
+    "coding": {
+     "mean": 0.9083,
+     "ci": [
+      0.825,
+      0.9833
+     ]
+    },
+    "overall": {
+     "mean": 0.723,
+     "ci": [
+      0.6989,
+      0.7443
+     ]
+    }
+   },
+   "cost": {
+    "engine": "ollama",
+    "tier": "local",
+    "family": "openai",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 0.0,
+    "usd": 0.0,
+    "usd_per_100": 0.0869,
+    "in_tokens": 216517,
+    "out_tokens": 133555,
+    "median_s": 4.14,
+    "served": {
+     "gpt-oss": 259
+    },
+    "substituted_turns": 0,
+    "kwh_gross": 0.04818,
+    "kwh_marginal": 0.02046,
+    "kwh_per_100": 0.0189,
+    "energy_cost": null,
+    "gpu_hours": 0.2033,
+    "rental_usd": 0.2216,
+    "timed_calls": 255,
+    "energy_calls": 255
+   }
+  },
+  "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0": {
+   "name": "Gemma2 9B CPT SahabatAI (Q8_0)",
+   "tier": "local",
+   "family": "google",
+   "engine": "ollama",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.4948,
+     "ci": [
+      0.444,
+      0.5491
+     ],
+     "auto": 0.4948,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 0.7,
+     "ci": [
+      0.5833,
+      0.8167
+     ],
+     "auto": 0.7,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.6086,
+     "ci": [
+      0.5202,
+      0.6894
+     ],
+     "auto": 0.6086,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.6617,
+     "ci": [
+      0.6393,
+      0.6862
+     ],
+     "auto": 0.7748,
+     "judge": 0.5486,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.0675,
+     "ci": [
+      0.02,
+      0.125
+     ],
+     "auto": 0.0675,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.8913,
+     "ci": [
+      0.8771,
+      0.9055
+     ],
+     "auto": 0.974,
+     "judge": 0.8086,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.1133,
+     "ci": [
+      0.0133,
+      0.2333
+     ],
+     "auto": 0.1133,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.6005,
+     "ci": [
+      0.4016,
+      0.7851
+     ],
+     "auto": 0.6005,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.5706,
+     "ci": [
+      0.5425,
+      0.599
+     ]
+    },
+    "coding": {
+     "mean": 0.3569,
+     "ci": [
+      0.2469,
+      0.4711
+     ]
+    },
+    "overall": {
+     "mean": 0.5172,
+     "ci": [
+      0.48,
+      0.5505
+     ]
+    }
+   },
+   "cost": {
+    "engine": "ollama",
+    "tier": "local",
+    "family": "google",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 0.0,
+    "usd": 0.0,
+    "usd_per_100": 0.299,
+    "in_tokens": 201529,
+    "out_tokens": 62360,
+    "median_s": 5.88,
+    "served": {
+     "hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0": 281
+    },
+    "substituted_turns": 0,
+    "kwh_gross": 0.13255,
+    "kwh_marginal": 0.05523,
+    "kwh_per_100": 0.05198,
+    "energy_cost": null,
+    "gpu_hours": 0.6994,
+    "rental_usd": 0.7624,
+    "timed_calls": 255,
+    "energy_calls": 255
+   }
+  },
+  "ollama:llama3.2": {
+   "name": "Llama 3.2 3B",
+   "tier": "local",
+   "family": "meta",
+   "engine": "ollama",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.3846,
+     "ci": [
+      0.3269,
+      0.4429
+     ],
+     "auto": 0.3846,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 0.4,
+     "ci": [
+      0.2833,
+      0.5167
+     ],
+     "auto": 0.4,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.4127,
+     "ci": [
+      0.3697,
+      0.4548
+     ],
+     "auto": 0.4127,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.4057,
+     "ci": [
+      0.3849,
+      0.4316
+     ],
+     "auto": 0.5214,
+     "judge": 0.29,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.0275,
+     "ci": [
+      0.005,
+      0.0575
+     ],
+     "auto": 0.0275,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.8178,
+     "ci": [
+      0.797,
+      0.8397
+     ],
+     "auto": 0.9579,
+     "judge": 0.6778,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.0925,
+     "ci": [
+      0.0175,
+      0.1875
+     ],
+     "auto": 0.0925,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.4044,
+     "ci": [
+      0.22,
+      0.6044
+     ],
+     "auto": 0.4044,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.4081,
+     "ci": [
+      0.3824,
+      0.4328
+     ]
+    },
+    "coding": {
+     "mean": 0.2485,
+     "ci": [
+      0.1437,
+      0.3624
+     ]
+    },
+    "overall": {
+     "mean": 0.3681,
+     "ci": [
+      0.3364,
+      0.4022
+     ]
+    }
+   },
+   "cost": {
+    "engine": "ollama",
+    "tier": "local",
+    "family": "meta",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 0.0,
+    "usd": 0.0,
+    "usd_per_100": 0.0671,
+    "in_tokens": 239450,
+    "out_tokens": 75931,
+    "median_s": 3.38,
+    "served": {
+     "llama3.2": 280
+    },
+    "substituted_turns": 0,
+    "kwh_gross": 0.03166,
+    "kwh_marginal": 0.00384,
+    "kwh_per_100": 0.01242,
+    "energy_cost": null,
+    "gpu_hours": 0.157,
+    "rental_usd": 0.1712,
+    "timed_calls": 255,
+    "energy_calls": 255
+   }
+  },
+  "ollama:phi4-reasoning:plus": {
+   "name": "Phi-4 reasoning plus 14.7B",
+   "tier": "local",
+   "family": "microsoft",
+   "engine": "ollama",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.5412,
+     "ci": [
+      0.4822,
+      0.6023
+     ],
+     "auto": 0.5412,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 0.75,
+     "ci": [
+      0.6333,
+      0.85
+     ],
+     "auto": 0.75,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.6193,
+     "ci": [
+      0.5578,
+      0.6801
+     ],
+     "auto": 0.6193,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.5947,
+     "ci": [
+      0.5676,
+      0.6218
+     ],
+     "auto": 0.6788,
+     "judge": 0.5106,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.1275,
+     "ci": [
+      0.055,
+      0.21
+     ],
+     "auto": 0.1275,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.8803,
+     "ci": [
+      0.857,
+      0.9008
+     ],
+     "auto": 0.9513,
+     "judge": 0.8092,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.8125,
+     "ci": [
+      0.6667,
+      0.9333
+     ],
+     "auto": 0.8125,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.7894,
+     "ci": [
+      0.6089,
+      0.935
+     ],
+     "auto": 0.7894,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.5855,
+     "ci": [
+      0.5587,
+      0.6138
+     ]
+    },
+    "coding": {
+     "mean": 0.801,
+     "ci": [
+      0.6912,
+      0.9029
+     ]
+    },
+    "overall": {
+     "mean": 0.6394,
+     "ci": [
+      0.6048,
+      0.6725
+     ]
+    }
+   },
+   "cost": {
+    "engine": "ollama",
+    "tier": "local",
+    "family": "microsoft",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 0.0,
+    "usd": 0.0,
+    "usd_per_100": 0.6932,
+    "in_tokens": 212780,
+    "out_tokens": 242347,
+    "median_s": 8.73,
+    "served": {
+     "phi4-reasoning:plus": 260
+    },
+    "substituted_turns": 0,
+    "kwh_gross": 0.18192,
+    "kwh_marginal": 0.0093,
+    "kwh_per_100": 0.07134,
+    "energy_cost": null,
+    "gpu_hours": 1.6216,
+    "rental_usd": 1.7676,
+    "timed_calls": 255,
+    "energy_calls": 255
+   }
+  },
+  "ollama:qwen2.5-coder:32b": {
+   "name": "Qwen2.5-Coder 32B",
+   "tier": "local",
+   "family": "alibaba",
+   "engine": "ollama",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.5272,
+     "ci": [
+      0.4785,
+      0.5765
+     ],
+     "auto": 0.5272,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 0.7667,
+     "ci": [
+      0.65,
+      0.8667
+     ],
+     "auto": 0.7667,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.7648,
+     "ci": [
+      0.7149,
+      0.8126
+     ],
+     "auto": 0.7648,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.6504,
+     "ci": [
+      0.6235,
+      0.6771
+     ],
+     "auto": 0.7869,
+     "judge": 0.5139,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.045,
+     "ci": [
+      0.015,
+      0.075
+     ],
+     "auto": 0.045,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.8693,
+     "ci": [
+      0.8524,
+      0.8854
+     ],
+     "auto": 0.9731,
+     "judge": 0.7656,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.4167,
+     "ci": [
+      0.25,
+      0.5833
+     ],
+     "auto": 0.4167,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.9308,
+     "ci": [
+      0.8167,
+      1.0
+     ],
+     "auto": 0.9308,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.6039,
+     "ci": [
+      0.5814,
+      0.6265
+     ]
+    },
+    "coding": {
+     "mean": 0.6737,
+     "ci": [
+      0.5763,
+      0.7725
+     ]
+    },
+    "overall": {
+     "mean": 0.6214,
+     "ci": [
+      0.5927,
+      0.6522
+     ]
+    }
+   },
+   "cost": {
+    "engine": "ollama",
+    "tier": "local",
+    "family": "alibaba",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 0.0,
+    "usd": 0.0,
+    "usd_per_100": 0.2589,
+    "in_tokens": 234575,
+    "out_tokens": 87809,
+    "median_s": 20.16,
+    "served": {
+     "qwen2.5-coder:32b": 272
+    },
+    "substituted_turns": 0,
+    "kwh_gross": 0.06944,
+    "kwh_marginal": 0.03957,
+    "kwh_per_100": 0.04599,
+    "energy_cost": null,
+    "gpu_hours": 0.3587,
+    "rental_usd": 0.391,
+    "timed_calls": 151,
+    "energy_calls": 151
+   }
+  },
+  "ollama:qwen2.5:7b-instruct": {
+   "name": "Qwen2.5 7B Instruct",
+   "tier": "local",
+   "family": "alibaba",
+   "engine": "ollama",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.4109,
+     "ci": [
+      0.3557,
+      0.4653
+     ],
+     "auto": 0.4109,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 0.6833,
+     "ci": [
+      0.5667,
+      0.8
+     ],
+     "auto": 0.6833,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.5213,
+     "ci": [
+      0.4664,
+      0.5795
+     ],
+     "auto": 0.5213,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.6767,
+     "ci": [
+      0.6461,
+      0.7076
+     ],
+     "auto": 0.855,
+     "judge": 0.4983,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.045,
+     "ci": [
+      0.02,
+      0.07
+     ],
+     "auto": 0.045,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.7983,
+     "ci": [
+      0.7619,
+      0.8358
+     ],
+     "auto": 0.9366,
+     "judge": 0.66,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.3127,
+     "ci": [
+      0.1761,
+      0.4567
+     ],
+     "auto": 0.3127,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.6942,
+     "ci": [
+      0.4941,
+      0.8717
+     ],
+     "auto": 0.6942,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.5226,
+     "ci": [
+      0.497,
+      0.5485
+     ]
+    },
+    "coding": {
+     "mean": 0.5034,
+     "ci": [
+      0.3905,
+      0.6196
+     ]
+    },
+    "overall": {
+     "mean": 0.5178,
+     "ci": [
+      0.4831,
+      0.5511
+     ]
+    }
+   },
+   "cost": {
+    "engine": "ollama",
+    "tier": "local",
+    "family": "alibaba",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 0.0,
+    "usd": 0.0,
+    "usd_per_100": 0.0834,
+    "in_tokens": 230457,
+    "out_tokens": 69615,
+    "median_s": 4.68,
+    "served": {
+     "qwen2.5:7b-instruct": 272
+    },
+    "substituted_turns": 0,
+    "kwh_gross": null,
+    "kwh_marginal": null,
+    "kwh_per_100": null,
+    "energy_cost": null,
+    "gpu_hours": 0.1951,
+    "rental_usd": 0.2127,
+    "timed_calls": 255,
+    "energy_calls": 0
+   }
+  },
+  "ollama:qwen3-coder:30b": {
+   "name": "Qwen3-Coder 30B-A3B",
+   "tier": "local",
+   "family": "alibaba",
+   "engine": "ollama",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.5283,
+     "ci": [
+      0.4696,
+      0.5917
+     ],
+     "auto": 0.5283,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 0.7667,
+     "ci": [
+      0.65,
+      0.8667
+     ],
+     "auto": 0.7667,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.6165,
+     "ci": [
+      0.555,
+      0.6707
+     ],
+     "auto": 0.6165,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.7167,
+     "ci": [
+      0.6942,
+      0.7395
+     ],
+     "auto": 0.8189,
+     "judge": 0.6144,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.065,
+     "ci": [
+      0.015,
+      0.13
+     ],
+     "auto": 0.065,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.8887,
+     "ci": [
+      0.872,
+      0.9035
+     ],
+     "auto": 0.9812,
+     "judge": 0.7961,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.5292,
+     "ci": [
+      0.3333,
+      0.7
+     ],
+     "auto": 0.5292,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.8325,
+     "ci": [
+      0.6557,
+      0.9733
+     ],
+     "auto": 0.8325,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.597,
+     "ci": [
+      0.5723,
+      0.6226
+     ]
+    },
+    "coding": {
+     "mean": 0.6808,
+     "ci": [
+      0.5646,
+      0.8
+     ]
+    },
+    "overall": {
+     "mean": 0.6179,
+     "ci": [
+      0.5834,
+      0.6506
+     ]
+    }
+   },
+   "cost": {
+    "engine": "ollama",
+    "tier": "local",
+    "family": "alibaba",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 0.0,
+    "usd": 0.0,
+    "usd_per_100": 0.2358,
+    "in_tokens": 229586,
+    "out_tokens": 73089,
+    "median_s": 3.24,
+    "served": {
+     "qwen3-coder:30b": 269
+    },
+    "substituted_turns": 0,
+    "kwh_gross": 0.06601,
+    "kwh_marginal": 0.01992,
+    "kwh_per_100": 0.02589,
+    "energy_cost": null,
+    "gpu_hours": 0.5516,
+    "rental_usd": 0.6013,
+    "timed_calls": 255,
+    "energy_calls": 255
+   }
+  },
+  "ollama:qwen3.6": {
+   "name": "Qwen3.6 36B",
+   "tier": "local",
+   "family": "alibaba",
+   "engine": "ollama",
+   "tasks": {
+    "structure": {
+     "n": 35,
+     "mean": 0.6631,
+     "ci": [
+      0.6197,
+      0.7057
+     ],
+     "auto": 0.6631,
+     "judge": null,
+     "n_judged": 0
+    },
+    "methodology": {
+     "n": 60,
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "auto": 1.0,
+     "judge": null,
+     "n_judged": 0
+    },
+    "extraction": {
+     "n": 30,
+     "mean": 0.814,
+     "ci": [
+      0.774,
+      0.8559
+     ],
+     "auto": 0.814,
+     "judge": null,
+     "n_judged": 0
+    },
+    "grounded": {
+     "n": 30,
+     "mean": 0.8151,
+     "ci": [
+      0.7257,
+      0.889
+     ],
+     "auto": 0.9126,
+     "judge": 0.7175,
+     "n_judged": 30
+    },
+    "references": {
+     "n": 20,
+     "mean": 0.06,
+     "ci": [
+      0.005,
+      0.13
+     ],
+     "auto": 0.06,
+     "judge": null,
+     "n_judged": 0
+    },
+    "language": {
+     "n": 30,
+     "mean": 0.9602,
+     "ci": [
+      0.9497,
+      0.9693
+     ],
+     "auto": 0.9861,
+     "judge": 0.9342,
+     "n_judged": 30
+    },
+    "coding": {
+     "n": 30,
+     "mean": 0.8,
+     "ci": [
+      0.6333,
+      0.9333
+     ],
+     "auto": 0.8,
+     "judge": null,
+     "n_judged": 0
+    },
+    "latex": {
+     "n": 20,
+     "mean": 0.85,
+     "ci": [
+      0.7,
+      1.0
+     ],
+     "auto": 0.85,
+     "judge": null,
+     "n_judged": 0
+    }
+   },
+   "composite": {
+    "academic": {
+     "mean": 0.7187,
+     "ci": [
+      0.6979,
+      0.7396
+     ]
+    },
+    "coding": {
+     "mean": 0.825,
+     "ci": [
+      0.7083,
+      0.9333
+     ]
+    },
+    "overall": {
+     "mean": 0.7453,
+     "ci": [
+      0.7142,
+      0.774
+     ]
+    }
+   },
+   "cost": {
+    "engine": "ollama",
+    "tier": "local",
+    "family": "alibaba",
+    "calls": 255,
+    "errors": 0,
+    "aiu": 0.0,
+    "usd": 0.0,
+    "usd_per_100": 0.6555,
+    "in_tokens": 477370,
+    "out_tokens": 681777,
+    "median_s": 57.71,
+    "served": {
+     "qwen3.6": 261
+    },
+    "substituted_turns": 0,
+    "kwh_gross": 0.28198,
+    "kwh_marginal": 0.15008,
+    "kwh_per_100": 0.11058,
+    "energy_cost": null,
+    "gpu_hours": 1.5335,
+    "rental_usd": 1.6715,
+    "timed_calls": 255,
+    "energy_calls": 255
+   }
+  }
+ },
+ "pairwise_top": [
+  {
+   "a": "copilot:kimi-k3",
+   "b": "copilot:gpt-5.4@low",
+   "n": 255,
+   "mean_diff": 0.0047,
+   "wilcoxon_p": 0.65534,
+   "sign_p": 0.59462,
+   "wilcoxon_p_holm": 1.0
+  },
+  {
+   "a": "copilot:kimi-k3",
+   "b": "copilot:gpt-6.1-sol@low",
+   "n": 255,
+   "mean_diff": 0.0074,
+   "wilcoxon_p": 0.22203,
+   "sign_p": 0.66117,
+   "wilcoxon_p_holm": 1.0
+  },
+  {
+   "a": "copilot:kimi-k3",
+   "b": "copilot:claude-sonnet-5.5@low",
+   "n": 255,
+   "mean_diff": 0.0209,
+   "wilcoxon_p": 0.02887,
+   "sign_p": 0.32712,
+   "wilcoxon_p_holm": 0.31759
+  },
+  {
+   "a": "copilot:kimi-k3",
+   "b": "copilot:gpt-5.6-terra@low",
+   "n": 255,
+   "mean_diff": 0.023,
+   "wilcoxon_p": 0.01508,
+   "sign_p": 0.01009,
+   "wilcoxon_p_holm": 0.18093
+  },
+  {
+   "a": "copilot:kimi-k3",
+   "b": "copilot:gemini-3.7-flash",
+   "n": 255,
+   "mean_diff": 0.0226,
+   "wilcoxon_p": 0.00027,
+   "sign_p": 0.00169,
+   "wilcoxon_p_holm": 0.00405
+  },
+  {
+   "a": "copilot:gpt-5.4@low",
+   "b": "copilot:gpt-6.1-sol@low",
+   "n": 255,
+   "mean_diff": 0.0027,
+   "wilcoxon_p": 0.76744,
+   "sign_p": 1.0,
+   "wilcoxon_p_holm": 1.0
+  },
+  {
+   "a": "copilot:gpt-5.4@low",
+   "b": "copilot:claude-sonnet-5.5@low",
+   "n": 255,
+   "mean_diff": 0.0162,
+   "wilcoxon_p": 0.0922,
+   "sign_p": 0.86137,
+   "wilcoxon_p_holm": 0.90967
+  },
+  {
+   "a": "copilot:gpt-5.4@low",
+   "b": "copilot:gpt-5.6-terra@low",
+   "n": 255,
+   "mean_diff": 0.0183,
+   "wilcoxon_p": 0.14773,
+   "sign_p": 0.04823,
+   "wilcoxon_p_holm": 1.0
+  },
+  {
+   "a": "copilot:gpt-5.4@low",
+   "b": "copilot:gemini-3.7-flash",
+   "n": 255,
+   "mean_diff": 0.0179,
+   "wilcoxon_p": 0.01244,
+   "sign_p": 0.06629,
+   "wilcoxon_p_holm": 0.17006
+  },
+  {
+   "a": "copilot:gpt-6.1-sol@low",
+   "b": "copilot:claude-sonnet-5.5@low",
+   "n": 255,
+   "mean_diff": 0.0135,
+   "wilcoxon_p": 0.15859,
+   "sign_p": 1.0,
+   "wilcoxon_p_holm": 1.0
+  },
+  {
+   "a": "copilot:gpt-6.1-sol@low",
+   "b": "copilot:gpt-5.6-terra@low",
+   "n": 255,
+   "mean_diff": 0.0156,
+   "wilcoxon_p": 0.09097,
+   "sign_p": 0.07726,
+   "wilcoxon_p_holm": 0.90967
+  },
+  {
+   "a": "copilot:gpt-6.1-sol@low",
+   "b": "copilot:gemini-3.7-flash",
+   "n": 255,
+   "mean_diff": 0.0152,
+   "wilcoxon_p": 0.01215,
+   "sign_p": 0.00345,
+   "wilcoxon_p_holm": 0.17006
+  },
+  {
+   "a": "copilot:claude-sonnet-5.5@low",
+   "b": "copilot:gpt-5.6-terra@low",
+   "n": 255,
+   "mean_diff": 0.0021,
+   "wilcoxon_p": 0.95521,
+   "sign_p": 0.35258,
+   "wilcoxon_p_holm": 1.0
+  },
+  {
+   "a": "copilot:claude-sonnet-5.5@low",
+   "b": "copilot:gemini-3.7-flash",
+   "n": 255,
+   "mean_diff": 0.0016,
+   "wilcoxon_p": 0.37137,
+   "sign_p": 0.10037,
+   "wilcoxon_p_holm": 1.0
+  },
+  {
+   "a": "copilot:gpt-5.6-terra@low",
+   "b": "copilot:gemini-3.7-flash",
+   "n": 255,
+   "mean_diff": -0.0004,
+   "wilcoxon_p": 0.4126,
+   "sign_p": 0.53305,
+   "wilcoxon_p_holm": 1.0
+  }
+ ],
+ "pareto_usd_per_100_vs_overall": [
+  "copilot:kimi-k3",
+  "copilot:gpt-5.4@low",
+  "copilot:gpt-6.1-sol@low",
+  "copilot:gemini-3.7-flash",
+  "copilot:gpt-6-luna@low"
+ ]
+}

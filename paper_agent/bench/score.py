@@ -20,7 +20,7 @@ from .schema import Item
 from .tasks import Context, registry
 from .tasks import extraction as X
 
-SCORER_VERSION = {"structure": 2, "methodology": 2, "extraction": 2, "grounded": 2, "references": 3, "language": 1,
+SCORER_VERSION = {"structure": 2, "methodology": 2, "extraction": 2, "grounded": 2, "references": 4, "language": 1,
                   "coding": 1, "latex": 2}
 
 

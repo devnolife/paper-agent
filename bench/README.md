@@ -12,7 +12,7 @@ for every call.
 | `methodology` | multiple-choice questions on research methods and statistics | 60 | accuracy |
 | `extraction` | fill a closed-vocabulary methods record from a masked thesis excerpt (**private items**) | 30 | field agreement with cross-vendor silver labels (no model graded by its own vendor) + verbatim-evidence check |
 | `grounded` | literature review from six given abstracts, citing `[P1]…[P6]` | 30 | citation coverage/validity, sentence citation rate, unsupported numbers, length; two LLM judges |
-| `references` | list five real references with DOI for a topic | 20 | Crossref/OpenAlex/Semantic Scholar verification (hallucination rate, DOI correctness) |
+| `references` | list five real references with DOI for a topic | 20 | Crossref lookup by DOI, then title + first author (not-found rate, DOI correctness); misses audited in doi.org, Scopus and OpenAlex |
 | `language` | abstract from a research summary; formal rewrite of an informal draft | 30 | length, English leakage, non-standard words, kept/fabricated numbers, key terms, sentence length; two LLM judges |
 | `coding` | Python data analysis on a synthetic CSV (regression, t/Mann–Whitney, ANOVA+Tukey, Cronbach, N-gain, …) | 30 | the program runs offline in a sandbox; JSON outputs compared within tolerance; pass@1 and pass after one repair |
 | `latex` | fix a broken document, typeset a booktabs table, convert a reference to BibTeX | 20 | pdflatex in the sandbox, PDF text, cell-by-cell comparison, BibTeX fields |
@@ -43,6 +43,9 @@ paper-agent bench score
 paper-agent bench judge                                    # judges of other vendors than the candidate's
 paper-agent bench human-sheet && paper-agent bench human-ingest   # two human raters, blind
 paper-agent bench report --out experiments/bench
+python experiments/bench/audit_refs.py                     # second-source audit of the references not in Crossref
+python experiments/bench/analyze.py                        # cost, diagnostics, judges, robustness -> analysis.json
+python experiments/bench/make_figures.py && python paper_bench/make_tables.py
 ```
 
 [`models.yaml`](models.yaml) is the study roster (tier and vendor family per model; local models with their
@@ -72,12 +75,25 @@ interpreter bound read-only, a minimal environment without tokens, a wall-clock 
   families rated by different judge subsets stay comparable. Agreement with two human raters is reported
   (Krippendorff's α between the raters, Spearman's ρ between judges and humans).
 * Composite scores are unweighted means of task scores: *academic* (six tasks), *coding* (`coding`, `latex`),
-  *overall* (eight). CIs: percentile bootstrap over items (stratified by task for composites); top models are
-  compared item by item (Wilcoxon signed-rank with Holm correction, sign test).
+  *overall* (eight). CIs: percentile bootstrap over items (stratified by task for composites). `analyze.py` gives the
+  paired difference of every model to the leader and the rank stability from task-stratified resamples (the
+  weighting of the overall score); `summary.json` also lists item-level Wilcoxon/sign tests among the top models.
+* `references`: credit 1 for a work found in Crossref with the correct DOI, 0.75 without a DOI, 0.5 with a wrong DOI,
+  0 if Crossref has no matching record (title similarity ≥ 0.90, year ± 1, first-author surname); Crossref errors
+  leave the item unscored. Not found in Crossref is not the same as fabricated, so `experiments/bench/audit_refs.py`
+  looks every miss up again — a given DOI at doi.org (other registration agencies), the title in Scopus and OpenAlex
+  through the studio-revisi browser-agent (`BROWSER_AGENT_URL`, `BROWSER_AGENT_API_KEY`) — and classifies it as
+  *exact* (a real work the score missed), *title* (a real title with wrong year or author), *none* or *unchecked*.
+  OpenAlex bills each search against a daily budget (US$1 with a free key, shared by everything that uses the key),
+  so the audit makes at most `AUDIT_OPENALEX_DAILY_CAP` searches (default 600) per UTC day and checks the rest on the
+  next run. The audit does not change scores; `analyze.py` reports the ranking with the works it finds credited.
 
 ## Limitations
 
-One run per model at low reasoning effort (a small high-effort check on the top models); one university's theses
-behind the `structure` reference and the `extraction` items; silver labels for `extraction` (a human-verified
-subset estimates their accuracy); LLM judges for prose, calibrated against only two raters; vendor model versions
+One run per model at low reasoning effort (a high-effort check on the top models is gated with the premium tier);
+one university's theses behind the `structure` reference and the `extraction` items; silver labels for `extraction`
+(a candidate is scored against the panel members of other vendors, so labels differ by vendor; a human-verified
+subset is prepared but not yet rated); LLM judges for prose, not yet compared with the two human raters; reference
+verification depends on the coverage of Crossref, doi.org, Scopus and OpenAlex (Semantic Scholar refused our
+requests during the audit); the served-model check rests on the SDK's own usage event; vendor model versions
 change, so results are dated (see `summary.json`).

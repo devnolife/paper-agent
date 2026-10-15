@@ -1,0 +1,2527 @@
+{
+ "cost": {
+  "aiu_by_stage": {
+   "cost-probes": 62.7,
+   "judges": 2450.2,
+   "main": 1912.0,
+   "pilot": 240.4
+  },
+  "aiu_total": 4665.3,
+  "usd_total": 46.65,
+  "api_calls_by_stage": {
+   "cost-probes": 24,
+   "judges": 3480,
+   "main": 3476,
+   "pilot": 376
+  },
+  "api_calls_total": 7356,
+  "api_tokens": {
+   "in": 3375548,
+   "out": 2296569
+  },
+  "local_calls": 2580
+ },
+ "diagnostics": {
+  "copilot:claude-haiku-4.5": {
+   "references": {
+    "returned_mean": 2.75,
+    "hallucination_rate": 0.4,
+    "doi_correct_rate": 0.2545,
+    "doi_unresolvable": 22,
+    "abstained_items": 14,
+    "returned": 55
+   },
+   "coding": {
+    "pass1": 0.8333,
+    "pass_repair": 0.9667,
+    "ran_first": 0.8667,
+    "repaired_items": 4
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2286,
+    "ch3_f1": 0.7098,
+    "ch4_f1": 0.6498,
+    "ch3_recall": 0.6821,
+    "ch3_precision": 0.7766
+   },
+   "extraction": {
+    "evidence_verbatim": 0.4713,
+    "fields": {
+     "alat": 0.8667,
+     "analisis": 0.6674,
+     "data_jenis": 0.8929,
+     "hipotesis": 1.0,
+     "n_sampel": 0.8966,
+     "pendekatan": 0.9655,
+     "teknik_pengumpulan": 0.872
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0667,
+    "answers_with_unsupported": 0.0333,
+    "foreign_citation_answers": 0.0,
+    "coverage": 0.9556,
+    "cited_sentences": 0.6499,
+    "words": 274.4333
+   },
+   "language": {
+    "nonstandard_per_answer": 0.3,
+    "english_ratio": 0.0,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0
+   },
+   "latex": {
+    "fix_compiled": 0.5,
+    "fix_score": 0.5,
+    "table_cells": 1.0,
+    "table_score": 0.95,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 0.9833,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 10.605,
+    "p90_s": 19.093,
+    "out_tokens_mean": 979.5647,
+    "reasoning_tokens_mean": 619.2549,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:claude-haiku-5.5@low": {
+   "references": {
+    "returned_mean": 3.8,
+    "hallucination_rate": 0.0263,
+    "doi_correct_rate": 0.8289,
+    "doi_unresolvable": 4,
+    "abstained_items": 11,
+    "returned": 76
+   },
+   "coding": {
+    "pass1": 1.0,
+    "pass_repair": 1.0,
+    "ran_first": 1.0,
+    "repaired_items": 0
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2857,
+    "ch3_f1": 0.7643,
+    "ch4_f1": 0.676,
+    "ch3_recall": 0.7767,
+    "ch3_precision": 0.7776
+   },
+   "extraction": {
+    "evidence_verbatim": 0.9889,
+    "fields": {
+     "alat": 1.0,
+     "analisis": 0.7997,
+     "data_jenis": 0.9643,
+     "hipotesis": 0.9655,
+     "n_sampel": 0.9655,
+     "pendekatan": 0.8966,
+     "teknik_pengumpulan": 0.9307
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0667,
+    "answers_with_unsupported": 0.0333,
+    "foreign_citation_answers": 0.1,
+    "coverage": 1.0,
+    "cited_sentences": 0.6599,
+    "words": 297.0333
+   },
+   "language": {
+    "nonstandard_per_answer": 0.0,
+    "english_ratio": 0.0,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0
+   },
+   "latex": {
+    "fix_compiled": 0.875,
+    "fix_score": 0.875,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 6.825,
+    "p90_s": 11.955,
+    "out_tokens_mean": 806.4902,
+    "reasoning_tokens_mean": 387.6431,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:claude-sonnet-5.5@low": {
+   "references": {
+    "returned_mean": 4.1,
+    "hallucination_rate": 0.0732,
+    "doi_correct_rate": 0.8415,
+    "doi_unresolvable": 1,
+    "abstained_items": 9,
+    "returned": 82
+   },
+   "coding": {
+    "pass1": 0.9667,
+    "pass_repair": 1.0,
+    "ran_first": 0.9667,
+    "repaired_items": 1
+   },
+   "structure": {
+    "generic_ch4_rate": 0.3429,
+    "ch3_f1": 0.8026,
+    "ch4_f1": 0.6929,
+    "ch3_recall": 0.8499,
+    "ch3_precision": 0.7857
+   },
+   "extraction": {
+    "evidence_verbatim": 0.9,
+    "fields": {
+     "alat": 0.9778,
+     "analisis": 0.7859,
+     "data_jenis": 0.9286,
+     "hipotesis": 1.0,
+     "n_sampel": 0.931,
+     "pendekatan": 1.0,
+     "teknik_pengumpulan": 0.8857
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.1,
+    "answers_with_unsupported": 0.0333,
+    "foreign_citation_answers": 0.0,
+    "coverage": 1.0,
+    "cited_sentences": 0.7417,
+    "words": 373.2333
+   },
+   "language": {
+    "nonstandard_per_answer": 0.0,
+    "english_ratio": 0.001,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0
+   },
+   "latex": {
+    "fix_compiled": 1.0,
+    "fix_score": 1.0,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 4.85,
+    "p90_s": 9.6,
+    "out_tokens_mean": 466.4078,
+    "reasoning_tokens_mean": 0.0,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:claude-sonnet-5@low": {
+   "references": {
+    "returned_mean": 2.95,
+    "hallucination_rate": 0.1356,
+    "doi_correct_rate": 0.661,
+    "doi_unresolvable": 9,
+    "abstained_items": 12,
+    "returned": 59
+   },
+   "coding": {
+    "pass1": 1.0,
+    "pass_repair": 1.0,
+    "ran_first": 1.0,
+    "repaired_items": 0
+   },
+   "structure": {
+    "generic_ch4_rate": 0.3143,
+    "ch3_f1": 0.7987,
+    "ch4_f1": 0.6828,
+    "ch3_recall": 0.8267,
+    "ch3_precision": 0.7961
+   },
+   "extraction": {
+    "evidence_verbatim": 0.8889,
+    "fields": {
+     "alat": 1.0,
+     "analisis": 0.6915,
+     "data_jenis": 0.9286,
+     "hipotesis": 0.9655,
+     "n_sampel": 0.9655,
+     "pendekatan": 0.9655,
+     "teknik_pengumpulan": 0.8098
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0,
+    "answers_with_unsupported": 0.0,
+    "foreign_citation_answers": 0.0667,
+    "coverage": 1.0,
+    "cited_sentences": 0.8349,
+    "words": 336.4333
+   },
+   "language": {
+    "nonstandard_per_answer": 0.0,
+    "english_ratio": 0.0009,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0
+   },
+   "latex": {
+    "fix_compiled": 1.0,
+    "fix_score": 1.0,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 5.755,
+    "p90_s": 12.819,
+    "out_tokens_mean": 404.1882,
+    "reasoning_tokens_mean": 2.4667,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:gemini-3.7-flash": {
+   "references": {
+    "returned_mean": 5.0,
+    "hallucination_rate": 0.21,
+    "doi_correct_rate": 0.63,
+    "doi_unresolvable": 18,
+    "abstained_items": 0,
+    "returned": 100
+   },
+   "coding": {
+    "pass1": 1.0,
+    "pass_repair": 1.0,
+    "ran_first": 1.0,
+    "repaired_items": 0
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2286,
+    "ch3_f1": 0.7454,
+    "ch4_f1": 0.7054,
+    "ch3_recall": 0.7258,
+    "ch3_precision": 0.8037
+   },
+   "extraction": {
+    "evidence_verbatim": 0.9253,
+    "fields": {
+     "alat": 0.9667,
+     "analisis": 0.8378,
+     "data_jenis": 0.9259,
+     "hipotesis": 0.9643,
+     "n_sampel": 1.0,
+     "pendekatan": 0.931,
+     "teknik_pengumpulan": 0.9367
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0,
+    "answers_with_unsupported": 0.0,
+    "foreign_citation_answers": 0.0,
+    "coverage": 1.0,
+    "cited_sentences": 0.9427,
+    "words": 276.4
+   },
+   "language": {
+    "nonstandard_per_answer": 0.0,
+    "english_ratio": 0.0,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0
+   },
+   "latex": {
+    "fix_compiled": 1.0,
+    "fix_score": 1.0,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 15.356,
+    "p90_s": 24.743,
+    "out_tokens_mean": 229.2275,
+    "reasoning_tokens_mean": 1169.6784,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:gemini-3.8-flash": {
+   "references": {
+    "returned_mean": 4.5,
+    "hallucination_rate": 0.2667,
+    "doi_correct_rate": 0.6222,
+    "doi_unresolvable": 17,
+    "abstained_items": 2,
+    "returned": 90
+   },
+   "coding": {
+    "pass1": 1.0,
+    "pass_repair": 1.0,
+    "ran_first": 1.0,
+    "repaired_items": 0
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2571,
+    "ch3_f1": 0.7487,
+    "ch4_f1": 0.6659,
+    "ch3_recall": 0.7351,
+    "ch3_precision": 0.803
+   },
+   "extraction": {
+    "evidence_verbatim": 0.9524,
+    "fields": {
+     "alat": 0.9333,
+     "analisis": 0.8556,
+     "data_jenis": 0.9259,
+     "hipotesis": 0.9286,
+     "n_sampel": 1.0,
+     "pendekatan": 0.8966,
+     "teknik_pengumpulan": 0.92
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.1,
+    "answers_with_unsupported": 0.0333,
+    "foreign_citation_answers": 0.0,
+    "coverage": 1.0,
+    "cited_sentences": 0.9325,
+    "words": 302.6667
+   },
+   "language": {
+    "nonstandard_per_answer": 0.0,
+    "english_ratio": 0.0,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0
+   },
+   "latex": {
+    "fix_compiled": 1.0,
+    "fix_score": 1.0,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 18.618,
+    "p90_s": 37.838,
+    "out_tokens_mean": 240.3529,
+    "reasoning_tokens_mean": 1419.6471,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:gemini-4-argon": {
+   "references": {
+    "returned_mean": 3.45,
+    "hallucination_rate": 0.029,
+    "doi_correct_rate": 0.8986,
+    "doi_unresolvable": 3,
+    "abstained_items": 11,
+    "returned": 69
+   },
+   "coding": {
+    "pass1": 1.0,
+    "pass_repair": 1.0,
+    "ran_first": 1.0,
+    "repaired_items": 0
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2571,
+    "ch3_f1": 0.78,
+    "ch4_f1": 0.6898,
+    "ch3_recall": 0.7944,
+    "ch3_precision": 0.7905
+   },
+   "extraction": {
+    "evidence_verbatim": 0.9167,
+    "fields": {
+     "alat": 1.0,
+     "analisis": 0.9,
+     "data_jenis": 0.963,
+     "hipotesis": 1.0,
+     "n_sampel": 1.0,
+     "pendekatan": 0.9655,
+     "teknik_pengumpulan": 0.9822
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0667,
+    "answers_with_unsupported": 0.0333,
+    "foreign_citation_answers": 0.0,
+    "coverage": 1.0,
+    "cited_sentences": 0.9404,
+    "words": 418.9667
+   },
+   "language": {
+    "nonstandard_per_answer": 0.0,
+    "english_ratio": 0.0,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0
+   },
+   "latex": {
+    "fix_compiled": 1.0,
+    "fix_score": 1.0,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 5.816,
+    "p90_s": 9.407,
+    "out_tokens_mean": 247.298,
+    "reasoning_tokens_mean": 43.2157,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:gpt-5-mini@low": {
+   "references": {
+    "returned_mean": 2.4,
+    "hallucination_rate": 0.0208,
+    "doi_correct_rate": 0.6875,
+    "doi_unresolvable": 8,
+    "abstained_items": 13,
+    "returned": 48
+   },
+   "coding": {
+    "pass1": 0.9333,
+    "pass_repair": 0.9667,
+    "ran_first": 0.9333,
+    "repaired_items": 2
+   },
+   "structure": {
+    "generic_ch4_rate": 0.3429,
+    "ch3_f1": 0.7213,
+    "ch4_f1": 0.581,
+    "ch3_recall": 0.7577,
+    "ch3_precision": 0.7172
+   },
+   "extraction": {
+    "evidence_verbatim": 0.9444,
+    "fields": {
+     "alat": 0.9889,
+     "analisis": 0.773,
+     "data_jenis": 0.5769,
+     "hipotesis": 0.931,
+     "n_sampel": 0.9286,
+     "pendekatan": 0.8571,
+     "teknik_pengumpulan": 0.876
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0,
+    "answers_with_unsupported": 0.0,
+    "foreign_citation_answers": 0.0333,
+    "coverage": 1.0,
+    "cited_sentences": 0.7884,
+    "words": 313.3667
+   },
+   "language": {
+    "nonstandard_per_answer": 0.5,
+    "english_ratio": 0.0008,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.1
+   },
+   "latex": {
+    "fix_compiled": 0.625,
+    "fix_score": 0.625,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 7.735,
+    "p90_s": 13.685,
+    "out_tokens_mean": 578.7843,
+    "reasoning_tokens_mean": 282.3529,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:gpt-5.4-mini@low": {
+   "references": {
+    "returned_mean": 4.4,
+    "hallucination_rate": 0.0795,
+    "doi_correct_rate": 0.5682,
+    "doi_unresolvable": 19,
+    "abstained_items": 7,
+    "returned": 88
+   },
+   "coding": {
+    "pass1": 0.9667,
+    "pass_repair": 1.0,
+    "ran_first": 0.9667,
+    "repaired_items": 1
+   },
+   "structure": {
+    "generic_ch4_rate": 0.1714,
+    "ch3_f1": 0.7647,
+    "ch4_f1": 0.7227,
+    "ch3_recall": 0.7888,
+    "ch3_precision": 0.7722
+   },
+   "extraction": {
+    "evidence_verbatim": 0.8889,
+    "fields": {
+     "alat": 0.9667,
+     "analisis": 0.7626,
+     "data_jenis": 1.0,
+     "hipotesis": 1.0,
+     "n_sampel": 0.9286,
+     "pendekatan": 0.8929,
+     "teknik_pengumpulan": 0.9144
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0,
+    "answers_with_unsupported": 0.0,
+    "foreign_citation_answers": 0.0,
+    "coverage": 0.9667,
+    "cited_sentences": 0.8289,
+    "words": 313.3
+   },
+   "language": {
+    "nonstandard_per_answer": 0.2667,
+    "english_ratio": 0.0,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0
+   },
+   "latex": {
+    "fix_compiled": 0.75,
+    "fix_score": 0.7375,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 4.787,
+    "p90_s": 9.46,
+    "out_tokens_mean": 434.8118,
+    "reasoning_tokens_mean": 210.3922,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:gpt-5.4@low": {
+   "references": {
+    "returned_mean": 4.4,
+    "hallucination_rate": 0.0,
+    "doi_correct_rate": 0.9091,
+    "doi_unresolvable": 3,
+    "abstained_items": 4,
+    "returned": 88
+   },
+   "coding": {
+    "pass1": 1.0,
+    "pass_repair": 1.0,
+    "ran_first": 1.0,
+    "repaired_items": 0
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2286,
+    "ch3_f1": 0.7701,
+    "ch4_f1": 0.7446,
+    "ch3_recall": 0.8074,
+    "ch3_precision": 0.7642
+   },
+   "extraction": {
+    "evidence_verbatim": 0.9556,
+    "fields": {
+     "alat": 1.0,
+     "analisis": 0.8867,
+     "data_jenis": 0.9615,
+     "hipotesis": 0.9655,
+     "n_sampel": 0.9643,
+     "pendekatan": 0.9286,
+     "teknik_pengumpulan": 0.9656
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0,
+    "answers_with_unsupported": 0.0,
+    "foreign_citation_answers": 0.0,
+    "coverage": 0.9889,
+    "cited_sentences": 0.918,
+    "words": 366.2333
+   },
+   "language": {
+    "nonstandard_per_answer": 0.1333,
+    "english_ratio": 0.0,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0333
+   },
+   "latex": {
+    "fix_compiled": 1.0,
+    "fix_score": 1.0,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 7.927,
+    "p90_s": 19.668,
+    "out_tokens_mean": 452.8549,
+    "reasoning_tokens_mean": 215.7333,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:gpt-5.6-terra@low": {
+   "references": {
+    "returned_mean": 4.2,
+    "hallucination_rate": 0.0238,
+    "doi_correct_rate": 0.8929,
+    "doi_unresolvable": 3,
+    "abstained_items": 6,
+    "returned": 84
+   },
+   "coding": {
+    "pass1": 0.9667,
+    "pass_repair": 1.0,
+    "ran_first": 0.9667,
+    "repaired_items": 1
+   },
+   "structure": {
+    "generic_ch4_rate": 0.1714,
+    "ch3_f1": 0.7566,
+    "ch4_f1": 0.7599,
+    "ch3_recall": 0.7507,
+    "ch3_precision": 0.7969
+   },
+   "extraction": {
+    "evidence_verbatim": 0.9556,
+    "fields": {
+     "alat": 1.0,
+     "analisis": 0.8496,
+     "data_jenis": 0.9615,
+     "hipotesis": 0.9655,
+     "n_sampel": 0.9643,
+     "pendekatan": 1.0,
+     "teknik_pengumpulan": 0.9344
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.1,
+    "answers_with_unsupported": 0.0333,
+    "foreign_citation_answers": 0.0,
+    "coverage": 0.9778,
+    "cited_sentences": 0.7864,
+    "words": 318.3667
+   },
+   "language": {
+    "nonstandard_per_answer": 0.0,
+    "english_ratio": 0.0,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0
+   },
+   "latex": {
+    "fix_compiled": 0.875,
+    "fix_score": 0.875,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 0.9833,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 5.93,
+    "p90_s": 12.592,
+    "out_tokens_mean": 342.102,
+    "reasoning_tokens_mean": 124.0627,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:gpt-6-luna@low": {
+   "references": {
+    "returned_mean": 4.5,
+    "hallucination_rate": 0.0778,
+    "doi_correct_rate": 0.8222,
+    "doi_unresolvable": 3,
+    "abstained_items": 4,
+    "returned": 90
+   },
+   "coding": {
+    "pass1": 1.0,
+    "pass_repair": 1.0,
+    "ran_first": 1.0,
+    "repaired_items": 0
+   },
+   "structure": {
+    "generic_ch4_rate": 0.1429,
+    "ch3_f1": 0.7736,
+    "ch4_f1": 0.7703,
+    "ch3_recall": 0.7949,
+    "ch3_precision": 0.7854
+   },
+   "extraction": {
+    "evidence_verbatim": 0.8778,
+    "fields": {
+     "alat": 1.0,
+     "analisis": 0.8756,
+     "data_jenis": 0.9615,
+     "hipotesis": 0.9655,
+     "n_sampel": 1.0,
+     "pendekatan": 0.9286,
+     "teknik_pengumpulan": 0.9319
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0667,
+    "answers_with_unsupported": 0.0333,
+    "foreign_citation_answers": 0.0,
+    "coverage": 0.9778,
+    "cited_sentences": 0.6813,
+    "words": 345.2
+   },
+   "language": {
+    "nonstandard_per_answer": 0.0,
+    "english_ratio": 0.0,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0333
+   },
+   "latex": {
+    "fix_compiled": 0.5,
+    "fix_score": 0.5,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 7.016,
+    "p90_s": 12.044,
+    "out_tokens_mean": 425.3333,
+    "reasoning_tokens_mean": 197.3569,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:gpt-6.1-sol@low": {
+   "references": {
+    "returned_mean": 4.1,
+    "hallucination_rate": 0.0,
+    "doi_correct_rate": 0.9756,
+    "doi_unresolvable": 1,
+    "abstained_items": 9,
+    "returned": 82
+   },
+   "coding": {
+    "pass1": 1.0,
+    "pass_repair": 1.0,
+    "ran_first": 1.0,
+    "repaired_items": 0
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2571,
+    "ch3_f1": 0.7703,
+    "ch4_f1": 0.7055,
+    "ch3_recall": 0.8212,
+    "ch3_precision": 0.7449
+   },
+   "extraction": {
+    "evidence_verbatim": 1.0,
+    "fields": {
+     "alat": 1.0,
+     "analisis": 0.8741,
+     "data_jenis": 1.0,
+     "hipotesis": 0.9655,
+     "n_sampel": 1.0,
+     "pendekatan": 1.0,
+     "teknik_pengumpulan": 0.9611
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.1,
+    "answers_with_unsupported": 0.0667,
+    "foreign_citation_answers": 0.0,
+    "coverage": 1.0,
+    "cited_sentences": 0.9601,
+    "words": 332.6667
+   },
+   "language": {
+    "nonstandard_per_answer": 0.0,
+    "english_ratio": 0.0,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0333
+   },
+   "latex": {
+    "fix_compiled": 1.0,
+    "fix_score": 1.0,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 8.268,
+    "p90_s": 15.114,
+    "out_tokens_mean": 288.9725,
+    "reasoning_tokens_mean": 45.5294,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:kimi-k3": {
+   "references": {
+    "returned_mean": 5.0,
+    "hallucination_rate": 0.02,
+    "doi_correct_rate": 0.89,
+    "doi_unresolvable": 6,
+    "abstained_items": 0,
+    "returned": 100
+   },
+   "coding": {
+    "pass1": 1.0,
+    "pass_repair": 1.0,
+    "ran_first": 1.0,
+    "repaired_items": 0
+   },
+   "structure": {
+    "generic_ch4_rate": 0.0571,
+    "ch3_f1": 0.7717,
+    "ch4_f1": 0.8071,
+    "ch3_recall": 0.7683,
+    "ch3_precision": 0.801
+   },
+   "extraction": {
+    "evidence_verbatim": 0.8222,
+    "fields": {
+     "alat": 1.0,
+     "analisis": 0.773,
+     "data_jenis": 0.931,
+     "hipotesis": 1.0,
+     "n_sampel": 0.9655,
+     "pendekatan": 0.9333,
+     "teknik_pengumpulan": 0.8867
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0333,
+    "answers_with_unsupported": 0.0333,
+    "foreign_citation_answers": 0.0333,
+    "coverage": 1.0,
+    "cited_sentences": 0.8734,
+    "words": 377.2333
+   },
+   "language": {
+    "nonstandard_per_answer": 0.0333,
+    "english_ratio": 0.0,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0
+   },
+   "latex": {
+    "fix_compiled": 0.875,
+    "fix_score": 0.875,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 34.479,
+    "p90_s": 144.59,
+    "out_tokens_mean": 1893.2784,
+    "reasoning_tokens_mean": 1589.7373,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "copilot:mai-code-1.1-flash@low": {
+   "references": {
+    "returned_mean": 4.75,
+    "hallucination_rate": 0.2737,
+    "doi_correct_rate": 0.4526,
+    "doi_unresolvable": 28,
+    "abstained_items": 1,
+    "returned": 95
+   },
+   "coding": {
+    "pass1": 0.8667,
+    "pass_repair": 0.9667,
+    "ran_first": 0.9,
+    "repaired_items": 3
+   },
+   "structure": {
+    "generic_ch4_rate": 0.1429,
+    "ch3_f1": 0.5769,
+    "ch4_f1": 0.5554,
+    "ch3_recall": 0.4921,
+    "ch3_precision": 0.7937
+   },
+   "extraction": {
+    "evidence_verbatim": 0.8833,
+    "fields": {
+     "alat": 0.9889,
+     "analisis": 0.7067,
+     "data_jenis": 0.931,
+     "hipotesis": 0.9333,
+     "n_sampel": 0.931,
+     "pendekatan": 0.8,
+     "teknik_pengumpulan": 0.8198
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.1667,
+    "answers_with_unsupported": 0.0333,
+    "foreign_citation_answers": 0.0333,
+    "coverage": 0.9778,
+    "cited_sentences": 0.7722,
+    "words": 332.2
+   },
+   "language": {
+    "nonstandard_per_answer": 0.2,
+    "english_ratio": 0.0,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0333
+   },
+   "latex": {
+    "fix_compiled": 0.875,
+    "fix_score": 0.875,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 7.899,
+    "p90_s": 18.849,
+    "out_tokens_mean": 1160.4196,
+    "reasoning_tokens_mean": 889.9765,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "ollama:gemma3:27b": {
+   "references": {
+    "returned_mean": 5.0,
+    "hallucination_rate": 0.83,
+    "doi_correct_rate": 0.01,
+    "doi_unresolvable": 73,
+    "abstained_items": 0,
+    "returned": 100
+   },
+   "coding": {
+    "pass1": 0.5333,
+    "pass_repair": 0.6,
+    "ran_first": 0.6,
+    "repaired_items": 12
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2,
+    "ch3_f1": 0.6781,
+    "ch4_f1": 0.7014,
+    "ch3_recall": 0.6945,
+    "ch3_precision": 0.6919
+   },
+   "extraction": {
+    "evidence_verbatim": 0.9,
+    "fields": {
+     "alat": 0.6167,
+     "analisis": 0.4489,
+     "data_jenis": 0.9259,
+     "hipotesis": 0.9643,
+     "n_sampel": 0.8214,
+     "pendekatan": 0.7586,
+     "teknik_pengumpulan": 0.8277
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0667,
+    "answers_with_unsupported": 0.0333,
+    "foreign_citation_answers": 0.4,
+    "coverage": 1.0,
+    "cited_sentences": 0.7259,
+    "words": 300.0
+   },
+   "language": {
+    "nonstandard_per_answer": 0.0667,
+    "english_ratio": 0.001,
+    "numbers_kept": 0.9944,
+    "answers_with_new_numbers": 0.0333
+   },
+   "latex": {
+    "fix_compiled": 0.75,
+    "fix_score": 0.7375,
+    "table_cells": 0.9111,
+    "table_score": 0.9556,
+    "bibtex": 0.9833
+   },
+   "methodology": {
+    "accuracy": 0.8,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 9.57,
+    "p90_s": 42.01,
+    "out_tokens_mean": 247.6549,
+    "reasoning_tokens_mean": 0.0,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "ollama:gemma4": {
+   "references": {
+    "returned_mean": 3.35,
+    "hallucination_rate": 0.9104,
+    "doi_correct_rate": 0.0,
+    "doi_unresolvable": 61,
+    "abstained_items": 9,
+    "returned": 67
+   },
+   "coding": {
+    "pass1": 0.4333,
+    "pass_repair": 0.7333,
+    "ran_first": 0.6,
+    "repaired_items": 12
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2,
+    "ch3_f1": 0.6911,
+    "ch4_f1": 0.5997,
+    "ch3_recall": 0.6164,
+    "ch3_precision": 0.8263
+   },
+   "extraction": {
+    "evidence_verbatim": 0.9667,
+    "fields": {
+     "alat": 0.5,
+     "analisis": 0.3793,
+     "data_jenis": 0.7778,
+     "hipotesis": 1.0,
+     "n_sampel": 0.8214,
+     "pendekatan": 0.7931,
+     "teknik_pengumpulan": 0.7746
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0,
+    "answers_with_unsupported": 0.0,
+    "foreign_citation_answers": 0.0333,
+    "coverage": 0.9778,
+    "cited_sentences": 0.8387,
+    "words": 292.3333
+   },
+   "language": {
+    "nonstandard_per_answer": 0.2333,
+    "english_ratio": 0.0011,
+    "numbers_kept": 0.9944,
+    "answers_with_new_numbers": 0.0333
+   },
+   "latex": {
+    "fix_compiled": 0.625,
+    "fix_score": 0.6125,
+    "table_cells": 0.9111,
+    "table_score": 0.9556,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 0.8167,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 13.569,
+    "p90_s": 24.232,
+    "out_tokens_mean": 684.9255,
+    "reasoning_tokens_mean": 0.0,
+    "thinking_chars_mean": 3218.0353
+   }
+  },
+  "ollama:gpt-oss": {
+   "references": {
+    "returned_mean": 3.5,
+    "hallucination_rate": 0.8571,
+    "doi_correct_rate": 0.0143,
+    "doi_unresolvable": 56,
+    "abstained_items": 6,
+    "returned": 70
+   },
+   "coding": {
+    "pass1": 0.8667,
+    "pass_repair": 0.9,
+    "ran_first": 0.8667,
+    "repaired_items": 4
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2571,
+    "ch3_f1": 0.5767,
+    "ch4_f1": 0.4304,
+    "ch3_recall": 0.5277,
+    "ch3_precision": 0.673
+   },
+   "extraction": {
+    "evidence_verbatim": 0.6778,
+    "fields": {
+     "alat": 0.9333,
+     "analisis": 0.3676,
+     "data_jenis": 0.8462,
+     "hipotesis": 1.0,
+     "n_sampel": 0.8571,
+     "pendekatan": 0.75,
+     "teknik_pengumpulan": 0.8311
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.1333,
+    "answers_with_unsupported": 0.0333,
+    "foreign_citation_answers": 0.4333,
+    "coverage": 0.9889,
+    "cited_sentences": 0.4799,
+    "words": 317.9
+   },
+   "language": {
+    "nonstandard_per_answer": 0.3333,
+    "english_ratio": 0.0014,
+    "numbers_kept": 0.9911,
+    "answers_with_new_numbers": 0.0333
+   },
+   "latex": {
+    "fix_compiled": 0.875,
+    "fix_score": 0.875,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 0.9333,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 4.144,
+    "p90_s": 10.941,
+    "out_tokens_mean": 516.9686,
+    "reasoning_tokens_mean": 0.0,
+    "thinking_chars_mean": 536.4275
+   }
+  },
+  "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0": {
+   "references": {
+    "returned_mean": 3.85,
+    "hallucination_rate": 0.8442,
+    "doi_correct_rate": 0.013,
+    "doi_unresolvable": 64,
+    "abstained_items": 9,
+    "returned": 77
+   },
+   "coding": {
+    "pass1": 0.1,
+    "pass_repair": 0.1333,
+    "ran_first": 0.1333,
+    "repaired_items": 26
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2571,
+    "ch3_f1": 0.5332,
+    "ch4_f1": 0.4563,
+    "ch3_recall": 0.4171,
+    "ch3_precision": 0.8319
+   },
+   "extraction": {
+    "evidence_verbatim": 0.8722,
+    "fields": {
+     "alat": 0.5885,
+     "analisis": 0.3618,
+     "data_jenis": 0.5556,
+     "hipotesis": 0.6071,
+     "n_sampel": 0.75,
+     "pendekatan": 0.7931,
+     "teknik_pengumpulan": 0.6144
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0,
+    "answers_with_unsupported": 0.0,
+    "foreign_citation_answers": 0.7667,
+    "coverage": 0.9611,
+    "cited_sentences": 0.4653,
+    "words": 331.3
+   },
+   "language": {
+    "nonstandard_per_answer": 0.4,
+    "english_ratio": 0.0,
+    "numbers_kept": 0.9728,
+    "answers_with_new_numbers": 0.0333
+   },
+   "latex": {
+    "fix_compiled": 0.25,
+    "fix_score": 0.25,
+    "table_cells": 0.7698,
+    "table_score": 0.6683,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 0.7,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 5.878,
+    "p90_s": 23.248,
+    "out_tokens_mean": 212.9569,
+    "reasoning_tokens_mean": 0.0,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "ollama:llama3.2": {
+   "references": {
+    "returned_mean": 4.55,
+    "hallucination_rate": 0.9451,
+    "doi_correct_rate": 0.0,
+    "doi_unresolvable": 79,
+    "abstained_items": 3,
+    "returned": 91
+   },
+   "coding": {
+    "pass1": 0.0333,
+    "pass_repair": 0.0333,
+    "ran_first": 0.1667,
+    "repaired_items": 25
+   },
+   "structure": {
+    "generic_ch4_rate": 0.0571,
+    "ch3_f1": 0.2557,
+    "ch4_f1": 0.5136,
+    "ch3_recall": 0.1636,
+    "ch3_precision": 0.6857
+   },
+   "extraction": {
+    "evidence_verbatim": 0.5722,
+    "fields": {
+     "alat": 0.0167,
+     "analisis": 0.1713,
+     "data_jenis": 0.1724,
+     "hipotesis": 0.9,
+     "n_sampel": 0.5172,
+     "pendekatan": 0.5667,
+     "teknik_pengumpulan": 0.5383
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.8,
+    "answers_with_unsupported": 0.0667,
+    "foreign_citation_answers": 0.9333,
+    "coverage": 0.0944,
+    "cited_sentences": 0.0262,
+    "words": 324.3333
+   },
+   "language": {
+    "nonstandard_per_answer": 0.6667,
+    "english_ratio": 0.0009,
+    "numbers_kept": 0.8835,
+    "answers_with_new_numbers": 0.0
+   },
+   "latex": {
+    "fix_compiled": 0.25,
+    "fix_score": 0.25,
+    "table_cells": 0.0,
+    "table_score": 0.2,
+    "bibtex": 0.8148
+   },
+   "methodology": {
+    "accuracy": 0.4,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 3.383,
+    "p90_s": 13.317,
+    "out_tokens_mean": 255.9843,
+    "reasoning_tokens_mean": 0.0,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "ollama:phi4-reasoning:plus": {
+   "references": {
+    "returned_mean": 4.7,
+    "hallucination_rate": 0.766,
+    "doi_correct_rate": 0.0213,
+    "doi_unresolvable": 54,
+    "abstained_items": 4,
+    "returned": 94
+   },
+   "coding": {
+    "pass1": 0.8,
+    "pass_repair": 0.9333,
+    "ran_first": 0.8333,
+    "repaired_items": 5
+   },
+   "structure": {
+    "generic_ch4_rate": 0.1429,
+    "ch3_f1": 0.4843,
+    "ch4_f1": 0.5981,
+    "ch3_recall": 0.3919,
+    "ch3_precision": 0.7214
+   },
+   "extraction": {
+    "evidence_verbatim": 0.4889,
+    "fields": {
+     "alat": 0.4378,
+     "analisis": 0.2848,
+     "data_jenis": 0.6207,
+     "hipotesis": 0.9333,
+     "n_sampel": 0.7586,
+     "pendekatan": 0.7,
+     "teknik_pengumpulan": 0.6067
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.1667,
+    "answers_with_unsupported": 0.0667,
+    "foreign_citation_answers": 0.7667,
+    "coverage": 0.85,
+    "cited_sentences": 0.2717,
+    "words": 507.2
+   },
+   "language": {
+    "nonstandard_per_answer": 0.4667,
+    "english_ratio": 0.0006,
+    "numbers_kept": 1.0,
+    "answers_with_new_numbers": 0.0
+   },
+   "latex": {
+    "fix_compiled": 0.625,
+    "fix_score": 0.625,
+    "table_cells": 0.8333,
+    "table_score": 0.8167,
+    "bibtex": 0.9815
+   },
+   "methodology": {
+    "accuracy": 0.75,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 8.729,
+    "p90_s": 60.54,
+    "out_tokens_mean": 897.6157,
+    "reasoning_tokens_mean": 0.0,
+    "thinking_chars_mean": 1695.2118
+   }
+  },
+  "ollama:qwen2.5-coder:32b": {
+   "references": {
+    "returned_mean": 4.65,
+    "hallucination_rate": 0.9032,
+    "doi_correct_rate": 0.0,
+    "doi_unresolvable": 73,
+    "abstained_items": 5,
+    "returned": 93
+   },
+   "coding": {
+    "pass1": 0.4,
+    "pass_repair": 0.8,
+    "ran_first": 0.4333,
+    "repaired_items": 17
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2,
+    "ch3_f1": 0.5255,
+    "ch4_f1": 0.5289,
+    "ch3_recall": 0.4438,
+    "ch3_precision": 0.7062
+   },
+   "extraction": {
+    "evidence_verbatim": 0.8167,
+    "fields": {
+     "alat": 0.6667,
+     "analisis": 0.4467,
+     "data_jenis": 0.8276,
+     "hipotesis": 1.0,
+     "n_sampel": 0.8621,
+     "pendekatan": 0.8333,
+     "teknik_pengumpulan": 0.7329
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.1667,
+    "answers_with_unsupported": 0.1,
+    "foreign_citation_answers": 0.8667,
+    "coverage": 0.9611,
+    "cited_sentences": 0.7041,
+    "words": 396.2333
+   },
+   "language": {
+    "nonstandard_per_answer": 0.5333,
+    "english_ratio": 0.001,
+    "numbers_kept": 0.9678,
+    "answers_with_new_numbers": 0.0667
+   },
+   "latex": {
+    "fix_compiled": 0.875,
+    "fix_score": 0.8625,
+    "table_cells": 0.9055,
+    "table_score": 0.9528,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 0.7667,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 20.156,
+    "p90_s": 104.964,
+    "out_tokens_mean": 311.8196,
+    "reasoning_tokens_mean": 0.0,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "ollama:qwen2.5:7b-instruct": {
+   "references": {
+    "returned_mean": 3.2,
+    "hallucination_rate": 0.8594,
+    "doi_correct_rate": 0.0,
+    "doi_unresolvable": 48,
+    "abstained_items": 18,
+    "returned": 64
+   },
+   "coding": {
+    "pass1": 0.1333,
+    "pass_repair": 0.3,
+    "ran_first": 0.4333,
+    "repaired_items": 17
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2571,
+    "ch3_f1": 0.3668,
+    "ch4_f1": 0.455,
+    "ch3_recall": 0.2752,
+    "ch3_precision": 0.6824
+   },
+   "extraction": {
+    "evidence_verbatim": 0.6611,
+    "fields": {
+     "alat": 0.0222,
+     "analisis": 0.2517,
+     "data_jenis": 0.5172,
+     "hipotesis": 0.8333,
+     "n_sampel": 0.7931,
+     "pendekatan": 0.6,
+     "teknik_pengumpulan": 0.6429
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.1,
+    "answers_with_unsupported": 0.0667,
+    "foreign_citation_answers": 0.4333,
+    "coverage": 0.9833,
+    "cited_sentences": 0.6156,
+    "words": 296.9
+   },
+   "language": {
+    "nonstandard_per_answer": 0.6,
+    "english_ratio": 0.0011,
+    "numbers_kept": 0.9181,
+    "answers_with_new_numbers": 0.0667
+   },
+   "latex": {
+    "fix_compiled": 0.5,
+    "fix_score": 0.5,
+    "table_cells": 0.5944,
+    "table_score": 0.6472,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 0.6833,
+    "unparsed": 1
+   },
+   "latency": {
+    "median_s": 4.685,
+    "p90_s": 15.16,
+    "out_tokens_mean": 247.3333,
+    "reasoning_tokens_mean": 0.0,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "ollama:qwen3-coder:30b": {
+   "references": {
+    "returned_mean": 4.95,
+    "hallucination_rate": 0.899,
+    "doi_correct_rate": 0.0303,
+    "doi_unresolvable": 82,
+    "abstained_items": 1,
+    "returned": 99
+   },
+   "coding": {
+    "pass1": 0.5,
+    "pass_repair": 0.7667,
+    "ran_first": 0.5333,
+    "repaired_items": 14
+   },
+   "structure": {
+    "generic_ch4_rate": 0.0571,
+    "ch3_f1": 0.518,
+    "ch4_f1": 0.5386,
+    "ch3_recall": 0.4131,
+    "ch3_precision": 0.759
+   },
+   "extraction": {
+    "evidence_verbatim": 0.6667,
+    "fields": {
+     "alat": 0.3203,
+     "analisis": 0.3279,
+     "data_jenis": 0.4483,
+     "hipotesis": 0.9667,
+     "n_sampel": 0.7241,
+     "pendekatan": 0.8,
+     "teknik_pengumpulan": 0.7306
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0,
+    "answers_with_unsupported": 0.0,
+    "foreign_citation_answers": 0.6667,
+    "coverage": 0.9889,
+    "cited_sentences": 0.6476,
+    "words": 241.6667
+   },
+   "language": {
+    "nonstandard_per_answer": 0.4333,
+    "english_ratio": 0.0,
+    "numbers_kept": 0.9633,
+    "answers_with_new_numbers": 0.0667
+   },
+   "latex": {
+    "fix_compiled": 0.625,
+    "fix_score": 0.625,
+    "table_cells": 0.8833,
+    "table_score": 0.9417,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 0.7667,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 3.237,
+    "p90_s": 7.433,
+    "out_tokens_mean": 261.9922,
+    "reasoning_tokens_mean": 0.0,
+    "thinking_chars_mean": 0.0
+   }
+  },
+  "ollama:qwen3.6": {
+   "references": {
+    "returned_mean": 1.75,
+    "hallucination_rate": 0.7429,
+    "doi_correct_rate": 0.0857,
+    "doi_unresolvable": 13,
+    "abstained_items": 13,
+    "returned": 35
+   },
+   "coding": {
+    "pass1": 0.8,
+    "pass_repair": 0.9,
+    "ran_first": 0.8,
+    "repaired_items": 6
+   },
+   "structure": {
+    "generic_ch4_rate": 0.2,
+    "ch3_f1": 0.7013,
+    "ch4_f1": 0.625,
+    "ch3_recall": 0.6493,
+    "ch3_precision": 0.8053
+   },
+   "extraction": {
+    "evidence_verbatim": 0.9222,
+    "fields": {
+     "alat": 0.7,
+     "analisis": 0.6211,
+     "data_jenis": 0.7241,
+     "hipotesis": 1.0,
+     "n_sampel": 0.931,
+     "pendekatan": 0.9,
+     "teknik_pengumpulan": 0.8325
+    }
+   },
+   "grounded": {
+    "unsupported_per_answer": 0.0,
+    "answers_with_unsupported": 0.0,
+    "foreign_citation_answers": 0.0,
+    "coverage": 0.8389,
+    "cited_sentences": 0.7422,
+    "words": 233.2667
+   },
+   "language": {
+    "nonstandard_per_answer": 0.3667,
+    "english_ratio": 0.0,
+    "numbers_kept": 0.9944,
+    "answers_with_new_numbers": 0.0667
+   },
+   "latex": {
+    "fix_compiled": 0.625,
+    "fix_score": 0.625,
+    "table_cells": 1.0,
+    "table_score": 1.0,
+    "bibtex": 1.0
+   },
+   "methodology": {
+    "accuracy": 1.0,
+    "unparsed": 0
+   },
+   "latency": {
+    "median_s": 57.71,
+    "p90_s": 108.912,
+    "out_tokens_mean": 2495.8863,
+    "reasoning_tokens_mean": 0.0,
+    "thinking_chars_mean": 12080.5725
+   }
+  }
+ },
+ "discrimination": {
+  "structure": {
+   "api_min": 0.5662,
+   "api_max": 0.7894,
+   "api_sd": 0.0534,
+   "api_at_ceiling": 0,
+   "api_n": 15,
+   "local_min": 0.3846,
+   "local_max": 0.6898,
+   "local_mean": 0.5389,
+   "api_mean": 0.7221,
+   "gap": 0.1833
+  },
+  "methodology": {
+   "api_min": 0.9833,
+   "api_max": 1.0,
+   "api_sd": 0.0057,
+   "api_at_ceiling": 15,
+   "api_n": 15,
+   "local_min": 0.4,
+   "local_max": 1.0,
+   "local_mean": 0.7617,
+   "api_mean": 0.9978,
+   "gap": 0.2361
+  },
+  "extraction": {
+   "api_min": 0.8525,
+   "api_max": 0.9724,
+   "api_sd": 0.0345,
+   "api_at_ceiling": 5,
+   "api_n": 15,
+   "local_min": 0.4127,
+   "local_max": 0.814,
+   "local_mean": 0.6632,
+   "api_mean": 0.9249,
+   "gap": 0.2618
+  },
+  "grounded": {
+   "api_min": 0.8354,
+   "api_max": 0.9634,
+   "api_sd": 0.0336,
+   "api_at_ceiling": 3,
+   "api_n": 15,
+   "local_min": 0.4057,
+   "local_max": 0.8925,
+   "local_mean": 0.6974,
+   "api_mean": 0.9233,
+   "gap": 0.2259
+  },
+  "references": {
+   "api_min": 0.235,
+   "api_max": 0.935,
+   "api_sd": 0.1778,
+   "api_at_ceiling": 0,
+   "api_n": 15,
+   "local_min": 0.0275,
+   "local_max": 0.1275,
+   "local_mean": 0.0613,
+   "api_mean": 0.6555,
+   "gap": 0.5943
+  },
+  "language": {
+   "api_min": 0.9196,
+   "api_max": 0.9931,
+   "api_sd": 0.0165,
+   "api_at_ceiling": 14,
+   "api_n": 15,
+   "local_min": 0.7983,
+   "local_max": 0.9602,
+   "local_mean": 0.8887,
+   "api_mean": 0.9682,
+   "gap": 0.0795
+  },
+  "coding": {
+   "api_min": 0.86,
+   "api_max": 1.0,
+   "api_sd": 0.0427,
+   "api_at_ceiling": 12,
+   "api_n": 15,
+   "local_min": 0.0925,
+   "local_max": 0.8667,
+   "local_mean": 0.5008,
+   "api_mean": 0.9724,
+   "gap": 0.4717
+  },
+  "latex": {
+   "api_min": 0.785,
+   "api_max": 1.0,
+   "api_sd": 0.0727,
+   "api_at_ceiling": 11,
+   "api_n": 15,
+   "local_min": 0.4044,
+   "local_max": 0.95,
+   "local_mean": 0.776,
+   "api_mean": 0.942,
+   "gap": 0.166
+  }
+ },
+ "judges": {
+  "judges": [
+   "copilot:claude-sonnet-5@low",
+   "copilot:gemini-4-argon",
+   "copilot:gpt-6.1-sol@low"
+  ],
+  "ratings": 3480,
+  "answers": 1500,
+  "answers_all_judges": 480,
+  "mean_by_judge": {
+   "copilot:claude-sonnet-5@low": 0.8447,
+   "copilot:gemini-4-argon": 0.8143,
+   "copilot:gpt-6.1-sol@low": 0.7842
+  },
+  "leniency_offset": {
+   "copilot:gemini-4-argon": -0.0277,
+   "copilot:gpt-6.1-sol@low": -0.0179,
+   "copilot:claude-sonnet-5@low": 0.0456
+  },
+  "alpha_interval_all_judges": 0.8567,
+  "alpha_ordinal_by_criterion": {
+   "grounded:kesetiaan_sumber": 0.5746,
+   "grounded:cakupan": 0.8004,
+   "grounded:keruntutan": 0.7416,
+   "grounded:bahasa_baku": 0.7377,
+   "grounded:kepatuhan": 0.6915,
+   "language:kesetiaan_isi": 0.5448,
+   "language:kelengkapan": 0.763,
+   "language:keruntutan": 0.6073,
+   "language:bahasa_baku": 0.5743,
+   "language:kepatuhan": 0.4577
+  },
+  "spearman_pairs": {
+   "copilot:claude-sonnet-5@low vs copilot:gemini-4-argon": {
+    "n": 900,
+    "rho": 0.7656
+   },
+   "copilot:claude-sonnet-5@low vs copilot:gpt-6.1-sol@low": {
+    "n": 840,
+    "rho": 0.7623
+   },
+   "copilot:gemini-4-argon vs copilot:gpt-6.1-sol@low": {
+    "n": 720,
+    "rho": 0.8881
+   }
+  }
+ },
+ "auto_vs_judge": {
+  "grounded": {
+   "answers": 750,
+   "rho_answers": 0.6892,
+   "models": 25,
+   "rho_model_means": 0.8185
+  },
+  "language": {
+   "answers": 750,
+   "rho_answers": 0.5307,
+   "models": 25,
+   "rho_model_means": 0.8178
+  }
+ },
+ "silver_agreement": {
+  "pendekatan": {
+   "unanimous": 28,
+   "majority": 2
+  },
+  "data_jenis": {
+   "unanimous": 26,
+   "majority": 3,
+   "none": 1
+  },
+  "teknik_pengumpulan": {
+   "majority": 18,
+   "unanimous": 10,
+   "none": 2
+  },
+  "analisis": {
+   "none": 6,
+   "unanimous": 12,
+   "majority": 12
+  },
+  "alat": {
+   "unanimous": 30
+  },
+  "n_sampel": {
+   "unanimous": 28,
+   "none": 1,
+   "majority": 1
+  },
+  "hipotesis": {
+   "unanimous": 28,
+   "majority": 2
+  }
+ },
+ "rank_bootstrap": {
+  "copilot:claude-haiku-4.5": {
+   "p_top1": 0.0,
+   "rank_median": 15.0,
+   "rank_ci": [
+    15,
+    16
+   ],
+   "diff_vs_leader": 0.1642,
+   "diff_ci": [
+    0.1355,
+    0.1947
+   ]
+  },
+  "copilot:claude-haiku-5.5@low": {
+   "p_top1": 0.0,
+   "rank_median": 9.0,
+   "rank_ci": [
+    6,
+    11
+   ],
+   "diff_vs_leader": 0.0463,
+   "diff_ci": [
+    0.0282,
+    0.064
+   ]
+  },
+  "copilot:claude-sonnet-5.5@low": {
+   "p_top1": 0.001,
+   "rank_median": 5.0,
+   "rank_ci": [
+    3,
+    9
+   ],
+   "diff_vs_leader": 0.0279,
+   "diff_ci": [
+    0.0064,
+    0.0498
+   ]
+  },
+  "copilot:claude-sonnet-5@low": {
+   "p_top1": 0.0,
+   "rank_median": 12.0,
+   "rank_ci": [
+    10,
+    12
+   ],
+   "diff_vs_leader": 0.0658,
+   "diff_ci": [
+    0.0426,
+    0.0879
+   ]
+  },
+  "copilot:gemini-3.7-flash": {
+   "p_top1": 0.0,
+   "rank_median": 6.0,
+   "rank_ci": [
+    4,
+    9
+   ],
+   "diff_vs_leader": 0.0299,
+   "diff_ci": [
+    0.0094,
+    0.0479
+   ]
+  },
+  "copilot:gemini-3.8-flash": {
+   "p_top1": 0.0,
+   "rank_median": 9.0,
+   "rank_ci": [
+    6,
+    12
+   ],
+   "diff_vs_leader": 0.0482,
+   "diff_ci": [
+    0.0238,
+    0.0727
+   ]
+  },
+  "copilot:gemini-4-argon": {
+   "p_top1": 0.0,
+   "rank_median": 8.0,
+   "rank_ci": [
+    5,
+    11
+   ],
+   "diff_vs_leader": 0.0402,
+   "diff_ci": [
+    0.0195,
+    0.0601
+   ]
+  },
+  "copilot:gpt-5-mini@low": {
+   "p_top1": 0.0,
+   "rank_median": 14.0,
+   "rank_ci": [
+    13,
+    14
+   ],
+   "diff_vs_leader": 0.1257,
+   "diff_ci": [
+    0.092,
+    0.161
+   ]
+  },
+  "copilot:gpt-5.4-mini@low": {
+   "p_top1": 0.0,
+   "rank_median": 11.0,
+   "rank_ci": [
+    7,
+    12
+   ],
+   "diff_vs_leader": 0.0579,
+   "diff_ci": [
+    0.0328,
+    0.0843
+   ]
+  },
+  "copilot:gpt-5.4@low": {
+   "p_top1": 0.249,
+   "rank_median": 2.0,
+   "rank_ci": [
+    1,
+    4
+   ],
+   "diff_vs_leader": 0.0062,
+   "diff_ci": [
+    -0.0143,
+    0.0266
+   ]
+  },
+  "copilot:gpt-5.6-terra@low": {
+   "p_top1": 0.0,
+   "rank_median": 5.0,
+   "rank_ci": [
+    2,
+    10
+   ],
+   "diff_vs_leader": 0.028,
+   "diff_ci": [
+    0.0076,
+    0.0524
+   ]
+  },
+  "copilot:gpt-6-luna@low": {
+   "p_top1": 0.0,
+   "rank_median": 8.0,
+   "rank_ci": [
+    4,
+    11
+   ],
+   "diff_vs_leader": 0.0404,
+   "diff_ci": [
+    0.0174,
+    0.0673
+   ]
+  },
+  "copilot:gpt-6.1-sol@low": {
+   "p_top1": 0.053,
+   "rank_median": 3.0,
+   "rank_ci": [
+    1,
+    4
+   ],
+   "diff_vs_leader": 0.0099,
+   "diff_ci": [
+    -0.0097,
+    0.0281
+   ]
+  },
+  "copilot:kimi-k3": {
+   "p_top1": 0.697,
+   "rank_median": 1.0,
+   "rank_ci": [
+    1,
+    3
+   ],
+   "diff_vs_leader": 0.0,
+   "diff_ci": [
+    0.0,
+    0.0
+   ]
+  },
+  "copilot:mai-code-1.1-flash@low": {
+   "p_top1": 0.0,
+   "rank_median": 13.0,
+   "rank_ci": [
+    13,
+    14
+   ],
+   "diff_vs_leader": 0.1047,
+   "diff_ci": [
+    0.0743,
+    0.1353
+   ]
+  },
+  "ollama:gemma3:27b": {
+   "p_top1": 0.0,
+   "rank_median": 18.0,
+   "rank_ci": [
+    17,
+    19
+   ],
+   "diff_vs_leader": 0.2499,
+   "diff_ci": [
+    0.2149,
+    0.283
+   ]
+  },
+  "ollama:gemma4": {
+   "p_top1": 0.0,
+   "rank_median": 19.0,
+   "rank_ci": [
+    18,
+    20
+   ],
+   "diff_vs_leader": 0.273,
+   "diff_ci": [
+    0.2357,
+    0.3093
+   ]
+  },
+  "ollama:gpt-oss": {
+   "p_top1": 0.0,
+   "rank_median": 17.0,
+   "rank_ci": [
+    16,
+    18
+   ],
+   "diff_vs_leader": 0.2183,
+   "diff_ci": [
+    0.1895,
+    0.2459
+   ]
+  },
+  "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0": {
+   "p_top1": 0.0,
+   "rank_median": 24.0,
+   "rank_ci": [
+    23,
+    24
+   ],
+   "diff_vs_leader": 0.4241,
+   "diff_ci": [
+    0.3905,
+    0.4585
+   ]
+  },
+  "ollama:llama3.2": {
+   "p_top1": 0.0,
+   "rank_median": 25.0,
+   "rank_ci": [
+    25,
+    25
+   ],
+   "diff_vs_leader": 0.5731,
+   "diff_ci": [
+    0.5388,
+    0.6047
+   ]
+  },
+  "ollama:phi4-reasoning:plus": {
+   "p_top1": 0.0,
+   "rank_median": 20.0,
+   "rank_ci": [
+    19,
+    22
+   ],
+   "diff_vs_leader": 0.3019,
+   "diff_ci": [
+    0.2687,
+    0.334
+   ]
+  },
+  "ollama:qwen2.5-coder:32b": {
+   "p_top1": 0.0,
+   "rank_median": 21.0,
+   "rank_ci": [
+    20,
+    22
+   ],
+   "diff_vs_leader": 0.3199,
+   "diff_ci": [
+    0.2864,
+    0.3529
+   ]
+  },
+  "ollama:qwen2.5:7b-instruct": {
+   "p_top1": 0.0,
+   "rank_median": 23.0,
+   "rank_ci": [
+    23,
+    24
+   ],
+   "diff_vs_leader": 0.4235,
+   "diff_ci": [
+    0.3878,
+    0.4593
+   ]
+  },
+  "ollama:qwen3-coder:30b": {
+   "p_top1": 0.0,
+   "rank_median": 22.0,
+   "rank_ci": [
+    20,
+    22
+   ],
+   "diff_vs_leader": 0.3234,
+   "diff_ci": [
+    0.2918,
+    0.3569
+   ]
+  },
+  "ollama:qwen3.6": {
+   "p_top1": 0.0,
+   "rank_median": 16.0,
+   "rank_ci": [
+    15,
+    17
+   ],
+   "diff_vs_leader": 0.196,
+   "diff_ci": [
+    0.1669,
+    0.2262
+   ]
+  }
+ },
+ "judge_sensitivity": {
+  "auto_only": {
+   "rho": 0.9938,
+   "top4": [
+    "copilot:kimi-k3",
+    "copilot:gpt-5.4@low",
+    "copilot:gpt-6.1-sol@low",
+    "copilot:gemini-3.7-flash"
+   ],
+   "top4_same_set": false,
+   "max_rank_shift": 3,
+   "overall": {
+    "copilot:kimi-k3": 0.9463,
+    "copilot:gpt-5.4@low": 0.9411,
+    "copilot:gpt-6.1-sol@low": 0.9386,
+    "copilot:gemini-3.7-flash": 0.9206,
+    "copilot:gpt-5.6-terra@low": 0.9194,
+    "copilot:gemini-4-argon": 0.916,
+    "copilot:claude-sonnet-5.5@low": 0.9156,
+    "copilot:gpt-6-luna@low": 0.906,
+    "copilot:gemini-3.8-flash": 0.9026,
+    "copilot:claude-haiku-5.5@low": 0.9014,
+    "copilot:gpt-5.4-mini@low": 0.8926,
+    "copilot:claude-sonnet-5@low": 0.8812,
+    "copilot:mai-code-1.1-flash@low": 0.8478,
+    "copilot:gpt-5-mini@low": 0.8258,
+    "copilot:claude-haiku-4.5": 0.7932,
+    "ollama:qwen3.6": 0.7607,
+    "ollama:gpt-oss": 0.7407,
+    "ollama:gemma3:27b": 0.709,
+    "ollama:gemma4": 0.6849,
+    "ollama:phi4-reasoning:plus": 0.6588,
+    "ollama:qwen2.5-coder:32b": 0.6514,
+    "ollama:qwen3-coder:30b": 0.6423,
+    "ollama:qwen2.5:7b-instruct": 0.5574,
+    "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0": 0.5417,
+    "ollama:llama3.2": 0.4001
+   }
+  },
+  "judge_only": {
+   "rho": 0.9962,
+   "top4": [
+    "copilot:kimi-k3",
+    "copilot:gpt-5.4@low",
+    "copilot:gpt-6.1-sol@low",
+    "copilot:claude-sonnet-5.5@low"
+   ],
+   "top4_same_set": true,
+   "max_rank_shift": 2,
+   "overall": {
+    "copilot:kimi-k3": 0.9363,
+    "copilot:gpt-5.4@low": 0.9291,
+    "copilot:gpt-6.1-sol@low": 0.9241,
+    "copilot:claude-sonnet-5.5@low": 0.9112,
+    "copilot:gpt-5.6-terra@low": 0.9073,
+    "copilot:gemini-3.7-flash": 0.9021,
+    "copilot:gpt-6-luna@low": 0.8959,
+    "copilot:claude-haiku-5.5@low": 0.8885,
+    "copilot:gemini-4-argon": 0.8861,
+    "copilot:gemini-3.8-flash": 0.8835,
+    "copilot:gpt-5.4-mini@low": 0.8742,
+    "copilot:claude-sonnet-5@low": 0.8698,
+    "copilot:mai-code-1.1-flash@low": 0.8254,
+    "copilot:gpt-5-mini@low": 0.8054,
+    "copilot:claude-haiku-4.5": 0.7611,
+    "ollama:qwen3.6": 0.7299,
+    "ollama:gpt-oss": 0.7052,
+    "ollama:gemma3:27b": 0.6739,
+    "ollama:gemma4": 0.6518,
+    "ollama:phi4-reasoning:plus": 0.62,
+    "ollama:qwen3-coder:30b": 0.5936,
+    "ollama:qwen2.5-coder:32b": 0.5913,
+    "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0": 0.4928,
+    "ollama:qwen2.5:7b-instruct": 0.4782,
+    "ollama:llama3.2": 0.3362
+   }
+  }
+ },
+ "verification_sensitivity": {
+  "complete": true,
+  "corrected_refs": 40,
+  "rho_overall": 0.9985,
+  "rho_references": 0.9983,
+  "max_rank_shift": 1,
+  "leader_same": true,
+  "top4_same_set": true,
+  "max_references_gain": 0.03,
+  "max_overall_gain": 0.0038,
+  "references": {
+   "copilot:kimi-k3": [
+    0.935,
+    0.94
+   ],
+   "copilot:gpt-5.4@low": [
+    0.84,
+    0.84
+   ],
+   "copilot:gpt-6.1-sol@low": [
+    0.81,
+    0.81
+   ],
+   "copilot:gpt-5.6-terra@low": [
+    0.785,
+    0.785
+   ],
+   "copilot:gpt-6-luna@low": [
+    0.785,
+    0.795
+   ],
+   "copilot:claude-sonnet-5.5@low": [
+    0.7275,
+    0.7575
+   ],
+   "copilot:gemini-3.7-flash": [
+    0.71,
+    0.725
+   ],
+   "copilot:claude-haiku-5.5@low": [
+    0.685,
+    0.69
+   ],
+   "copilot:gpt-5.4-mini@low": [
+    0.655,
+    0.66
+   ],
+   "copilot:gemini-4-argon": [
+    0.645,
+    0.65
+   ],
+   "copilot:gemini-3.8-flash": [
+    0.61,
+    0.615
+   ],
+   "copilot:mai-code-1.1-flash@low": [
+    0.56,
+    0.575
+   ],
+   "copilot:claude-sonnet-5@low": [
+    0.45,
+    0.465
+   ],
+   "copilot:gpt-5-mini@low": [
+    0.4,
+    0.405
+   ],
+   "copilot:claude-haiku-4.5": [
+    0.235,
+    0.245
+   ],
+   "ollama:phi4-reasoning:plus": [
+    0.1275,
+    0.1425
+   ],
+   "ollama:gemma3:27b": [
+    0.09,
+    0.11
+   ],
+   "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0": [
+    0.0675,
+    0.085
+   ],
+   "ollama:qwen3-coder:30b": [
+    0.065,
+    0.07
+   ],
+   "ollama:qwen3.6": [
+    0.06,
+    0.06
+   ],
+   "ollama:gpt-oss": [
+    0.055,
+    0.065
+   ],
+   "ollama:qwen2.5-coder:32b": [
+    0.045,
+    0.05
+   ],
+   "ollama:qwen2.5:7b-instruct": [
+    0.045,
+    0.055
+   ],
+   "ollama:gemma4": [
+    0.03,
+    0.04
+   ],
+   "ollama:llama3.2": [
+    0.0275,
+    0.0275
+   ]
+  },
+  "overall": {
+   "copilot:kimi-k3": [
+    0.9413,
+    0.9419
+   ],
+   "copilot:gpt-5.4@low": [
+    0.9351,
+    0.9351
+   ],
+   "copilot:gpt-6.1-sol@low": [
+    0.9314,
+    0.9314
+   ],
+   "copilot:claude-sonnet-5.5@low": [
+    0.9134,
+    0.9171
+   ],
+   "copilot:gpt-5.6-terra@low": [
+    0.9133,
+    0.9133
+   ],
+   "copilot:gemini-3.7-flash": [
+    0.9114,
+    0.9132
+   ],
+   "copilot:gpt-6-luna@low": [
+    0.9009,
+    0.9022
+   ],
+   "copilot:gemini-4-argon": [
+    0.9011,
+    0.9017
+   ],
+   "copilot:claude-haiku-5.5@low": [
+    0.895,
+    0.8956
+   ],
+   "copilot:gemini-3.8-flash": [
+    0.8931,
+    0.8937
+   ],
+   "copilot:gpt-5.4-mini@low": [
+    0.8834,
+    0.884
+   ],
+   "copilot:claude-sonnet-5@low": [
+    0.8755,
+    0.8774
+   ],
+   "copilot:mai-code-1.1-flash@low": [
+    0.8366,
+    0.8385
+   ],
+   "copilot:gpt-5-mini@low": [
+    0.8156,
+    0.8163
+   ],
+   "copilot:claude-haiku-4.5": [
+    0.7771,
+    0.7784
+   ],
+   "ollama:qwen3.6": [
+    0.7453,
+    0.7453
+   ],
+   "ollama:gpt-oss": [
+    0.723,
+    0.7242
+   ],
+   "ollama:gemma3:27b": [
+    0.6914,
+    0.6939
+   ],
+   "ollama:gemma4": [
+    0.6683,
+    0.6696
+   ],
+   "ollama:phi4-reasoning:plus": [
+    0.6394,
+    0.6412
+   ],
+   "ollama:qwen2.5-coder:32b": [
+    0.6214,
+    0.622
+   ],
+   "ollama:qwen3-coder:30b": [
+    0.6179,
+    0.6186
+   ],
+   "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0": [
+    0.5172,
+    0.5194
+   ],
+   "ollama:qwen2.5:7b-instruct": [
+    0.5178,
+    0.519
+   ],
+   "ollama:llama3.2": [
+    0.3682,
+    0.3682
+   ]
+  }
+ },
+ "groups": {
+  "academic": [
+   "structure",
+   "methodology",
+   "extraction",
+   "grounded",
+   "references",
+   "language"
+  ],
+  "coding": [
+   "coding",
+   "latex"
+  ]
+ }
+}

@@ -4,7 +4,6 @@
 """
 from __future__ import annotations
 
-import csv
 import json
 import math
 from pathlib import Path
@@ -13,6 +12,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
+from matplotlib.patches import Patch  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 SUMMARY = ROOT / "experiments" / "bench" / "summary.json"
@@ -39,7 +39,7 @@ def short(name: str) -> str:
 
 
 def pareto(summary: dict) -> None:
-    fig, ax = plt.subplots(figsize=(3.5, 2.7))
+    fig, ax = plt.subplots(figsize=(3.5, 2.6))
     pts = []
     for label, m in summary["models"].items():
         q = m["composite"]["overall"]["mean"]
@@ -49,17 +49,21 @@ def pareto(summary: dict) -> None:
         col, mk = TIER_STYLE.get(m["tier"], ("grey", "x"))
         ax.scatter(c, q, color=col, marker=mk, s=18, zorder=3)
         pts.append((c, q, short(m["name"]), label in summary.get("pareto_usd_per_100_vs_overall", [])))
-    for c, q, n, on_front in pts:
-        if on_front:
-            ax.annotate(n, (c, q), fontsize=6, xytext=(3, 2), textcoords="offset points")
-    front = sorted((c, q) for c, q, _n, f in pts if f)
-    if front:
-        ax.plot([c for c, _ in front], [q for _, q in front], color="black", lw=0.6, ls="--", zorder=2)
+    front_pts = sorted((c, q, n) for c, q, n, on_front in pts if on_front)
+    for i, (c, q, n) in enumerate(front_pts):       # alternate above/below so neighbouring labels do not collide
+        last = i == len(front_pts) - 1
+        ax.annotate(n, (c, q), fontsize=5.5, xytext=(-4, -9 if last or i % 2 else 5), textcoords="offset points",
+                    ha="right" if last else "left")
+    if front_pts:
+        ax.plot([c for c, _q, _n in front_pts], [q for _c, q, _n in front_pts], color="black", lw=0.6, ls="--",
+                zorder=2)
     ax.set_xscale("log")
     ax.set_xlabel("US$ per 100 items (API: AI units; local: L40S rental equivalent)")
     ax.set_ylabel("Overall score")
+    present = {m["tier"] for m in summary["models"].values()}
     for tier, (col, mk) in TIER_STYLE.items():
-        ax.scatter([], [], color=col, marker=mk, s=18, label=tier)
+        if tier in present:
+            ax.scatter([], [], color=col, marker=mk, s=18, label=tier)
     ax.legend(loc="lower right", frameon=False)
     ax.grid(alpha=0.3, which="both", lw=0.4)
     save(fig, "pareto")
@@ -84,24 +88,39 @@ def heatmap(summary: dict) -> None:
     save(fig, "heatmap")
 
 
-def hallucination(per_item: Path, summary: dict) -> None:
-    if not per_item.exists():
+def hallucination(analysis_path: Path, summary: dict) -> None:
+    """Listed references not found in Crossref and, from the second-source audit, found in no database, per model."""
+    if not analysis_path.exists():
         return
-    by_model = {}
-    for row in csv.DictReader(per_item.open(encoding="utf-8")):
-        if row["task"] == "references":
-            by_model.setdefault(row["model"], []).append(float(row["score"]))
-    rows = sorted(((sum(v) / len(v), short(summary["models"][k]["name"]), summary["models"][k]["tier"])
-                   for k, v in by_model.items() if k in summary["models"]), reverse=True)
-    if not rows:
-        return
-    fig, ax = plt.subplots(figsize=(3.5, 0.15 * len(rows) + 0.8))
-    ax.barh(range(len(rows)), [r[0] for r in rows], color=[TIER_STYLE.get(r[2], ("grey", ""))[0] for r in rows])
+    D = json.loads(analysis_path.read_text(encoding="utf-8"))["diagnostics"]
+    audit_path = analysis_path.parent / "refs_audit.json"
+    nowhere = {}
+    if audit_path.exists():
+        audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        nowhere = {k: v.get("no_match_rate") for k, v in audit["models"].items()}
+    rows = sorted(((D[k]["references"]["hallucination_rate"], nowhere.get(k), short(m["name"]), m["tier"],
+                    D[k]["references"]["returned_mean"]) for k, m in summary["models"].items()
+                   if k in D and D[k]["references"]["hallucination_rate"] is not None), key=lambda r: (r[0], r[1] or 0))
+    fig, ax = plt.subplots(figsize=(3.5, 0.125 * len(rows) + 0.75))
+    cols = [TIER_STYLE.get(r[3], ("grey", ""))[0] for r in rows]
+    ax.barh(range(len(rows)), [100 * r[0] for r in rows], color=cols, alpha=0.35 if nowhere else 1.0)
+    if nowhere:
+        ax.barh(range(len(rows)), [100 * (r[1] or 0) for r in rows], color=cols)
+    for i, r in enumerate(rows):
+        both = f"{100 * r[0]:.0f}%" + (f" / {100 * r[1]:.0f}%" if r[1] is not None else "")
+        ax.text(100 * r[0] + 1, i, f"{both} of {20 * r[4]:.0f}", va="center", fontsize=4.8)
     ax.set_yticks(range(len(rows)))
-    ax.set_yticklabels([r[1] for r in rows], fontsize=5.5)
+    ax.set_yticklabels([r[2] for r in rows], fontsize=5.5)
     ax.invert_yaxis()
-    ax.set_xlim(0, 1)
-    ax.set_xlabel("Reference task score (verified, correct DOI)")
+    ax.set_xlim(0, 125)
+    ax.set_xlabel("Listed references not found in Crossref / in no database (%), of n listed" if nowhere
+                  else "Listed references not found in Crossref (%), of n listed")
+    tiers = [t for t in TIER_STYLE if any(r[3] == t for r in rows)]
+    handles = [Patch(color=TIER_STYLE[t][0], label=t) for t in tiers]
+    if nowhere:
+        handles += [Patch(facecolor="grey", alpha=0.35, label="not in Crossref"),
+                    Patch(facecolor="grey", label="in no database")]
+    ax.legend(handles=handles, loc="upper right", frameon=False, fontsize=6)
     ax.grid(axis="x", alpha=0.3, lw=0.4)
     save(fig, "references")
 
@@ -115,7 +134,7 @@ def energy(summary: dict) -> None:
     if not rows:
         return
     rows.sort()
-    fig, ax = plt.subplots(figsize=(3.5, 0.18 * len(rows) + 0.8))
+    fig, ax = plt.subplots(figsize=(3.5, 0.15 * len(rows) + 0.65))
     ax.barh(range(len(rows)), [r[0] for r in rows], color="#31a354")
     ax.set_yticks(range(len(rows)))
     ax.set_yticklabels([f"{r[1]} ({r[2]:.2f})" if r[2] is not None else r[1] for r in rows], fontsize=6)
@@ -128,7 +147,7 @@ def main() -> None:
     summary = json.loads(SUMMARY.read_text(encoding="utf-8"))
     pareto(summary)
     heatmap(summary)
-    hallucination(SUMMARY.parent / "per_item.csv", summary)
+    hallucination(SUMMARY.parent / "analysis.json", summary)
     energy(summary)
     print(f"figures -> {OUT_PDF} and {OUT_PNG}")
 
