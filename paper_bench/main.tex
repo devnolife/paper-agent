@@ -1,0 +1,59 @@
+% SkripsiBench paper — IEEE conference format
+% Build: paper-agent compile paper_bench/main.tex   (tables in generated/ come from paper_bench/make_tables.py)
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\graphicspath{{figures/}}
+
+% \todo{} marks items that must be resolved before submission
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\newcommand{\task}[1]{\texttt{#1}}
+% generated tables: English (main.tex) or Indonesian captions (main_id.tex); numbers come from the run data
+\newcommand{\langsuffix}{}
+\input{generated/numbers}
+
+\begin{document}
+
+\title{SkripsiBench: Which Language Model for Indonesian Academic Writing and Research Code? Quality, Cost and Provenance of Local and API Models}
+
+\author{%
+\IEEEauthorblockN{Andi Agung Dwi Arya B}
+\IEEEauthorblockA{\textit{Program Studi Magister Teknik Informatika, Fakultas Teknik} \\
+\textit{Universitas Hasanuddin}\\
+Makassar, Indonesia \\
+D082251054 $\cdot$ \todo{email}}
+}
+
+\maketitle
+
+\input{sections/abstract}
+
+\begin{IEEEkeywords}
+large language models, benchmark, Indonesian, academic writing, research code, LLM-as-a-judge, hallucinated references, inference cost, provenance
+\end{IEEEkeywords}
+
+\input{sections/introduction}
+\input{sections/related}
+\input{sections/benchmark}
+\input{sections/setup}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

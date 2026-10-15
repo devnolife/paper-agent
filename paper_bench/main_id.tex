@@ -1,0 +1,69 @@
+% Versi Bahasa Indonesia — dihasilkan oleh `paper-agent translate-tex` dari sections/ -> sections_id/, lalu disunting
+% manual oleh paper_bench/postedit_id.py (daftar suntingan ada di skrip itu). Build:
+%   paper-agent translate-tex --src paper_bench/sections --out paper_bench/sections_id --glossary paper_bench/glossary_id.yaml
+%   python paper_bench/postedit_id.py && paper-agent compile paper_bench/main_id.tex
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[bahasa]{babel}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\graphicspath{{figures/}}
+
+\addto\captionsbahasa{%
+  \def\abstractname{Abstrak}%
+  \def\tablename{TABEL}%
+  \def\refname{Daftar Pustaka}%
+  \def\IEEEkeywordsname{Kata Kunci}%
+}
+
+% \todo{} marks items that must be resolved before submission
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\newcommand{\task}[1]{\texttt{#1}}
+% generated tables: English (main.tex) or Indonesian captions (main_id.tex); numbers come from the run data
+\newcommand{\langsuffix}{-id}
+\input{generated/numbers}
+
+\begin{document}
+
+\title{SkripsiBench: Model Bahasa Mana untuk Penulisan Akademik Berbahasa Indonesia dan Kode Riset? Mutu, Biaya, dan Provenans Model Lokal dan Model API}
+
+\author{%
+\IEEEauthorblockN{Andi Agung Dwi Arya B}
+\IEEEauthorblockA{\textit{Program Studi Magister Teknik Informatika, Fakultas Teknik} \\
+\textit{Universitas Hasanuddin}\\
+Makassar, Indonesia \\
+D082251054 $\cdot$ \todo{email}}
+}
+
+\maketitle
+
+\input{sections_id/abstract}
+
+\begin{IEEEkeywords}
+model bahasa besar, benchmark, bahasa Indonesia, penulisan akademik, kode riset, LLM sebagai juri, rujukan halusinasi, biaya inferensi, provenans
+\end{IEEEkeywords}
+
+\input{sections_id/introduction}
+\input{sections_id/related}
+\input{sections_id/benchmark}
+\input{sections_id/setup}
+\input{sections_id/results}
+\input{sections_id/discussion}
+\input{sections_id/conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

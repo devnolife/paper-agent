@@ -15,6 +15,9 @@ __pycache__/
 paper/build/*
 !paper/build/main.pdf
 !paper/build/main_id.pdf
+paper_bench/build/*
+!paper_bench/build/main.pdf
+!paper_bench/build/main_id.pdf
 *.aux
 *.bbl
 *.blg

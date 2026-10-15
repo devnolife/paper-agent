@@ -5,12 +5,18 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Paper EN](https://img.shields.io/badge/paper-English%20PDF-b31b1b.svg)](paper/build/main.pdf)
 [![Paper ID](https://img.shields.io/badge/paper-Bahasa%20Indonesia%20PDF-b31b1b.svg)](paper/build/main_id.pdf)
+[![SkripsiBench EN](https://img.shields.io/badge/SkripsiBench-English%20PDF-8a2be2.svg)](paper_bench/build/main.pdf)
+[![SkripsiBench ID](https://img.shields.io/badge/SkripsiBench-Bahasa%20Indonesia%20PDF-8a2be2.svg)](paper_bench/build/main_id.pdf)
 
 **An agent for scientific papers whose every LLM call records the model that actually answered.**
 
 Translate a LaTeX or Word paper without breaking a single `\cite`, verify every reference against bibliographic
 databases, gate citations, build and QA the PDF, get two independent model reviews, convert a DOCX manuscript to
 IEEE LaTeX — and know, for every step, *which model did the work*.
+
+**New — [SkripsiBench](#skripsibench-which-model-for-indonesian-thesis-work-and-research-code):** which LLM to use for
+Indonesian academic writing and research code, measured on 255 items in eight thesis tasks for 25 local and API
+models, with the cost and the served model of every call.
 
 <p align="center">
   <img src="docs/img/fig1_architecture.png" alt="paper-agent translation pipeline" width="900">
@@ -51,6 +57,7 @@ thesis claimed Claude Opus 4.8 for work done by Claude Haiku 4.5. `paper-agent` 
 | `paper-agent run "<request>"` | Natural-language task → plan of whitelisted tool calls (planner model, keyword router as fallback) → execution → per-step report with served models. Paths are confined to the working directory. |
 | `paper-agent serve` | The same operations as an HTTP API (FastAPI): `/v1/run`, `/v1/translate/tex`, `/v1/compile`, `/v1/citations/check`, `/v1/review`, `/v1/status`. |
 | `paper-agent status` | Which engines and models are reachable (Ollama tags, API-model authentication and token source). |
+| `paper-agent bench` | SkripsiBench: `plan` (cost estimate), `run` (resumable, cost-gated, budget cap), `silver`, `judge`, `score`, `human-sheet`/`human-ingest`, `report`, `manifest`, `check` — see [`bench/README.md`](bench/README.md). |
 
 ```mermaid
 flowchart LR
@@ -110,6 +117,82 @@ model at all**, only by the validators:
 
 The post-editor changed 38 of 146 units; the per-unit QA scores before and after post-editing lie on the diagonal
 (left) — the corrections are real but invisible to the metric — and most edits are small (right).
+
+## SkripsiBench: which model for Indonesian thesis work and research code?
+
+Vendor leaderboards rank models on English knowledge and reasoning; none of them says which model to use for a
+*skripsi*, the Indonesian undergraduate thesis. **SkripsiBench** ([`bench/`](bench/README.md)) is 255 items in eight
+tasks taken from that workflow — chapter outlines per study programme, methodology questions, methods extraction from
+real theses, grounded literature reviews, reference lists, formal Indonesian, data-analysis code and LaTeX — scored
+deterministically wherever possible, with LLM judges of other vendors for prose, and with the served model, tokens,
+cost and GPU energy recorded for every call. The companion paper is in [`paper_bench/`](paper_bench/)
+([English PDF](paper_bench/build/main.pdf), [Indonesian PDF](paper_bench/build/main_id.pdf)).
+
+25 models ran on 14–15 October 2026: 15 API models of the GitHub Copilot SDK (grouped by name into an economy and a
+standard tier, low reasoning effort where a model accepts one) and 10 local open-weight models on a shared Ollama
+server with two L40S GPUs — 7,356 API calls, US$46.65 and 6.1 GPU-hours in total. Cost per 100 items: API models in
+the vendor's AI units at US$0.01, local models as GPU time at an on-demand L40S price (US$1.09/h).
+
+| # | Model | Tier | Overall [95 % CI] | Academic | Code | US$ / 100 items | Median s / call |
+|---:|---|---|---|---:|---:|---:|---:|
+| 1 | **kimi-k3** | economy | **0.941** [0.92, 0.96] | 0.930 | 0.975 | 3.119 | 34.5 |
+| 2 | **gpt-5.4** | standard | **0.935** [0.92, 0.95] | 0.913 | 1.000 | 0.864 | 7.9 |
+| 3 | **gpt-6.1-sol** | standard | **0.931** [0.92, 0.95] | 0.908 | 1.000 | 0.461 | 8.3 |
+| 4 | claude-sonnet-5.5 | standard | 0.913 [0.89, 0.93] | 0.890 | 0.983 | 0.783 | 4.8 |
+| 5 | gpt-5.6-terra | standard | 0.913 [0.89, 0.94] | 0.898 | 0.958 | 0.585 | 5.9 |
+| 6 | gemini-3.7-flash | economy | 0.911 [0.90, 0.92] | 0.882 | 1.000 | 0.141 | 15.4 |
+| 7 | gemini-4-argon | standard | 0.901 [0.88, 0.92] | 0.868 | 1.000 | 0.396 | 5.8 |
+| 8 | gpt-6-luna | standard | 0.901 [0.87, 0.93] | 0.901 | 0.900 | 0.030 | 7.0 |
+| 9 | claude-haiku-5.5 | economy | 0.895 [0.87, 0.92] | 0.868 | 0.975 | 0.056 | 6.8 |
+| 10 | gemini-3.8-flash | economy | 0.893 [0.87, 0.91] | 0.857 | 1.000 | 0.145 | 18.6 |
+| 11 | gpt-5.4-mini | economy | 0.883 [0.86, 0.91] | 0.868 | 0.931 | 0.252 | 4.8 |
+| 12 | claude-sonnet-5 | standard | 0.876 [0.85, 0.90] | 0.834 | 1.000 | 0.711 | 5.8 |
+| 13 | mai-code-1.1-flash | economy | 0.837 [0.81, 0.86] | 0.808 | 0.922 | 0.157 | 7.9 |
+| 14 | gpt-5-mini | economy | 0.816 [0.78, 0.85] | 0.790 | 0.892 | 0.136 | 7.7 |
+| 15 | claude-haiku-4.5 | economy | 0.777 [0.74, 0.81] | 0.762 | 0.823 | 0.598 | 10.6 |
+| 16 | Qwen3.6 36B | local | 0.745 [0.71, 0.77] | 0.719 | 0.825 | 0.655 | 57.7 |
+| 17 | gpt-oss 20B | local | 0.723 [0.70, 0.74] | 0.661 | 0.908 | 0.087 | 4.1 |
+| 18 | Gemma 3 27B | local | 0.691 [0.66, 0.72] | 0.680 | 0.727 | 0.170 | 9.6 |
+| 19 | Gemma 4 8B | local | 0.668 [0.64, 0.70] | 0.671 | 0.660 | 0.183 | 13.6 |
+| 20 | Phi-4 reasoning plus 14.7B | local | 0.639 [0.60, 0.67] | 0.586 | 0.801 | 0.693 | 8.7 |
+| 21 | Qwen2.5-Coder 32B | local | 0.621 [0.59, 0.65] | 0.604 | 0.674 | 0.259 | 20.2 |
+| 22 | Qwen3-Coder 30B-A3B | local | 0.618 [0.58, 0.65] | 0.597 | 0.681 | 0.236 | 3.2 |
+| 23 | Qwen2.5 7B Instruct | local | 0.518 [0.48, 0.55] | 0.523 | 0.503 | 0.083 | 4.7 |
+| 24 | Gemma2 9B CPT SahabatAI | local | 0.517 [0.48, 0.55] | 0.571 | 0.357 | 0.299 | 5.9 |
+| 25 | Llama 3.2 3B | local | 0.368 [0.34, 0.40] | 0.408 | 0.248 | 0.067 | 3.4 |
+
+Full per-task scores: [`experiments/bench/leaderboard.md`](experiments/bench/leaderboard.md); per-item scores:
+[`per_item.csv`](experiments/bench/per_item.csv); analyses (judges, robustness, diagnostics, cost):
+[`analysis.json`](experiments/bench/analysis.json).
+
+<p align="center">
+  <img src="docs/img/bench_pareto.png" alt="Overall score against cost per 100 items" width="46%">
+  &nbsp;
+  <img src="docs/img/bench_references.png" alt="References not found in Crossref and in no database" width="46%">
+</p>
+
+* **The three leaders are not significantly different.** The paired difference to kimi-k3 is 0.006 [−0.014, 0.027]
+  for gpt-5.4 and 0.010 [−0.010, 0.028] for gpt-6.1-sol (task-stratified bootstrap). That is not equivalence, and two
+  tasks (methodology questions, formal Indonesian) are near ceiling for every API model.
+* **Price is what differs.** Per 100 items kimi-k3 costs US$3.12 (it reasons at length: median 34.5 s per call),
+  gpt-6.1-sol US$0.46, and gpt-6-luna reaches 0.901 for US$0.030 — 104 times less for 0.04 less. Tier names are a
+  poor guide: the most expensive model per item was grouped with the economy models.
+* **References separate the models.** 0–40 % of the references an API model listed are not found in Crossref. A
+  second-source audit ([`audit_refs.py`](experiments/bench/audit_refs.py): doi.org, Scopus and OpenAlex through the
+  studio-revisi browser-agent) finds 17 % of those misses with matching metadata elsewhere; 0–31 % of an API model's
+  references are found in no database, against 61–85 % for local models. Verify every reference a model produces.
+* **Local models trail on every task, on average.** The best, Qwen3.6 36B (0.745), stays below the weakest API model
+  (claude-haiku-4.5, 0.777), and at rental prices local models were not cheaper per item; they come closest on formal
+  Indonesian. The Indonesian-tuned SahabatAI 9B did not write formal Indonesian better than the general Gemma 4 8B.
+* **Provenance and judges.** The SDK reported the requested model as the serving model for all 7,356 calls (no
+  substitution, unlike the incident above). The three judges agree (Krippendorff's α = 0.86, interval), and scoring
+  the prose by the deterministic checks alone barely changes the ranking (Spearman ρ = 0.994).
+
+Not in this version: the nine premium-tier models (estimated at about US$50 for all items; the runner gates them
+behind an explicit approval and a budget cap), a high-effort check of the leaders, repeated runs, and the comparison
+of the judges with two human raters (blind sheets are generated by `paper-agent bench human-sheet`). The 30
+extraction items are masked excerpts of real theses and stay private; [`bench/MANIFEST.json`](bench/MANIFEST.json)
+holds their SHA-256.
 
 ---
 
@@ -221,7 +304,31 @@ the fallback model, and finally the source text is kept and reported — never s
 
 ---
 
-## Paper
+## Papers
+
+### SkripsiBench
+
+[`paper_bench/`](paper_bench/) contains **"SkripsiBench: Which Language Model for Indonesian Academic Writing and
+Research Code? Quality, Cost and Provenance of Local and API Models"** (IEEE conference format, 8 pages). Every number
+in its text is a macro generated from the run data ([`make_tables.py`](paper_bench/make_tables.py) →
+`generated/numbers.tex`), so a new run updates the paper by regenerating and recompiling. The Indonesian version was
+translated by `paper-agent translate-tex` from the same sections (111 units, none left untranslated, glossary
+compliance 94 %, cosine 0.94 to the back-translation; served models GPT-5 mini, Claude Haiku 4.5, Gemma 3 27B) and then
+post-edited in 89 places that [`postedit_id.py`](paper_bench/postedit_id.py) lists and re-applies. Translating this
+paper exposed two masking bugs, now fixed and tested: a `\caption{…}` spanning lines lost its last character and
+gained a stray `}`, and a `\paragraph{Title}` followed by text on the same line kept its title untranslated.
+[`paper_bench/review.md`](paper_bench/review.md) is the output of `paper-agent review` on the English paper (critics:
+gpt-6.1-sol and claude-sonnet-5.5 at low effort). Four overclaims it found were softened before release; its main
+points — no human validation of keys, judges and silver labels yet, single runs, the premium tier missing, and
+confounded local cost — are the limitations the paper states.
+
+<p align="center">
+  <a href="paper_bench/build/main.pdf"><img src="docs/img/paper_bench_en_p1-1.png" alt="SkripsiBench, English version, page 1" width="44%"></a>
+  &nbsp;&nbsp;
+  <a href="paper_bench/build/main_id.pdf"><img src="docs/img/paper_bench_id_p1-1.png" alt="SkripsiBench, Indonesian version, page 1" width="44%"></a>
+</p>
+
+### Which Model Actually Answered?
 
 [`paper/`](paper/) contains **"Which Model Actually Answered? Silent Model Substitution, Deterministic Validators, and
 Multi-Model Routing in an LLM Paper Agent"** (IEEE conference format, 7 pages, 27 references — 23 verified in ≥ 2
@@ -264,8 +371,13 @@ paper_agent/            the package
   citations.py          citation gate          build.py     latexmk + PDF QA
   review.py             two-critic review      docx2tex.py  DOCX → IEEEtran project
   agent.py              planner + whitelisted tool execution      cli.py / api.py
+  bench/                SkripsiBench: runner (cost gate, budget cap, provenance), scorers per task, sandbox,
+                        judges, silver labels, human sheets, statistics, report
+bench/                  SkripsiBench items (public), model roster, word lists, item generators, MANIFEST.json
 paper/                  the paper (EN sections, ID sections, figures, verified bibliography, both PDFs, review)
+paper_bench/            the SkripsiBench paper (sections EN/ID, generated tables and number macros, figures, PDFs)
 experiments/            per-unit metrics of the three configurations + make_figures.py
+experiments/bench/      SkripsiBench results: leaderboard, per-item scores, analysis, reference audit, figure script
 integrations/vscode/    the "Paper Agent" custom agent for VS Code
 tests/                  deterministic tests (no network, no models)
 ```
@@ -278,6 +390,10 @@ Each configuration in the paper was run once; automatic metrics (cross-lingual c
 proxies and a human evaluation by bilingual experts is still needed; one language pair, one document type and one
 glossary were studied; the substitution finding concerns one vendor SDK and one account tier at one point in time.
 Provenance via `assistant.usage` is specific to that SDK — other engines record the model name the server returns.
+SkripsiBench: one run per model and item at low reasoning effort; the structure references and the extraction excerpts
+come from the theses of one university; extraction is scored against silver labels; the LLM judges and the item keys
+have not yet been checked by people; reference verification depends on the coverage of Crossref, doi.org, Scopus and
+OpenAlex; local energy was measured on a shared server (see [`bench/README.md`](bench/README.md)).
 
 ## License
 

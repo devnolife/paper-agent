@@ -1,0 +1,86 @@
+# Glosarium EN -> ID untuk makalah SkripsiBench (`paper-agent translate-tex --glossary paper_bench/glossary_id.yaml`)
+benchmark: benchmark
+large language model: model bahasa besar
+large language models: model bahasa besar
+language model: model bahasa
+open-weight model: model open-weight
+local model: model lokal
+local models: model lokal
+API model: model API
+API models: model API
+vendor SDK: SDK vendor
+reasoning effort: reasoning effort
+served model: model yang melayani
+requested model: model yang diminta
+provenance: provenans
+study programme: program studi
+study programmes: program studi
+undergraduate thesis: skripsi
+thesis: skripsi
+theses: skripsi
+methods chapter: bab metode
+results chapter: bab hasil
+sub-section: subbab
+sub-sections: subbab
+literature review: tinjauan pustaka
+grounded writing: penulisan berlandaskan sumber
+abstract: abstrak
+formal Indonesian: bahasa Indonesia baku
+non-standard words: kata tidak baku
+silver label: label perak
+silver labels: label perak
+gold label: label emas
+judge: juri
+judges: juri
+LLM judge: juri LLM
+LLM judges: juri LLM
+leniency: kelunakan
+human raters: penilai manusia
+rater: penilai
+rubric: rubrik
+hallucination rate: tingkat halusinasi
+hallucinated references: rujukan halusinasi
+fabricated references: rujukan karangan
+sandbox: sandbox
+cost gate: gerbang biaya
+AI units: AI units
+economy: hemat
+standard tier: tier menengah
+premium: premium
+tier: tier
+bootstrap: bootstrap
+confidence interval: interval kepercayaan
+Wilcoxon signed-rank test: uji peringkat bertanda Wilcoxon
+sign test: uji tanda
+Pareto front: front Pareto
+energy: energi
+GPU board energy: energi papan GPU
+rental equivalent: setara sewa
+inference: inferensi
+prompt: prompt
+pass@1: pass@1
+not found in Crossref: tidak ditemukan di Crossref
+found nowhere: tidak ditemukan di mana pun
+not significantly different: tidak berbeda signifikan
+paired difference: selisih berpasangan
+task-stratified bootstrap: bootstrap terstratifikasi per tugas
+near ceiling: mendekati batas atas
+ceiling effect: efek batas atas
+registration agency: lembaga registrasi DOI
+audit: audit
+item: butir
+items: butir
+public items: butir publik
+outline: kerangka
+outlines: kerangka
+chapter outlines: kerangka bab
+reference: rujukan
+references: rujukan
+reference list: daftar rujukan
+leader: model teratas
+leaders: model-model teratas
+key: kunci jawaban
+keys: kunci jawaban
+excerpt: cuplikan
+excerpts: cuplikan
+prose: prosa
