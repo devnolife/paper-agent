@@ -282,6 +282,10 @@ class Doc:
                 depth = close_at(body[m.end():], 1)[1]
                 lines.append(Line([indent + body[: m.end()], self._unit(name, lno, body[m.end():]), tail]))
                 continue
+            if m:                               # it closes mid-line: \paragraph{Title} text, \caption{...}\label{...}
+                lines.append(Line([indent + body[: m.end()], self._unit(name, lno, body[m.end():end - 1]), "}",
+                                   self._unit(name, lno, body[end:]), tail]))
+                continue
             if body.startswith("\\item"):
                 lines.append(Line([indent + "\\item", self._unit(name, lno, body[len("\\item"):]), tail]))
                 continue

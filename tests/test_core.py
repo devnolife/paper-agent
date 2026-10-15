@@ -239,3 +239,18 @@ def test_caption_spanning_lines_keeps_its_text_and_leaves_the_closing_brace_out_
     assert "  \\caption{Skor terhadap biaya (API: waktu GPU pada\n  Garis putus menyambungkan front.}\n" in out
     assert integrity_ok("a {b} c", "x {y} z") and not integrity_ok("a {b} c", "x {y z")
     assert not integrity_ok("waktu GPU pada", "waktu GPU pada}")                      # invented a brace
+
+
+def test_heading_argument_closing_mid_line_is_its_own_unit():
+    src = ("\\paragraph{Models} We evaluate \\NModels{} models on \\emph{all} items.\n"
+           "\\section{Introduction}\\label{sec:intro}\n\\caption{Short caption.}\\label{fig:a}\n")
+    doc = Doc()
+    doc.add_file("s", src)
+    assert doc.render("s") == src
+    texts = [u.masked for u in doc.units]
+    assert "Models" in texts and "Introduction" in texts and "Short caption." in texts
+    rest = next(u for u in doc.units if "We evaluate" in u.masked)
+    assert "paragraph" not in rest.masked and "<1>all</1>" in rest.masked
+    head = next(u for u in doc.units if u.masked == "Models")
+    head.final = "Model"
+    assert doc.render("s").startswith("\\paragraph{Model} We evaluate")
