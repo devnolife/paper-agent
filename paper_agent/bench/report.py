@@ -104,7 +104,8 @@ def costs(run_dir: Path, prices: Prices) -> Dict[str, dict]:
     out: Dict[str, dict] = {}
     for model, recs in latest_records(run_dir).items():
         c = {"calls": 0, "errors": 0, "aiu": 0.0, "in_tokens": 0, "out_tokens": 0, "seconds": [], "gross_j": 0.0,
-             "marginal_j": 0.0, "energy_calls": 0, "wall_s": 0.0, "served": {}, "substituted": 0, "engine": None,
+             "marginal_j": 0.0, "energy_calls": 0, "wall_s": 0.0, "timed_calls": 0, "served": {}, "substituted": 0,
+             "engine": None,
              "tier": None, "family": None}
         for r in recs.values():
             c["engine"], c["tier"], c["family"] = r.get("engine"), r.get("tier"), r.get("family")
@@ -125,6 +126,7 @@ def costs(run_dir: Path, prices: Prices) -> Dict[str, dict]:
             c["seconds"].append(r.get("seconds") or 0.0)
             if "energy" in r:                    # sequential local call: its own window is GPU time
                 c["wall_s"] += r.get("wall_s") or 0.0
+                c["timed_calls"] += 1
             e = r.get("energy") or {}
             if e.get("gross_j") is not None:
                 c["gross_j"] += e["gross_j"]
@@ -137,6 +139,7 @@ def costs(run_dir: Path, prices: Prices) -> Dict[str, dict]:
             if sg.get("workers", 1) <= 1:
                 continue                         # sequential segment: already counted call by call
             c["wall_s"] += sg["t1"] - sg["t0"]
+            c["timed_calls"] += sg["calls"]
             if sg.get("gross_j") is not None:
                 c["gross_j"] += sg["gross_j"]
                 c["marginal_j"] += sg.get("marginal_j") or 0.0
@@ -156,7 +159,10 @@ def costs(run_dir: Path, prices: Prices) -> Dict[str, dict]:
                                "kwh_per_100": round(kwh_g * 100 / c["energy_calls"], 5) if c["energy_calls"] else None,
                                "energy_cost": prices.energy_cost(kwh_g) if c["energy_calls"] else None,
                                "gpu_hours": round(gpu_h, 4), "rental_usd": None if rental is None else round(rental, 4),
-                               "usd_per_100": round(rental * 100 / ok, 4) if rental is not None and ok else None})
+                               "timed_calls": c["timed_calls"], "energy_calls": c["energy_calls"],
+                               # per 100 calls whose GPU time was measured (a run killed mid-way leaves calls untimed)
+                               "usd_per_100": (round(rental * 100 / c["timed_calls"], 4)
+                                               if rental is not None and c["timed_calls"] else None)})
     return out
 
 

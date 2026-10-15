@@ -304,6 +304,7 @@ def test_local_costs_mix_sequential_calls_and_parallel_segments(tmp_path: Path):
     assert c["gpu_hours"] == pytest.approx(30 / 3600, abs=1e-4)    # 10 s sequential + 20 s parallel segment
     assert c["kwh_gross"] == pytest.approx(0.3) and c["kwh_per_100"] == pytest.approx(10.0)
     assert c["rental_usd"] == pytest.approx(0.03)
+    assert c["timed_calls"] == 3 and c["usd_per_100"] == pytest.approx(1.0)       # US$0.03 over 3 timed calls
 
 
 def _costly_reply(engine, model, system, user, timeout=600, json_mode=True, effort=None, options=None):
