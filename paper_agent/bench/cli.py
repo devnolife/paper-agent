@@ -24,7 +24,7 @@ def repo_root() -> Path:
 
 
 def add_parser(sub) -> None:
-    b = sub.add_parser("bench", help="SkripsiBench: academic-writing and research-coding benchmark")
+    b = sub.add_parser("bench", help="AcademicBench: academic-writing and research-coding benchmark")
     bs = b.add_subparsers(dest="bench_cmd", required=True)
 
     def common(p, models: bool = True):

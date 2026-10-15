@@ -1,4 +1,4 @@
-"""LaTeX tables and number macros for the SkripsiBench paper, from ``experiments/bench/{summary,analysis,refs_audit}.json``.
+"""LaTeX tables and number macros for the AcademicBench paper, from ``experiments/bench/{summary,analysis,refs_audit}.json``.
 
   python paper_bench/make_tables.py      # -> paper_bench/generated/{leaderboard,diagnostics,numbers}.tex
 

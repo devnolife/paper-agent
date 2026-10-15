@@ -1,4 +1,4 @@
-# Glosarium EN -> ID untuk makalah SkripsiBench (`paper-agent translate-tex --glossary paper_bench/glossary_id.yaml`)
+# Glosarium EN -> ID untuk makalah AcademicBench (`paper-agent translate-tex --glossary paper_bench/glossary_id.yaml`)
 benchmark: benchmark
 large language model: model bahasa besar
 large language models: model bahasa besar

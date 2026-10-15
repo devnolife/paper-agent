@@ -103,7 +103,7 @@ def build_manifest(items: List[Item], note: str = "") -> dict:
         t = tasks.setdefault(it.task, {"public": 0, "private": 0, "items": {}})
         t[it.privacy] += 1
         t["items"][it.id] = it.sha256()
-    return {"benchmark": "SkripsiBench", "created": time.strftime("%Y-%m-%d"), "note": note,
+    return {"benchmark": "AcademicBench", "created": time.strftime("%Y-%m-%d"), "note": note,
             "n_items": len(items), "tasks": tasks}
 
 

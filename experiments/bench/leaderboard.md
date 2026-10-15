@@ -1,4 +1,4 @@
-# SkripsiBench leaderboard (2026-10-15 21:36)
+# AcademicBench leaderboard (2026-10-15 21:36)
 
 Scores in [0, 1]; 95 % bootstrap CI in brackets. Cost: API models in US$ per 100 items (1 AIU = US$0.01); local models in kWh per 100 items (GPU board energy) and rental-equivalent US$ when a GPU price is set.
 

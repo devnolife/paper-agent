@@ -1,4 +1,4 @@
-"""Figures for the SkripsiBench paper and README from ``experiments/bench/summary.json`` (+ ``per_item.csv``).
+"""Figures for the AcademicBench paper and README from ``experiments/bench/summary.json`` (+ ``per_item.csv``).
 
   python experiments/bench/make_figures.py            # -> paper_bench/figures/*.pdf and docs/img/bench_*.png
 """

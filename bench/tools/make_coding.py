@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the SkripsiBench ``coding`` task: 30 research data-analysis items on synthetic data.
+"""Build the AcademicBench ``coding`` task: 30 research data-analysis items on synthetic data.
 
 For every task the generator
 
@@ -18,7 +18,7 @@ Outputs are byte-identical across runs. Run from the repository root with the sh
 
     python bench/tools/make_coding.py
 
-Temporary directories follow :mod:`tempfile` (set ``TMPDIR`` to move them). ``SKRIPSIBENCH_PYTHON`` overrides the
+Temporary directories follow :mod:`tempfile` (set ``TMPDIR`` to move them). ``ACADEMICBENCH_PYTHON`` overrides the
 interpreter used for the subprocesses (default: the interpreter running this script).
 """
 from __future__ import annotations
@@ -52,7 +52,7 @@ from scipy import integrate, special, stats
 ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = ROOT / "bench" / "data" / "coding"
 ITEMS_PATH = ROOT / "bench" / "items" / "coding.jsonl"
-PYTHON = os.environ.get("SKRIPSIBENCH_PYTHON", sys.executable)
+PYTHON = os.environ.get("ACADEMICBENCH_PYTHON") or os.environ.get("SKRIPSIBENCH_PYTHON") or sys.executable
 CREATED = "2026-10-14"
 SANDBOX_NAME = "data.csv"
 DEFAULT_TOL = {"abs": 1e-4, "rel": 1e-3}
@@ -2581,7 +2581,7 @@ def run_solution(code: str, files: dict[str, Path]) -> subprocess.CompletedProce
     """Run a program in a fresh temporary directory that holds only the data files under their sandbox names."""
     env = dict(os.environ, OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1", MKL_NUM_THREADS="1",
                PYTHONDONTWRITEBYTECODE="1")
-    with tempfile.TemporaryDirectory(prefix="skripsibench-coding-") as tmp:
+    with tempfile.TemporaryDirectory(prefix="academicbench-coding-") as tmp:
         for name, src in files.items():
             shutil.copyfile(src, Path(tmp) / name)
         assert sorted(os.listdir(tmp)) == sorted(files)

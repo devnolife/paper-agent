@@ -1,4 +1,4 @@
-# SkripsiBench study roster (models enabled for the authors' account on 2026-10-14).
+# AcademicBench study roster (models enabled for the authors' account on 2026-10-14).
 # tier: economy / standard / premium (vendor SDK models) and local (Ollama). Premium models and reasoning effort
 # high/xhigh/max only run with `paper-agent bench run --approve-high-cost`.
 effort: low                       # reasoning effort for API models that accept one

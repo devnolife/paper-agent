@@ -1,5 +1,5 @@
 {
- "benchmark": "SkripsiBench",
+ "benchmark": "AcademicBench",
  "created": "2026-10-15",
  "note": "public items in bench/items; private items are hashes only",
  "n_items": 255,

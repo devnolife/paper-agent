@@ -1,3 +1,5 @@
+> Review of the paper under its working title *SkripsiBench*; the benchmark was renamed AcademicBench afterwards. The critics' text is kept as they wrote it.
+
 # Review — main.tex
 
 Critics (model that actually answered): copilot:gpt-6.1-sol, copilot:claude-sonnet-5.5

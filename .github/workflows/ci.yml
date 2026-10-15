@@ -17,5 +17,5 @@ jobs:
       - run: pip install -e ".[dev]"
       - run: python -m pyflakes paper_agent tests experiments paper_bench
       - run: python -m pytest -q
-      - name: SkripsiBench release recomputes from its per-item scores
+      - name: AcademicBench release recomputes from its per-item scores
         run: python experiments/bench/verify_release.py

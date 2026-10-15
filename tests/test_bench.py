@@ -1,4 +1,4 @@
-"""SkripsiBench: deterministic tests (no network, no models; engines are monkeypatched)."""
+"""AcademicBench: deterministic tests (no network, no models; engines are monkeypatched)."""
 from __future__ import annotations
 
 import json

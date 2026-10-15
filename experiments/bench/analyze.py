@@ -1,4 +1,4 @@
-"""Analyses for the SkripsiBench paper beyond the leaderboard, from a run directory -> ``analysis.json`` (aggregates
+"""Analyses for the AcademicBench paper beyond the leaderboard, from a run directory -> ``analysis.json`` (aggregates
 only: no item text, no answers).
 
   BENCH_RUN_DIR=<run dir> BENCH_PRIVATE_DIR=<private dir> python experiments/bench/analyze.py

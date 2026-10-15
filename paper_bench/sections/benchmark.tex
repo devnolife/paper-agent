@@ -1,11 +1,11 @@
-\section{SkripsiBench}
+\section{AcademicBench}
 \label{sec:bench}
 
 \subsection{Design}
 Four principles guided the benchmark. (i) Every task is a step a student or supervisor actually performs while writing a skripsi. (ii) A score is computed deterministically wherever the task allows it; LLM judges are used only for prose quality, and the kit prepares blind sheets to check them against people. (iii) Real thesis text is used only where nothing else will do, and is never published. (iv) Every call is accounted for: who answered (as the serving stack reports it), at what effort, for how many tokens, at what cost. All prompts are in Indonesian. Table~\ref{tab:tasks} summarises the eight tasks.
 
 \begin{table*}[t]
-  \caption{The eight SkripsiBench tasks. \emph{Pub.} public items in the repository; \emph{Priv.} private items (hashes only). All items except the extraction excerpts were written for the benchmark.}
+  \caption{The eight AcademicBench tasks. \emph{Pub.} public items in the repository; \emph{Priv.} private items (hashes only). All items except the extraction excerpts were written for the benchmark.}
   \label{tab:tasks}
   \centering
   \small

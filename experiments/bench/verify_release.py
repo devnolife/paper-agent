@@ -1,4 +1,4 @@
-"""Check the SkripsiBench release against itself: recompute the paper's statistics from the released per-item scores.
+"""Check the AcademicBench release against itself: recompute the paper's statistics from the released per-item scores.
 
   python experiments/bench/verify_release.py
 

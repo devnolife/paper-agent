@@ -19,7 +19,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     ap = argparse.ArgumentParser(prog="paper-agent",
                                  description="Agent for scientific papers: structure-safe translation, reference "
                                              "verification, citation gate, LaTeX build/QA, multi-model review, "
-                                             "DOCX->IEEE LaTeX, and SkripsiBench (model benchmark for Indonesian "
+                                             "DOCX->IEEE LaTeX, and AcademicBench (model benchmark for Indonesian "
                                              "academic writing and research coding). Every LLM call records the model "
                                              "that actually answered.")
     ap.add_argument("--version", action="version", version=f"paper-agent {__version__}")

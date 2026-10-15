@@ -223,7 +223,7 @@ def build_summary(items: List[Item], run_dir: Path, names: Optional[Dict[str, st
     counts: Dict[str, Dict[str, int]] = {}
     for it in items:
         counts.setdefault(it.task, {"public": 0, "private": 0})[it.privacy] += 1
-    return {"benchmark": "SkripsiBench", "created": time.strftime("%Y-%m-%d %H:%M"), "items": counts,
+    return {"benchmark": "AcademicBench", "created": time.strftime("%Y-%m-%d %H:%M"), "items": counts,
             "judge_weight": JUDGE_WEIGHT if use_judges else 0.0, "prices": prices.describe(), "ranking": ranked,
             "models": models, "pairwise_top": pairwise, "pareto_usd_per_100_vs_overall": S.pareto_front(pts)}
 
@@ -234,7 +234,7 @@ def _f(v, d: int = 3) -> str:
 
 def leaderboard_md(summary: dict) -> str:
     m = summary["models"]
-    lines = [f"# SkripsiBench leaderboard ({summary['created']})", "",
+    lines = [f"# AcademicBench leaderboard ({summary['created']})", "",
              "Scores in [0, 1]; 95 % bootstrap CI in brackets. Cost: API models in US$ per 100 items "
              f"(1 AIU = US${summary['prices']['usd_per_aiu']}); local models in kWh per 100 items (GPU board energy) "
              "and rental-equivalent US$ when a GPU price is set.", "",

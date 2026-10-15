@@ -1,4 +1,4 @@
-"""SkripsiBench: Indonesian academic-writing and research-coding benchmark for local and API models.
+"""AcademicBench: Indonesian academic-writing and research-coding benchmark for local and API models.
 
 Eight tasks (``structure``, ``methodology``, ``extraction``, ``grounded``, ``references``, ``language``, ``coding``,
 ``latex``), scored deterministically where possible; cross-vendor LLM judges and human raters only for prose.

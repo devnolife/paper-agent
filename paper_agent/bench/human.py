@@ -28,7 +28,7 @@ PROSE_COLS = ["kesetiaan", "kelengkapan", "keruntutan", "bahasa_baku", "kepatuha
 JUDGE_TO_COL = {"kesetiaan_sumber": "kesetiaan", "kesetiaan_isi": "kesetiaan", "cakupan": "kelengkapan",
                 "kelengkapan": "kelengkapan", "keruntutan": "keruntutan", "bahasa_baku": "bahasa_baku",
                 "kepatuhan": "kepatuhan"}
-GUIDE = """# Petunjuk penilaian (SkripsiBench)
+GUIDE = """# Petunjuk penilaian (AcademicBench)
 
 Anda menilai **jawaban sistem AI** tanpa mengetahui sistem mana yang menulisnya. Kerjakan sendiri, jangan
 berdiskusi dengan penilai lain sampai selesai.

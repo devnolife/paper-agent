@@ -1,7 +1,7 @@
-# SkripsiBench
+# AcademicBench
 
 **Which model should an Indonesian student or lecturer use for thesis work — and which one for the research code?**
-Vendor leaderboards do not measure this. SkripsiBench does, on eight tasks taken from the *skripsi* (Indonesian
+Vendor leaderboards do not measure this. AcademicBench does, on eight tasks taken from the *skripsi* (Indonesian
 undergraduate thesis) workflow, for local models (Ollama) and API models (vendor SDK) under the same prompts, with
 scores that are deterministic wherever possible, and with the cost and the model that actually answered recorded
 for every call.
