@@ -12,9 +12,6 @@ __pycache__/
 .paper-agent/
 
 # LaTeX build output (keep sources, figures and the final PDFs)
-paper/build/*
-!paper/build/main.pdf
-!paper/build/main_id.pdf
 paper_bench/build/*
 !paper_bench/build/main.pdf
 !paper_bench/build/main_id.pdf

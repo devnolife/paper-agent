@@ -1,7 +1,7 @@
 name: ci
 on:
   push:
-    branches: [main]
+    branches: [main, bench, translate]
   pull_request:
 jobs:
   test:
