@@ -8,8 +8,9 @@ pass@1 and after one repair; generic results chapters; verbatim evidence; unsupp
 task discrimination (ceiling effects); local vs API gaps; LLM-judge reliability (leniency, Krippendorff's alpha
 between judges, agreement with the deterministic scores); agreement of the extraction silver panel; ranking
 robustness (stratified bootstrap of the overall rank and of the difference to the leader); sensitivity of the ranking
-to the judges (prose scored by the automatic checks only or by the judges only) and to the reference verification
-source (references that ``audit_refs.py`` finds outside Crossref credited as the scorer would).
+to the judges (prose scored by the automatic checks only or by the judges only), to the reference verification
+source (references that ``audit_refs.py`` finds outside Crossref credited as the scorer would), and to leaving out the
+private extraction task (the ranking anyone can recompute from the public items).
 """
 from __future__ import annotations
 
@@ -248,12 +249,24 @@ def silver_agreement(recs: dict, items: list) -> dict:
     return {f: dict(c) for f, c in counts.items()}
 
 
-def overall_score(rows: dict, pick=lambda r: r["score"]) -> float:
+def overall_score(rows: dict, pick=lambda r: r["score"], tasks=TASKS) -> float:
     """Mean of the task means (the leaderboard's overall score); ``pick`` chooses the per-item score."""
     by_task = defaultdict(list)
     for r in rows.values():
         by_task[r["task"]].append(pick(r))
-    return mean([mean(by_task[t]) for t in TASKS if by_task.get(t)])
+    return mean([mean(by_task[t]) for t in tasks if by_task.get(t)])
+
+
+def public_only(per_item: dict, private_tasks=("extraction",)) -> dict:
+    """The overall ranking without the private tasks, i.e. what anyone can recompute from the public items."""
+    main = {m: overall_score(rows) for m, rows in per_item.items()}
+    pub = {m: overall_score(rows, tasks=[t for t in TASKS if t not in private_tasks]) for m, rows in per_item.items()}
+    order, pub_order = sorted(main, key=lambda m: -main[m]), sorted(pub, key=lambda m: -pub[m])
+    return {"private_tasks": list(private_tasks),
+            "rho": r4(S.spearman([main[m] for m in order], [pub[m] for m in order])["rho"]),
+            "max_rank_shift": max(abs(pub_order.index(m) - order.index(m)) for m in order),
+            "leader_same": pub_order[0] == order[0], "top4_same_set": set(pub_order[:4]) == set(order[:4]),
+            "overall": {m: r4(pub[m]) for m in pub_order}}
 
 
 def judge_sensitivity(per_item: dict) -> dict:
@@ -352,6 +365,7 @@ def main() -> None:
            "auto_vs_judge": auto_vs_judge(per_item), "silver_agreement": silver_agreement(recs, items),
            "rank_bootstrap": rank_bootstrap(per_item), "judge_sensitivity": judge_sensitivity(per_item),
            "verification_sensitivity": verification_sensitivity(per_item, audit, items),
+           "public_only": public_only(per_item),
            "groups": {g: {"academic": ACADEMIC_TASKS, "coding": CODING_TASKS}[g] for g in ("academic", "coding")}}
     OUT.write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"analysis -> {OUT}")

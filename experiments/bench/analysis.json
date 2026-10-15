@@ -1811,8 +1811,8 @@
    "copilot:gpt-6.1-sol@low": 0.7842
   },
   "leniency_offset": {
-   "copilot:gemini-4-argon": -0.0277,
    "copilot:gpt-6.1-sol@low": -0.0179,
+   "copilot:gemini-4-argon": -0.0277,
    "copilot:claude-sonnet-5@low": 0.0456
   },
   "alpha_interval_all_judges": 0.8567,
@@ -2508,6 +2508,42 @@
     0.3682,
     0.3682
    ]
+  }
+ },
+ "public_only": {
+  "private_tasks": [
+   "extraction"
+  ],
+  "rho": 0.9985,
+  "max_rank_shift": 1,
+  "leader_same": true,
+  "top4_same_set": true,
+  "overall": {
+   "copilot:kimi-k3": 0.9435,
+   "copilot:gpt-5.4@low": 0.9324,
+   "copilot:gpt-6.1-sol@low": 0.9257,
+   "copilot:claude-sonnet-5.5@low": 0.9112,
+   "copilot:gpt-5.6-terra@low": 0.9075,
+   "copilot:gemini-3.7-flash": 0.9074,
+   "copilot:gpt-6-luna@low": 0.8937,
+   "copilot:gemini-4-argon": 0.8909,
+   "copilot:claude-haiku-5.5@low": 0.8898,
+   "copilot:gemini-3.8-flash": 0.8897,
+   "copilot:gpt-5.4-mini@low": 0.8778,
+   "copilot:claude-sonnet-5@low": 0.8716,
+   "copilot:mai-code-1.1-flash@low": 0.8317,
+   "copilot:gpt-5-mini@low": 0.8104,
+   "copilot:claude-haiku-4.5": 0.7625,
+   "ollama:qwen3.6": 0.7355,
+   "ollama:gpt-oss": 0.7126,
+   "ollama:gemma3:27b": 0.6814,
+   "ollama:gemma4": 0.6613,
+   "ollama:phi4-reasoning:plus": 0.6422,
+   "ollama:qwen3-coder:30b": 0.6181,
+   "ollama:qwen2.5-coder:32b": 0.6009,
+   "ollama:qwen2.5:7b-instruct": 0.5173,
+   "ollama:hf.co/gmonsoon/gemma2-9b-cpt-sahabatai-v1-instruct-GGUF:Q8_0": 0.5042,
+   "ollama:llama3.2": 0.3618
   }
  },
  "groups": {
