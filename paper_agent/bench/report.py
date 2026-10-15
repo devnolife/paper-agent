@@ -272,8 +272,8 @@ def per_item_csv(items: List[Item], run_dir: Path, use_judges: bool = True) -> s
     for model in sorted(per):
         for iid in sorted(per[model]):
             r = per[model][iid]
-            w.writerow([model, iid, r["task"], round(r["score"], 4), round(r["auto"], 4),
-                        "" if r["judge"] is None else round(r["judge"], 4)])
+            w.writerow([model, iid, r["task"], round(r["score"], 6), round(r["auto"], 6),
+                        "" if r["judge"] is None else round(r["judge"], 6)])
     return buf.getvalue()
 
 
