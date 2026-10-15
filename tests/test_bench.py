@@ -340,3 +340,14 @@ def test_changed_answer_key_is_rescored(tmp_path: Path, monkeypatch):
     tot = score.score_runs(schema.load_items([items_dir]), Context(repo=REPO), cfg.run_dir, log=lambda *_: None)
     rows = score.load_scores(cfg.run_dir)["copilot:gpt-5-mini@low"]
     assert tot["scored"] == 1 and tot["reused"] == 0 and rows[("methodology-001", 0)]["score"] == 0.0
+
+
+def test_mount_script_mounts_targets_under_the_temp_root_after_its_tmpfs():
+    script = sandbox._mount_script(["/tmp/ci/venv", "/home/u/runtime"], "/tmp/pa-sbx-1/hold", "/tmp/pa-sbx-1/work",
+                                   {"A": "b"}).splitlines()
+    tmp_tmpfs = script.index('mount -t tmpfs -o size=256m,mode=1777 tmpfs "/tmp"')
+    venv = next(i for i, line in enumerate(script) if line.startswith("mount --bind") and line.endswith('"/tmp/ci/venv"'))
+    runtime = next(i for i, line in enumerate(script) if line.endswith('"/home/u/runtime"') and "--bind" in line)
+    work = next(i for i, line in enumerate(script) if line.endswith(f'"{sandbox.WORK}"'))
+    assert venv > tmp_tmpfs > max(runtime, work)
+    assert any(line.startswith("umount ") for line in script[venv:])

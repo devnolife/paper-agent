@@ -104,6 +104,13 @@ def python_roots(python: str) -> tuple:
 def _mount_script(binds: List[str], hold: str, work_hold: str, env: Dict[str, str]) -> str:
     """Shell script run as root of the new user namespace: hide private dirs, re-expose only what is needed."""
     temp_root = next((h for h in HIDE if hold == h or hold.startswith(h + "/")), None)
+    # A target under temp_root (e.g. an interpreter in /tmp) would be hidden again by temp_root's tmpfs, which must
+    # come last because the hold and work dirs live under it: such targets are staged on another fresh tmpfs and
+    # mounted after it.
+    stage = next((f"{d}/.sbx-stage" for d in HIDE if d != temp_root and os.path.isdir(d)), None)
+
+    def late(path: str) -> bool:
+        return temp_root is not None and stage is not None and (path == temp_root or path.startswith(temp_root + "/"))
     lines = ["set -e"]
     for i, src in enumerate(binds):
         lines += [f'mkdir -p "{hold}/b{i}"', f'mount --bind "{src}" "{hold}/b{i}"',
@@ -111,11 +118,20 @@ def _mount_script(binds: List[str], hold: str, work_hold: str, env: Dict[str, st
     for d in HIDE:
         if d != temp_root:
             lines.append(f'if [ -d "{d}" ]; then mount -t tmpfs -o size=256m,mode=755 tmpfs "{d}"; fi')
-    for i, src in enumerate(binds):
-        lines += [f'mkdir -p "{src}"', f'mount --bind "{hold}/b{i}" "{src}"']
-    lines += [f'mkdir -p "{WORK}" /home/sbx/.texmf-var', f'mount --bind "{work_hold}" "{WORK}"']
+    after = []
+    for k, (held, dst) in enumerate([(f"{hold}/b{i}", src) for i, src in enumerate(binds)] + [(work_hold, WORK)]):
+        if late(dst):
+            lines += [f'mkdir -p "{stage}/{k}"', f'mount --bind "{held}" "{stage}/{k}"']
+            after.append((f"{stage}/{k}", dst))
+        else:
+            lines += [f'mkdir -p "{dst}"', f'mount --bind "{held}" "{dst}"']
     if temp_root:   # last: the hold and work dirs live under it
         lines.append(f'mount -t tmpfs -o size=256m,mode=1777 tmpfs "{temp_root}"')
+    for staged, dst in after:
+        lines += [f'mkdir -p "{dst}"', f'mount --bind "{staged}" "{dst}"', f'umount "{staged}"', f'rmdir "{staged}"']
+    if after:
+        lines.append(f'rmdir "{stage}"')
+    lines.append("mkdir -p /home/sbx/.texmf-var")
     exports = " ".join(f"{k}='{v}'" for k, v in env.items())
     # The script runs as root of the user namespace with every capability (needed for the mounts). The program must
     # not keep them: with CAP_SYS_ADMIN it could unmount the tmpfs layers and reach the real /home, /run (Docker
