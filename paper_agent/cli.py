@@ -78,6 +78,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     s = sub.add_parser("review", help="two independent LLM critics review the paper (provenance recorded)")
     s.add_argument("main_tex", nargs="?", default="paper/main.tex")
     s.add_argument("-o", "--out", default=None, help="markdown report path (default: <paper dir>/review.md)")
+    s.add_argument("--effort", default=None, help="reasoning effort for the critics (e.g. low); default: model default")
 
     s = sub.add_parser("docx2tex", help="convert a DOCX manuscript to an IEEEtran LaTeX project")
     s.add_argument("input")
@@ -135,7 +136,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     elif args.cmd == "review":
         from .review import review_paper
         out = _p(args.out) or Path(args.main_tex).parent / "review.md"
-        res = review_paper(Path(args.main_tex), out=out, log=log)
+        res = review_paper(Path(args.main_tex), out=out, log=log, effort=args.effort)
         log(f"wrote {out}")
         res = {"out": str(out), "merged": res["merged"], "critics": [r["_model_served"] for r in res["reviews"]]}
     elif args.cmd == "docx2tex":

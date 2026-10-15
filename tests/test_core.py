@@ -137,3 +137,89 @@ def test_execute_reports_unknown_tool(tmp_path: Path):
     res = agent.execute({"steps": [{"tool": "nope", "args": {}}]}, tmp_path, log=lambda *_: None)
     assert res["ok"] is False and "unknown tool" in res["results"][0]["result"]["error"]
     assert json.dumps(res)  # serialisable
+
+
+def test_bibtex_manual_keeps_journal_fields():
+    from paper_agent.references import bibtex_manual
+    b = bibtex_manual({"type": "article", "title": "T & U", "authors": ["{Org Name}"], "year": 1979, "journal": "J",
+                       "volume": 6, "number": 2, "pages": "65--70"}, "k")
+    assert b.startswith("@article{k,") and "author = {{Org Name}}" in b and "title = {{T \\& U}}" in b
+    assert "journal = {J}" in b and "volume = {6}" in b and "number = {2}" in b and "pages = {65--70}" in b
+
+
+def test_review_paper_text_expands_generated_macros(tmp_path):
+    from paper_agent.review import paper_text
+    (tmp_path / "generated").mkdir()
+    (tmp_path / "generated" / "numbers.tex").write_text("\\newcommand{\\TopScore}{0.939}\n\\newcommand{\\NApi}{15}\n"
+                                                        "\\newcommand{\\Calls}{7{,}356}\n")
+    (tmp_path / "generated" / "table-id.tex").write_text("Tabel \\NApi{} model\n")
+    (tmp_path / "main.tex").write_text("\\documentclass{article}\n\\newcommand{\\langsuffix}{-id}\n"
+                                       "\\newcommand{\\todo}[1]{[TODO: #1]}\n\\input{generated/numbers}\n"
+                                       "\\begin{document}\nBest \\TopScore{} of \\NApi\\ models, \\Calls{} calls; "
+                                       "\\TopScoreX stays.\n\\input{sections/results}\n\\end{document}\n")
+    (tmp_path / "sections").mkdir()
+    (tmp_path / "sections" / "results.tex").write_text("\\input{generated/table\\langsuffix}\n")
+    text = paper_text(tmp_path / "main.tex")
+    assert "Best 0.939 of 15\\ models, 7{,}356 calls" in text and "Tabel 15 model" in text
+    assert "\\TopScoreX" in text and "newcommand" not in text
+
+
+def test_chat_json_passes_effort(monkeypatch):
+    from paper_agent import engines
+    seen = {}
+
+    def fake(model, system, user, timeout=600, json_mode=True, effort=None, options=None):
+        seen["effort"] = effort
+        return engines.Reply('{"ok": 1}', "copilot", model, model, effort, 0.1, None)
+    monkeypatch.setitem(engines.REPLY_ENGINES, "copilot", fake)
+    assert engines.chat_json("copilot", "m", "s", "u", effort="low") == {"ok": 1} and seen["effort"] == "low"
+
+
+def test_agent_maps_upstream_429_to_rate_limited(monkeypatch):
+    from paper_agent import references as R
+
+    class Resp:
+        def __init__(self, status, text):
+            self.status_code, self.text, self.ok = status, text, 200 <= status < 300
+
+        def json(self):
+            return {"results": [{"title": "T", "year": 2020, "doi": "https://doi.org/10.1/X", "authors": ["A B"]}]}
+    replies = iter([Resp(502, '{"detail":"openalex HTTP 429"}'), Resp(429, "cooldown"), Resp(502, "openalex HTTP 500"),
+                    Resp(200, "")])
+    monkeypatch.setattr(R.requests, "post", lambda *a, **k: next(replies))
+    agent = R.Agent(enabled=False)
+    for _ in range(2):
+        with pytest.raises(R.RateLimited):
+            agent.search("openalex", "q")
+    assert agent.search("openalex", "q") is None
+    rec = agent.search("openalex", "q")[0]
+    assert rec.doi == "10.1/x" and rec.year == 2020
+
+
+def test_reuse_verified_skips_entries_now_manual(tmp_path, monkeypatch):
+    from paper_agent import references as R
+    seed = tmp_path / "seed.yaml"
+    seed.write_text("entries:\n  - key: k\n    type: article\n    title: A Title\n    authors: [A B]\n    year: 2020\n"
+                    "    journal: J\n    verify: manual\n", encoding="utf-8")
+    old = R.Result("k", "VERIFIED", ["crossref", "openalex"], "10.1/old", 1.0, [], "@article{k,\n  title = {{Old}}\n}")
+    monkeypatch.setattr(R, "load_previous", lambda *a: {"k": old})
+    res = R.verify_references(seed, tmp_path / "r.bib", tmp_path / "r.md", use_agent=False, reuse_verified=True,
+                              log=lambda *_: None)
+    assert res["results"][0]["status"] == "MANUAL" and "journal = {J}" in (tmp_path / "r.bib").read_text()
+
+
+def test_crossref_record_joins_subtitle_and_matches_print_year():
+    from paper_agent.references import Local, best_match
+    rec = Local._crossref_rec({"title": ["E-S-QUAL"], "subtitle": ["A Multiple-Item Scale for Assessing Electronic Service "
+                                                                    "Quality"], "DOI": "10.1177/X", "author": [
+        {"given": "A.", "family": "Parasuraman"}], "issued": {"date-parts": [[2015, 11, 5]]},
+        "published-print": {"date-parts": [[2017, 4]]}, "published-online": {"date-parts": [[2015, 11, 5]]}})
+    assert rec.title == "E-S-QUAL: A Multiple-Item Scale for Assessing Electronic Service Quality"
+    assert rec.year == 2015 and rec.extra["years"] == [2015, 2017]
+    seed = {"title": "E-S-QUAL: A Multiple-Item Scale for Assessing Electronic Service Quality", "year": 2017,
+            "authors": ["A. Parasuraman"], "type": "article"}
+    assert best_match(seed, [rec], [])
+    assert not best_match(dict(seed, year=2020), [rec], [])
+    same = Local._crossref_rec({"title": ["A Title: Its Subtitle"], "subtitle": ["Its subtitle"], "issued": {
+        "date-parts": [[2020]]}})
+    assert same.title == "A Title: Its Subtitle"

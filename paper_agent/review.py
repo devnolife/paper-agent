@@ -29,9 +29,44 @@ Return ONLY JSON with this schema:
 Be specific and quote the paper where possible. Judge only what is in the text; do not invent results."""
 
 
+_NEWCOMMAND = re.compile(r"\\(?:re)?newcommand\*?\s*\{\\([A-Za-z@]+)\}\s*\{")
+
+
+def _braced(s: str, i: int) -> Tuple[str, int]:
+    """Content of the brace group whose opening brace is just before ``i``, and the index after it."""
+    depth, j = 1, i
+    while j < len(s) and depth:
+        depth += {"{": 1, "}": -1}.get(s[j], 0) if s[j - 1] != "\\" else 0
+        j += 1
+    return s[i:j - 1], j
+
+
+def _macros(txt: str) -> Dict[str, str]:
+    """Argument-free ``\\newcommand`` definitions (e.g. generated numbers) in ``txt``."""
+    out = {}
+    for m in _NEWCOMMAND.finditer(txt):
+        out[m.group(1)], _ = _braced(txt, m.end())
+    return out
+
+
+def expand_macros(txt: str, defs: Dict[str, str], rounds: int = 3) -> str:
+    """Replace argument-free macros by their definitions so a reader of the source sees what the PDF shows."""
+    if not defs:
+        return txt
+    pat = re.compile(r"\\(" + "|".join(sorted(map(re.escape, defs), key=len, reverse=True)) + r")(?![A-Za-z@])(?:\{\})?")
+    for _ in range(rounds):
+        new = pat.sub(lambda m: defs[m.group(1)], txt)
+        if new == txt:
+            break
+        txt = new
+    return txt
+
+
 def paper_text(main_tex: Path, max_chars: int = 60000) -> str:
-    """Flattened LaTeX source (inputs resolved, comments stripped, preamble dropped)."""
+    """Flattened LaTeX source: inputs resolved (also paths built from macros), comments stripped, argument-free
+    macros such as generated numbers expanded, preamble dropped."""
     main_tex = Path(main_tex)
+    defs: Dict[str, str] = {}
 
     def load(p: Path, seen: set) -> str:
         p = p.resolve()
@@ -39,18 +74,20 @@ def paper_text(main_tex: Path, max_chars: int = 60000) -> str:
             return ""
         seen.add(p)
         txt = strip_comments(p.read_text(encoding="utf-8"))
+        defs.update(_macros(txt))
 
         def sub(m):
-            child = p.parent / m.group(1)
-            if child.suffix != ".tex":
-                child = child.with_suffix(".tex")
+            name = expand_macros(m.group(1), defs).strip()
+            name = name if name.endswith(".tex") else name + ".tex"
+            # LaTeX resolves \input against the main file's directory; the including file's is a fallback
+            child = next((d / name for d in (main_tex.parent, p.parent) if (d / name).exists()), main_tex.parent / name)
             return load(child, seen)
         return re.sub(r"\\(?:input|include)\{([^}]+)\}", sub, txt)
 
     text = load(main_tex, set())
     body = text.split("\\begin{document}", 1)[-1]
     body = re.sub(r"\\(usepackage|documentclass|graphicspath|newcommand)\b.*", "", body)
-    return body[:max_chars]
+    return expand_macros(body, defs)[:max_chars]
 
 
 def _norm_issue(s: str) -> str:
@@ -72,7 +109,7 @@ def schema_ok(data: object) -> bool:
 
 
 def review_paper(main_tex: Path, roles: Optional[Dict[str, Tuple[str, str]]] = None, out: Optional[Path] = None,
-                 log=print) -> dict:
+                 log=print, effort: Optional[str] = None) -> dict:
     roles = roles or default_roles()
     text = paper_text(main_tex)
     prompt = ("PAPER (LaTeX source, flattened):\n\n" + text + "\n\nEND OF PAPER.\n\nReview the paper above as instructed. "
@@ -81,11 +118,12 @@ def review_paper(main_tex: Path, roles: Optional[Dict[str, Tuple[str, str]]] = N
     reviews: List[dict] = []
     for engine, model in critics:
         t0 = time.time()
-        data = engines.chat_json(engine, model, RUBRIC, prompt, retries=1, timeout=900)
+        data = engines.chat_json(engine, model, RUBRIC, prompt, retries=1, timeout=900, effort=effort)
         if not schema_ok(data):                      # models sometimes answer with their own keys; insist once
             data = engines.chat_json(engine, model, RUBRIC + "\n\nYour previous answer did not follow the schema. "
                                      "Answer again with EXACTLY the keys summary, scores, strengths, weaknesses, "
-                                     "overclaims, missing, recommendation.", prompt, retries=0, timeout=900)
+                                     "overclaims, missing, recommendation.", prompt, retries=0, timeout=900,
+                                     effort=effort)
         served = engines.last_served() or f"{engine}:{model}"
         if not isinstance(data, dict):
             log(f"  critic {engine}:{model}: no valid JSON")
@@ -95,6 +133,7 @@ def review_paper(main_tex: Path, roles: Optional[Dict[str, Tuple[str, str]]] = N
             log(f"  critic {served}: answer does not follow the rubric schema (kept, flagged)")
         data["_model_requested"] = f"{engine}:{model}"
         data["_model_served"] = served
+        data["_effort"] = effort
         data["_seconds"] = round(time.time() - t0, 1)
         reviews.append(data)
         log(f"  critic {served}: {data.get('recommendation', '?')} in {data['_seconds']} s")

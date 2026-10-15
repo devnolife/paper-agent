@@ -430,11 +430,16 @@ def chat_reply(engine: str, model: str, system: str, user: str, timeout: float =
                                  options=options)
 
 
-def chat_json(engine: str, model: str, system: str, user: str, retries: int = 2, timeout: float = 600) -> Any:
-    """Parsed JSON or None after ``retries`` failed attempts (network, non-JSON, schema)."""
+def chat_json(engine: str, model: str, system: str, user: str, retries: int = 2, timeout: float = 600,
+              effort: Optional[str] = None) -> Any:
+    """Parsed JSON or None after ``retries`` failed attempts (network, non-JSON, schema). ``effort`` sets the
+    reasoning effort (Copilot); without it the model's default applies."""
     for attempt in range(retries + 1):
         try:
-            raw = chat(engine, model, system, user, timeout=timeout, json_mode=True)
+            if effort:
+                raw = chat_reply(engine, model, system, user, timeout=timeout, json_mode=True, effort=effort).text
+            else:
+                raw = chat(engine, model, system, user, timeout=timeout, json_mode=True)
             return json.loads(raw)
         except Exception as exc:  # noqa: BLE001
             print(f"    [{engine}:{model}] attempt {attempt + 1} failed: {str(exc)[:120]}", file=sys.stderr)

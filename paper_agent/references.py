@@ -126,6 +126,16 @@ def clean_doi(doi: Optional[str]) -> str:
     return re.sub(r"^https?://(dx\.)?doi\.org/", "", (doi or "").strip().lower())
 
 
+def crossref_years(it: dict) -> List[int]:
+    """Every year a Crossref work carries: ``issued`` is the earliest (often online first), the print year can be later."""
+    years = set()
+    for k in ("issued", "published", "published-print", "published-online"):
+        parts = (it.get(k) or {}).get("date-parts") or []
+        if parts and parts[0] and parts[0][0]:
+            years.add(int(parts[0][0]))
+    return sorted(years)
+
+
 def is_arxiv_doi(doi: str) -> bool:
     return doi.startswith("10.48550/")
 
@@ -179,7 +189,8 @@ class Agent:
         except requests.RequestException as exc:
             print(f"    agent {source}: {exc}", file=sys.stderr)
             return None
-        if r.status_code == 429:
+        # the agent forwards an upstream 429 (daily budget, quota) as 502 "<source> HTTP 429"
+        if r.status_code == 429 or (r.status_code == 502 and "HTTP 429" in r.text):
             raise RateLimited(f"{source}: {r.text[:80]}")
         if not r.ok:
             return None
@@ -204,9 +215,13 @@ class Local:
     @staticmethod
     def _crossref_rec(it: dict) -> Record:
         parts = (it.get("issued") or {}).get("date-parts") or [[None]]
-        return Record("crossref", (it.get("title") or [""])[0], parts[0][0], clean_doi(it.get("DOI")),
+        title = (it.get("title") or [""])[0]
+        sub = (it.get("subtitle") or [""])[0]
+        if sub and norm(sub) not in norm(title):      # Crossref keeps some subtitles apart: "E-S-QUAL" + "A Multiple-Item…"
+            title = f"{title}: {sub}"
+        return Record("crossref", title, parts[0][0], clean_doi(it.get("DOI")),
                       [" ".join(filter(None, [a.get("given"), a.get("family")])) for a in it.get("author") or []],
-                      (it.get("container-title") or [""])[0], it.get("URL") or "", {"raw": it})
+                      (it.get("container-title") or [""])[0], it.get("URL") or "", {"raw": it, "years": crossref_years(it)})
 
     @staticmethod
     def _openalex_rec(w: dict) -> Record:
@@ -310,7 +325,8 @@ def best_match(seed: Dict, cands: List[Record], notes: List[str]) -> Optional[tu
     best = None
     for c in cands:
         sim = title_sim(seed["title"], c.title)
-        if c.year is not None and abs(int(c.year) - int(seed["year"])) > YEAR_TOL:
+        years = c.extra.get("years") or ([c.year] if c.year is not None else [])
+        if years and all(abs(int(y) - int(seed["year"])) > YEAR_TOL for y in years):
             continue
         author_ok = True
         if first and len(first) >= 3 and c.authors:
@@ -410,7 +426,8 @@ def bibtex_manual(seed: Dict, key: str) -> str:
     typ = seed.get("type", "misc")
     fields = [("author", " and ".join(seed.get("authors", []))), ("title", "{" + _bib_escape(seed["title"]) + "}"),
               ("year", str(seed["year"]))]
-    for f in ("edition", "publisher", "address", "howpublished", "note", "url"):
+    for f in ("journal", "booktitle", "volume", "number", "pages", "edition", "publisher", "address", "howpublished",
+              "note", "url"):
         if seed.get(f):
             fields.append((f, str(seed[f])))
     body = ",\n".join(f"  {k} = {{{v}}}" for k, v in fields if v)
@@ -601,7 +618,7 @@ def verify_references(seed_path: Path, bib_path: Path, report_path: Path, only: 
     results: List[Result] = []
     for i, s in enumerate(seeds, 1):
         old = prev.get(s["key"])
-        if old and old.status == "VERIFIED" and old.bibtex:
+        if old and old.status == "VERIFIED" and old.bibtex and s.get("verify", "auto") != "manual":
             old.bibtex = strip_title_footnote(old.bibtex, s["title"])
             results.append(old)
             log(f"[{i}/{len(seeds)}] {s['key']} … {old.status} (reused)")
