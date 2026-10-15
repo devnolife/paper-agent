@@ -19,3 +19,5 @@ jobs:
       - run: python -m pytest -q
       - name: AcademicBench release recomputes from its per-item scores
         run: python experiments/bench/verify_release.py
+      - name: README result tables match the released data
+        run: python experiments/bench/make_results_md.py --check
