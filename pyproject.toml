@@ -27,7 +27,7 @@ dev = ["pytest>=8", "pyflakes>=3"]
 paper-agent = "paper_agent.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/devnolife/paper-agent"
+Homepage = "https://github.com/devnolife/paper-agent-v1"
 
 [tool.setuptools.packages.find]
 include = ["paper_agent*"]

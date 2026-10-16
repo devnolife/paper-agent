@@ -5,7 +5,7 @@
 **Which LLM should Indonesian students, supervisors and thesis tools use — and at what cost? 255 items in eight
 thesis tasks, 25 local and API models, the cost and the served model of every call.**
 
-[![CI](https://github.com/devnolife/paper-agent/actions/workflows/ci.yml/badge.svg?branch=bench)](https://github.com/devnolife/paper-agent/actions/workflows/ci.yml?query=branch%3Abench)
+[![CI](https://github.com/devnolife/paper-agent-v1/actions/workflows/ci.yml/badge.svg?branch=bench)](https://github.com/devnolife/paper-agent-v1/actions/workflows/ci.yml?query=branch%3Abench)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Paper EN](https://img.shields.io/badge/paper-English%20PDF-8a2be2.svg)](paper_bench/build/main.pdf)
@@ -18,7 +18,8 @@ thesis tasks, 25 local and API models, the cost and the served model of every ca
 
 > [!NOTE]
 > This is the **`bench`** branch: the AcademicBench benchmark and its paper. The paper-agent tool it runs on and the
-> paper on silent model substitution are on the [`translate`](https://github.com/devnolife/paper-agent/tree/translate) branch; [`main`](https://github.com/devnolife/paper-agent/tree/main) holds both.
+> paper on silent model substitution are on the [`translate`](https://github.com/devnolife/paper-agent-v1/tree/translate) branch and in the standalone
+> [`devnolife/paper-agent`](https://github.com/devnolife/paper-agent) repository; [`main`](https://github.com/devnolife/paper-agent-v1/tree/main) holds both studies.
 
 ## At a glance
 
@@ -46,7 +47,7 @@ thesis tasks, 25 local and API models, the cost and the served model of every ca
 ### 1 · Verify the released results (about 2 seconds)
 
 ```bash
-git clone -b bench https://github.com/devnolife/paper-agent.git && cd paper-agent
+git clone -b bench https://github.com/devnolife/paper-agent-v1.git && cd paper-agent-v1
 pip install -e .
 python experiments/bench/verify_release.py
 ```
@@ -187,7 +188,7 @@ and each judge's leniency is removed before averaging. Failed calls score 0 inst
   (claude-haiku-4.5, 0.777), and at rental prices local models were not cheaper per item; they come closest on formal
   Indonesian. The Indonesian-tuned SahabatAI 9B did not write formal Indonesian better than the general Gemma 4 8B.
 * **Provenance and judges.** The SDK reported the requested model as the serving model for all 7,356 calls (no
-  substitution; the incident that motivated this check is the subject of the [paper-agent paper](https://github.com/devnolife/paper-agent/tree/translate)). The three judges agree (Krippendorff's α = 0.86), and
+  substitution; the incident that motivated this check is the subject of the [paper-agent paper](https://github.com/devnolife/paper-agent)). The three judges agree (Krippendorff's α = 0.86), and
   scoring the prose by the deterministic checks alone barely changes the ranking (Spearman ρ = 0.994).
 
 > [!NOTE]
@@ -455,11 +456,11 @@ orchestration used for this study (resumable rounds, cost gate, human-rating imp
 
 ### Built on paper-agent
 
-AcademicBench runs on [paper-agent](https://github.com/devnolife/paper-agent/tree/translate)'s engines, which record the served model of every call (the SDK's
+AcademicBench runs on [paper-agent](https://github.com/devnolife/paper-agent)'s engines, which record the served model of every call (the SDK's
 usage event for API models, Ollama's response for local ones). Its reference scorer uses paper-agent's verification
 rule, and the Indonesian version of the paper was translated by paper-agent's structure-safe `translate-tex`. The tool
-is included here because the benchmark needs it; its documentation and its own paper are on the
-[`translate`](https://github.com/devnolife/paper-agent/tree/translate) branch.
+is included here because the benchmark needs it; its documentation and its own paper are in the standalone
+[`devnolife/paper-agent`](https://github.com/devnolife/paper-agent) repository.
 
 ---
 
